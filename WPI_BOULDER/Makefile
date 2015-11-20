@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-ansi -pedantic -Wall -Wextra -Werror 
+CFLAGS=-ansi -pedantic -Wall -Wextra
 DEBUG=-g
 SRC_DIR=./src
 BIN_DIR=./bin

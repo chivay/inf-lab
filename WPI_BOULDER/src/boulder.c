@@ -125,23 +125,28 @@ void print_map(void)
 		putchar('\n');
 	}
 }
-bool moving_allowed(position src, char direction)
+
+/* Check if it is possible to push a stone */
+bool movement_allowed(position src, char direction)
 {
+
 	return false;
 }
 
+/* Moves source field to target field, marking source as empty */
 void move_field(position src, position dst)
 {
 	map[dst.y][dst.x] = map[src.y][src.x];
 	map[src.y][src.x] = M_EMPTY;
 }
 
+/* Handle Rockford's movement based on chosen direction */
 void move_rockford(char direction)
 {
-	char next_field;
 	position new_pos;
 	new_pos = player_position;
 
+	/* Compute new position */
 	switch(direction)
 	{
 		case DIR_UP:
@@ -157,10 +162,9 @@ void move_rockford(char direction)
 			new_pos.x++;
 			break;
 	}
-	
-	next_field = map[new_pos.y][new_pos.x];
 
-	switch(next_field)
+	/* Determine what to do based on target field type */
+	switch(map[new_pos.y][new_pos.x])
 	{
 		case M_EMPTY:								/* OK TO MOVE */
 		case M_GROUND:								/* OK TO MOVE */
@@ -170,9 +174,9 @@ void move_rockford(char direction)
 		case M_ROCK:								/* DO NOTHING, NOT ALLOWED */
 			break;
 		case M_STONE:								/* OK, ONLY IF NEXT SPACE IS EMPTY*/
-			if (moving_allowed(new_pos, direction))
+			if (movement_allowed(new_pos, direction))
 			{
-
+				
 			}
 		case M_DIAMOND:								/* OK, REMOVE DIAMOND */
 
@@ -185,8 +189,16 @@ void move_rockford(char direction)
 	}
 }
 
+
+/* Initialize variables and settings */
 void init(void)
 {
+	RUNNING = false;
+	
+	/* Initialize empty lists */
+	stone_list   = NULL;
+	diamond_list = NULL;
+
 	player_position.x = 0;
 	player_position.y = 0;
 	/*
@@ -196,13 +208,15 @@ void init(void)
 	 * */
 }
 
+
+/* Update position of diamonds and stones */
 void update()
 {
 	/* HANDLE GRAVITY */
 	
-
 }
 
+/* React to user's input */
 void handle_input()
 {
 	char input = getchar();
@@ -221,7 +235,6 @@ void handle_input()
 
 void start(void)
 {
-	RUNNING = false;
 	while(RUNNING)
 	{
 		update();
@@ -235,5 +248,6 @@ int main(void)
 	init();
 	print_map();
 	start();
+	print_map();
 	return 0;
 }
