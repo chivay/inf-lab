@@ -127,10 +127,22 @@ void print_map(void)
 }
 
 /* Check if it is possible to push a stone */
-bool movement_allowed(position src, char direction)
+bool movement_allowed(position stone_pos, char direction)
 {
-
-	return false;
+	switch(direction)
+	{
+		case DIR_UP:
+		case DIR_DOWN:
+			return false;     /* Pushing stone up or down not allowed */		
+			break;
+		case DIR_LEFT:
+			stone_pos.x--;
+			break;
+		case DIR_RIGHT:
+			stone_pos.x++;
+			break;
+	}
+	return (map[stone_pos.y][stone_pos.x] == M_EMPTY);
 }
 
 /* Moves source field to target field, marking source as empty */
@@ -169,14 +181,14 @@ void move_rockford(char direction)
 		case M_EMPTY:								/* OK TO MOVE */
 		case M_GROUND:								/* OK TO MOVE */
 			move_field(player_position, new_pos);
-			new_pos = player_position;
+			player_position = new_pos;
 			break;
 		case M_ROCK:								/* DO NOTHING, NOT ALLOWED */
 			break;
 		case M_STONE:								/* OK, ONLY IF NEXT SPACE IS EMPTY*/
 			if (movement_allowed(new_pos, direction))
 			{
-				
+				/* TODO */
 			}
 		case M_DIAMOND:								/* OK, REMOVE DIAMOND */
 
@@ -193,19 +205,38 @@ void move_rockford(char direction)
 /* Initialize variables and settings */
 void init(void)
 {
-	RUNNING = false;
+	int x, y;
+	RUNNING = true;
 	
 	/* Initialize empty lists */
 	stone_list   = NULL;
 	diamond_list = NULL;
 
-	player_position.x = 0;
-	player_position.y = 0;
 	/*
 	 * LOOK FOR DIAMONDS
 	 * LOOK FOR STONES
-	 * DELETE THEM FROM BACKGROUND AS DYNAMIC OBJECTS
 	 * */
+	for (y = 0; y < map_height; y++)
+	{
+		for (x = 0; x < map_width; x++)
+		{
+			switch(map[y][x])
+			{
+				case M_ROCKFORD:
+					player_position.x = x;
+					player_position.y = y;
+					break;
+				case M_STONE:
+					push_front(&stone_list, make_position(x,y));
+					printf("[i] Added stone (%d, %d)\n", x, y);
+					break;
+				case M_DIAMOND:
+					push_front(&diamond_list, make_position(x,y));
+					printf("[i] Added diamond (%d, %d)\n", x, y);
+					break;
+			}
+		}
+	}
 }
 
 
