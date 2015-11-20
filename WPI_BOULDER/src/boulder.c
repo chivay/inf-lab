@@ -49,6 +49,31 @@ void push_front(l_node ** head, position pos)
 	new_head->next = *head;
 	*head = new_head;
 }
+bool remove_node(l_node **head, position pos)
+{
+	l_node *current, *prev = NULL;
+
+	if (head == NULL)   /* Nothing to delete from */
+		return false;   /* ERROR */
+
+	for (current = *head; current != NULL; prev=current, current=current->next)
+	{
+		if(current->val.x == pos.x &&
+		   current->val.y == pos.y )  /* Found matching value */
+		{
+			if(prev == NULL) /* Check if it is the first node */
+				*head = current->next;
+			else
+				prev->next = current->next; /* Remove the node */
+
+			free(current);
+			return true;
+		}
+	}
+
+	/* Value not found */
+	return false;
+}
 bool is_empty(l_node *head)
 {
 	return (head == NULL);
@@ -69,6 +94,26 @@ int getline(char *s)
 		s[i++]=c;
 	s[i] = '\n';
 	return i+1;
+}
+
+position get_position(position pos, char direction)
+{
+	switch(direction)
+	{
+		case DIR_UP:
+			pos.y--;
+			break;
+		case DIR_DOWN:
+			pos.y++;
+			break;
+		case DIR_LEFT:
+			pos.x--;
+			break;
+		case DIR_RIGHT:
+			pos.x++;
+			break;
+	}
+	return pos;
 }
 /* END UTILITY FUNCTIONS */
 
@@ -146,8 +191,10 @@ bool movement_allowed(position stone_pos, char direction)
 }
 
 /* Moves source field to target field, marking source as empty */
-void move_field(position src, position dst)
+void move_field(position src, char direction)
 {
+	position dst = get_position(src, direction);
+
 	map[dst.y][dst.x] = map[src.y][src.x];
 	map[src.y][src.x] = M_EMPTY;
 }
@@ -156,31 +203,16 @@ void move_field(position src, position dst)
 void move_rockford(char direction)
 {
 	position new_pos;
-	new_pos = player_position;
 
 	/* Compute new position */
-	switch(direction)
-	{
-		case DIR_UP:
-			new_pos.y--;
-			break;
-		case DIR_DOWN:
-			new_pos.y++;
-			break;
-		case DIR_LEFT:
-			new_pos.x--;
-			break;
-		case DIR_RIGHT:
-			new_pos.x++;
-			break;
-	}
+	new_pos = get_position(player_position, direction);
 
 	/* Determine what to do based on target field type */
 	switch(map[new_pos.y][new_pos.x])
 	{
 		case M_EMPTY:								/* OK TO MOVE */
 		case M_GROUND:								/* OK TO MOVE */
-			move_field(player_position, new_pos);
+			move_field(player_position, direction);
 			player_position = new_pos;
 			break;
 		case M_ROCK:								/* DO NOTHING, NOT ALLOWED */
@@ -188,14 +220,19 @@ void move_rockford(char direction)
 		case M_STONE:								/* OK, ONLY IF NEXT SPACE IS EMPTY*/
 			if (movement_allowed(new_pos, direction))
 			{
-				/* TODO */
+				move_field(new_pos, direction);
+				move_field(player_position, direction);
+				player_position = new_pos;
 			}
 		case M_DIAMOND:								/* OK, REMOVE DIAMOND */
+			remove_node(&diamond_list, new_pos);
+			move_field(player_position, direction);
+			player_position = new_pos;
 
 		case M_EXIT:								/* OK, ONLY IF DIAMOND LIST IS EMPTY*/
 			if ( is_empty(diamond_list) )
 			{
-				move_field(player_position, new_pos);
+				move_field(player_position, direction);
 				RUNNING = false;                    
 			}
 	}
