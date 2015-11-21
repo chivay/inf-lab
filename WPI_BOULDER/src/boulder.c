@@ -215,26 +215,39 @@ void move_rockford(char direction)
 			move_field(player_position, direction);
 			player_position = new_pos;
 			break;
+
 		case M_ROCK:								/* DO NOTHING, NOT ALLOWED */
 			break;
+
 		case M_STONE:								/* OK, ONLY IF NEXT SPACE IS EMPTY*/
 			if (movement_allowed(new_pos, direction))
 			{
+				/* update stone list */
+				remove_node(&stone_list, new_pos);
+				push_front(&stone_list, get_position(new_pos, direction));
+
 				move_field(new_pos, direction);
 				move_field(player_position, direction);
 				player_position = new_pos;
+
 			}
+			break;
+
 		case M_DIAMOND:								/* OK, REMOVE DIAMOND */
 			remove_node(&diamond_list, new_pos);
 			move_field(player_position, direction);
 			player_position = new_pos;
+			break;
 
 		case M_EXIT:								/* OK, ONLY IF DIAMOND LIST IS EMPTY*/
 			if ( is_empty(diamond_list) )
 			{
 				move_field(player_position, direction);
+				/* Rockford disappears */
+				map[new_pos.y][new_pos.x] = M_EXIT;
 				RUNNING = false;                    
 			}
+			break;
 	}
 }
 
@@ -265,11 +278,9 @@ void init(void)
 					break;
 				case M_STONE:
 					push_front(&stone_list, make_position(x,y));
-					printf("[i] Added stone (%d, %d)\n", x, y);
 					break;
 				case M_DIAMOND:
 					push_front(&diamond_list, make_position(x,y));
-					printf("[i] Added diamond (%d, %d)\n", x, y);
 					break;
 			}
 		}
@@ -280,8 +291,38 @@ void init(void)
 /* Update position of diamonds and stones */
 void update()
 {
-	/* HANDLE GRAVITY */
-	
+	bool changed;
+	do
+	{
+		l_node *pStone, *pDiamond;
+		changed = false;
+
+		/* Update stone list */
+		for (pStone = stone_list; pStone != NULL; pStone = pStone->next)
+		{
+			/* if there is empty space below, try to move down*/
+			while(map[pStone->val.y + 1][pStone->val.x] == M_EMPTY)
+			{
+				move_field(make_position(pStone->val.x, pStone->val.y), DIR_DOWN);
+				pStone->val.y++;
+
+				changed = true;
+			}
+		}
+
+		/* Update diamond list */
+		for (pDiamond = diamond_list; pDiamond != NULL; pDiamond = pDiamond->next)
+		{
+			/* if there is empty space below, try to move down*/
+			while(map[pDiamond->val.y + 1][pDiamond->val.x] == M_EMPTY)
+			{
+				move_field(make_position(pDiamond->val.x, pDiamond->val.y), DIR_DOWN);
+				pDiamond->val.y++;
+				
+				changed = true;
+			}
+		}
+	} while(changed);
 }
 
 /* React to user's input */
@@ -308,13 +349,13 @@ void start(void)
 		update();
 		handle_input();
 	}
+	update();
 }
 
 int main(void)
 {
 	load_map();
 	init();
-	print_map();
 	start();
 	print_map();
 	return 0;
