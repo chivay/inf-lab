@@ -9,7 +9,7 @@
 /* MAP SYMBOLS */
 #define M_ROCKFORD '&'
 #define M_EMPTY    ' '
-#define M_GROUND   '.' 
+#define M_DIRT     '.' 
 #define M_ROCK     '#'
 #define M_STONE    'O'
 #define M_DIAMOND  '$'
@@ -21,11 +21,15 @@
 #define DIR_LEFT  'a'
 #define DIR_RIGHT 'd'
 
-typedef struct position {
+
+/* Simple structure to define coordinates on map */
+typedef struct {
 	int x;
 	int y;
 } position;
 
+
+/* Returns position structure with given values */
 position make_position(int x, int y)
 {
 	position p;
@@ -34,51 +38,6 @@ position make_position(int x, int y)
 	return p;
 }
 
-/* LINKED LIST */
-typedef struct l_node {
-	position val;
-	struct l_node *next;
-} l_node;
-
-void push_front(l_node ** head, position pos)
-{
-	l_node *new_head;
-	new_head = (l_node *) malloc( sizeof(l_node) );
-
-	new_head->val = pos;
-	new_head->next = *head;
-	*head = new_head;
-}
-bool remove_node(l_node **head, position pos)
-{
-	l_node *current, *prev = NULL;
-
-	if (head == NULL)   /* Nothing to delete from */
-		return false;   /* ERROR */
-
-	for (current = *head; current != NULL; prev=current, current=current->next)
-	{
-		if(current->val.x == pos.x &&
-		   current->val.y == pos.y )  /* Found matching value */
-		{
-			if(prev == NULL) /* Check if it is the first node */
-				*head = current->next;
-			else
-				prev->next = current->next; /* Remove the node */
-
-			free(current);
-			return true;
-		}
-	}
-
-	/* Value not found */
-	return false;
-}
-bool is_empty(l_node *head)
-{
-	return (head == NULL);
-}
-/* END LINKED LIST */
 
 /* UTILITY FUNCTIONS */
 int max(int a, int b)
@@ -86,16 +45,19 @@ int max(int a, int b)
 	return a > b ? a : b;
 }
 
+/* Reads line from STDIN until end of line
+ * Returns number of characters read */
 int getline(char *s)
 {
 	char c;
 	int i = 0;
-	while( (c = getchar()) != '\n' && c != EOF)
-		s[i++]=c;
+	while( (c = getchar()) != '\n' && c != EOF && i < MAX_WIDTH)
+		s[i++] = c;
 	s[i] = '\n';
 	return i+1;
 }
 
+/* Computes new coordinates for given direction of movement */
 position get_position(position pos, char direction)
 {
 	switch(direction)
@@ -119,22 +81,29 @@ position get_position(position pos, char direction)
 
 
 /* GLOBAL VARIABLES */
+
+/* Array contaning map data */
 char map[MAX_HEIGHT][MAX_WIDTH];
 
+/* Map dimensions */
 int map_height,
 	map_width;
 
-l_node *stone_list;
-l_node *diamond_list;
-
+/* Controls end of execution */
 bool RUNNING;
 
+/* Rockford position (current and from previous iteration) */
 position player_position;
+position previous_position;
+
+/* Number of uncollected diamonds */
+int diamond_counter;
+
 /* END GLOBAL VARIABLES */
 
 
 /*
- * Reads map pattern from STDIN until it encounters
+ * Reads map data from STDIN until it encounters
  * an empty line
  */
 void load_map(void)
@@ -146,7 +115,8 @@ void load_map(void)
 
 	s = (char *) malloc(MAX_WIDTH * sizeof(char));
 
-	while ( ( len = getline(s) ) > 1) /* Dopóki nie wczytamy samego \n */
+	/* Load until only \n is read */
+	while ( ( len = getline(s) ) > 1)
 	{
 		int i;
 		for (i = 0; i < len; i++)
@@ -155,9 +125,11 @@ void load_map(void)
 		map_height++;
 		map_width = max(map_width, len);
 	}
+
 	free(s);
 }
 
+/* Print map to STDOUT */
 void print_map(void)
 {
 	int i,j;
@@ -165,7 +137,6 @@ void print_map(void)
 	{
 		char c;
 		j = 0;
-
 		while( (c = map[i][j++]) != '\n' ) putchar(c);
 		putchar('\n');
 	}
@@ -211,7 +182,7 @@ void move_rockford(char direction)
 	switch(map[new_pos.y][new_pos.x])
 	{
 		case M_EMPTY:								/* OK TO MOVE */
-		case M_GROUND:								/* OK TO MOVE */
+		case M_DIRT:								/* OK TO MOVE */
 			move_field(player_position, direction);
 			player_position = new_pos;
 			break;
@@ -222,10 +193,6 @@ void move_rockford(char direction)
 		case M_STONE:								/* OK, ONLY IF NEXT SPACE IS EMPTY*/
 			if (movement_allowed(new_pos, direction))
 			{
-				/* update stone list */
-				remove_node(&stone_list, new_pos);
-				push_front(&stone_list, get_position(new_pos, direction));
-
 				move_field(new_pos, direction);
 				move_field(player_position, direction);
 				player_position = new_pos;
@@ -234,13 +201,14 @@ void move_rockford(char direction)
 			break;
 
 		case M_DIAMOND:								/* OK, REMOVE DIAMOND */
-			remove_node(&diamond_list, new_pos);
+			diamond_counter--;
+
 			move_field(player_position, direction);
 			player_position = new_pos;
 			break;
 
 		case M_EXIT:								/* OK, ONLY IF DIAMOND LIST IS EMPTY*/
-			if ( is_empty(diamond_list) )
+			if (diamond_counter == 0)
 			{
 				move_field(player_position, direction);
 				/* Rockford disappears */
@@ -252,20 +220,15 @@ void move_rockford(char direction)
 }
 
 
-/* Initialize variables and settings */
+/* Initialize variables */
 void init(void)
 {
 	int x, y;
+
+	diamond_counter = 0;
 	RUNNING = true;
 	
-	/* Initialize empty lists */
-	stone_list   = NULL;
-	diamond_list = NULL;
-
-	/*
-	 * LOOK FOR DIAMONDS
-	 * LOOK FOR STONES
-	 * */
+	/* Looks for diamonds and Rockford */
 	for (y = 0; y < map_height; y++)
 	{
 		for (x = 0; x < map_width; x++)
@@ -275,12 +238,13 @@ void init(void)
 				case M_ROCKFORD:
 					player_position.x = x;
 					player_position.y = y;
+
+					previous_position = player_position;
 					break;
 				case M_STONE:
-					push_front(&stone_list, make_position(x,y));
 					break;
 				case M_DIAMOND:
-					push_front(&diamond_list, make_position(x,y));
+					diamond_counter++;
 					break;
 			}
 		}
@@ -288,45 +252,77 @@ void init(void)
 }
 
 
-/* Update position of diamonds and stones */
+/*
+ * Update position of diamonds and stones in
+ * given column
+ */
+void updateColumn(int column)
+{
+	int i;
+	for (i = map_height - 1; i >= 0; i--)
+	{
+		char field = map[i][column];
+		if(field == M_DIAMOND || field == M_STONE)
+		{
+			position p = make_position(column, i);
+			/* If there is space below, move down */
+			while(map[p.y + 1][column] == M_EMPTY)
+			{
+				move_field(p, DIR_DOWN);
+				p.y++;
+			}
+		}
+	}
+}
+
+/* Stabilize map */
+void updateGlobal()
+{
+	int i,j;
+	for(i = map_height-1; i >= 0; i--)
+	{
+		for(j = 0; j < map_width; j++)
+		{
+			char field = map[i][j];
+
+			if(field == M_DIAMOND || field == M_STONE)
+			{
+				position p = make_position(j, i);
+
+				/* If there is space below, move down */
+				while(map[p.y + 1][p.x] == M_EMPTY)
+				{
+					move_field(p, DIR_DOWN);
+					p.y++;
+				}
+			}
+		}
+	}
+
+}
+
+/* Update columns near Rockford */
 void update()
 {
-	bool changed;
-	do
+	/* Horizontal movement */
+	if(previous_position.x != player_position.x)
 	{
-		l_node *pStone, *pDiamond;
-		changed = false;
+		/* Update column on left and right */;
+		updateColumn(player_position.x + 1);
+		updateColumn(player_position.x - 1);
+	}
 
-		/* Update stone list */
-		for (pStone = stone_list; pStone != NULL; pStone = pStone->next)
-		{
-			/* if there is empty space below, try to move down*/
-			while(map[pStone->val.y + 1][pStone->val.x] == M_EMPTY)
-			{
-				move_field(make_position(pStone->val.x, pStone->val.y), DIR_DOWN);
-				pStone->val.y++;
+	/* Vertival movement */
+	if(previous_position.y != player_position.y)
+	{
+		updateColumn(player_position.x);
+	}
 
-				changed = true;
-			}
-		}
-
-		/* Update diamond list */
-		for (pDiamond = diamond_list; pDiamond != NULL; pDiamond = pDiamond->next)
-		{
-			/* if there is empty space below, try to move down*/
-			while(map[pDiamond->val.y + 1][pDiamond->val.x] == M_EMPTY)
-			{
-				move_field(make_position(pDiamond->val.x, pDiamond->val.y), DIR_DOWN);
-				pDiamond->val.y++;
-				
-				changed = true;
-			}
-		}
-	} while(changed);
+	previous_position = player_position;
 }
 
 /* React to user's input */
-void handle_input()
+void handle_input(void)
 {
 	char input = getchar();
 	switch(input)
@@ -344,12 +340,13 @@ void handle_input()
 
 void start(void)
 {
+	updateGlobal();
 	while(RUNNING)
 	{
 		update();
 		handle_input();
 	}
-	update();
+	updateGlobal();
 }
 
 int main(void)
@@ -358,5 +355,6 @@ int main(void)
 	init();
 	start();
 	print_map();
+
 	return 0;
 }
