@@ -2,6 +2,11 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
+#ifdef TUI
+	#include <ncurses.h>
+#endif
+
+
 /* MAP DIMENSIONS */
 #define MAX_HEIGHT (100 + 1)
 #define MAX_WIDTH  (200 + 1)
@@ -22,32 +27,55 @@
 #define DIR_RIGHT 'd'
 
 
+/* Map row */
+typedef char map_t[MAX_WIDTH];
+
 /* Simple structure to define coordinates on map */
 typedef struct {
 	int x;
 	int y;
 } position;
 
+/* Structure containing game state */
+typedef struct {
 
-/* Returns position structure with given values */
-position make_position(int x, int y)
-{
-	position p;
-	p.x = x;
-	p.y = y;
-	return p;
-}
+	/* Pointer to map */
+	map_t *map;
+
+	/* Map dimensions*/
+	int map_height;
+	int map_width;
+
+	/* Flag to terminate execution*/
+	bool running;
+
+	/* Rockford's position (current and from previous iteration) */
+	position previous_position;
+	position player_position;
+
+	/* Number of not collected diamonds */
+	int diamond_counter;
+
+	/* Terminal dimension (used only in TUI mode) */
+	int term_rows;
+	int term_cols;
+
+} game_state;
+
 
 
 /* UTILITY FUNCTIONS */
+
+/* Returns maximum of greater value */
 int max(int a, int b)
 {
 	return a > b ? a : b;
 }
 
-/* Reads line from STDIN until end of line
- * Returns number of characters read */
-int getline(char *s)
+/* Reads line from STDIN into char* until end of line
+ * Returns number of characters read
+ */
+int read_line(char *s)
 {
 	char c;
 	int i = 0;
@@ -57,304 +85,378 @@ int getline(char *s)
 	return i+1;
 }
 
-/* Computes new coordinates for given direction of movement */
-position get_position(position pos, char direction)
+/* Computes new coordinates for  @direction of movement
+ * and stores result in @dst
+ */
+void  calc_position(position *pos, position *dst, char direction)
 {
+	*dst = *pos;
+
 	switch(direction)
 	{
 		case DIR_UP:
-			pos.y--;
+			dst->y--;
 			break;
+
 		case DIR_DOWN:
-			pos.y++;
+			dst->y++;
 			break;
+
 		case DIR_LEFT:
-			pos.x--;
+			dst->x--;
 			break;
+
 		case DIR_RIGHT:
-			pos.x++;
+			dst->x++;
 			break;
 	}
-	return pos;
 }
 /* END UTILITY FUNCTIONS */
 
 
-/* GLOBAL VARIABLES */
-
-/* Array contaning map data */
-char map[MAX_HEIGHT][MAX_WIDTH];
-
-/* Map dimensions */
-int map_height,
-	map_width;
-
-/* Controls end of execution */
-bool RUNNING;
-
-/* Rockford position (current and from previous iteration) */
-position player_position;
-position previous_position;
-
-/* Number of uncollected diamonds */
-int diamond_counter;
-
-/* END GLOBAL VARIABLES */
-
-
-/*
- * Reads map data from STDIN until it encounters
- * an empty line
+/* Reads map data from STDIN until
+ * an empty line is encountered
  */
-void load_map(void)
+void load_map(game_state *g)
 {
 	char *s;
-	int len;
-	map_height = 0;
-	map_width  = 0;
 
+	int len;
+
+	/* Reset map dimensions */
+	g->map_height = 0;
+	g->map_width  = 0;
+
+	/* Allocate memory for line to read */
 	s = (char *) malloc(MAX_WIDTH * sizeof(char));
 
-	/* Load until only \n is read */
-	while ( ( len = getline(s) ) > 1)
+	/* Read until only \n is read */
+	while ( ( len = read_line(s) ) > 1)
 	{
 		int i;
-		for (i = 0; i < len; i++)
-			map[map_height][i] = s[i];
 
-		map_height++;
-		map_width = max(map_width, len);
+		/* Rewrite line to map in memory */
+		for (i = 0; i < len; i++)
+			g->map[g->map_height][i] = s[i];
+
+		/* Update map dimensions */
+		g->map_height++;
+		g->map_width = max(g->map_width, len);
 	}
 
+	/* Free allocated memory */
 	free(s);
 }
 
-/* Print map to STDOUT */
-void print_map(void)
+/* Prints map to STDOUT  */
+void print_map(game_state *g)
 {
+	char c;
 	int i,j;
-	for (i = 0; i < map_height; i++)
+	for (i = 0; i < g->map_height; i++)
 	{
-		char c;
+		#ifdef TUI
+			move(i+1, 0);
+		#endif 
 		j = 0;
-		while( (c = map[i][j++]) != '\n' ) putchar(c);
-		putchar('\n');
+
+		while( (c = g->map[i][j++]) != '\n' ){
+			#ifdef TUI
+				addch(c);
+			#else
+				putchar(c);
+			#endif 
+		}
+
+		#ifndef TUI
+			putchar('\n');
+		#endif 
 	}
 }
 
-/* Check if it is possible to push a stone */
-bool movement_allowed(position stone_pos, char direction)
+
+/* Checks if it is possible to push a stone
+ * from position @stone_pos in direction @direction
+ */
+bool movement_allowed(game_state *g, position *stone_pos, char direction)
 {
+	position dst = *stone_pos;
 	switch(direction)
 	{
+		/* Pushing stone up or down not allowed */		
 		case DIR_UP:
 		case DIR_DOWN:
-			return false;     /* Pushing stone up or down not allowed */		
+			return false;    
 			break;
+
 		case DIR_LEFT:
-			stone_pos.x--;
+			dst.x--;
 			break;
+
 		case DIR_RIGHT:
-			stone_pos.x++;
+			dst.x++;
 			break;
+
 	}
-	return (map[stone_pos.y][stone_pos.x] == M_EMPTY);
+	/* If destination field is empty then, movement allowed */
+	return ( g->map[dst.y][dst.x] == M_EMPTY);
 }
 
 /* Moves source field to target field, marking source as empty */
-void move_field(position src, char direction)
+void move_field(game_state *g, position *src, char direction)
 {
-	position dst = get_position(src, direction);
+	position dst;
+	calc_position(src, &dst, direction);
 
-	map[dst.y][dst.x] = map[src.y][src.x];
-	map[src.y][src.x] = M_EMPTY;
+	/* Move field in given direction */
+	g->map[dst.y][dst.x] = g->map[src->y][src->x];
+
+	/* Mark source field as empty */
+	g->map[src->y][src->x] = M_EMPTY;
 }
 
-/* Handle Rockford's movement based on chosen direction */
-void move_rockford(char direction)
+/* Handles movement into field containing dirt or empty */
+void movement_dirt(game_state *g, position *new_pos, char direction)
+{
+	move_field(g, &(g->player_position), direction);
+	g->player_position = *new_pos;
+}
+
+/* Handles movement into field containing stone */
+void movement_stone(game_state *g, position *new_pos, char direction)
+{
+	if (movement_allowed(g, new_pos, direction))
+	{
+		move_field(g, new_pos, direction);
+		move_field(g, &(g->player_position), direction);
+		g->player_position = *new_pos;
+
+	}
+}
+/* Handles movement into field containing diamond */
+void movement_diamond(game_state *g, position *new_pos, char direction)
+{
+	g->diamond_counter--;
+
+	move_field(g, &(g->player_position), direction);
+	g->player_position = *new_pos;
+}
+
+/* Handles movement into field containing exit */
+void movement_exit(game_state *g, position *new_pos, char direction)
+{
+	/* If there are no diamonds left */
+	if (g->diamond_counter == 0)
+	{
+		move_field(g, &(g->player_position), direction);
+
+		/* Rockford disappears, X on map stays */
+		g->map[new_pos->y][new_pos->x] = M_EXIT;
+		/* End of execution*/
+		g->running = false;                    
+	}
+}
+
+/* Handles Rockford's movement based on chosen direction */
+void move_rockford(game_state *g, char direction)
 {
 	position new_pos;
 
 	/* Compute new position */
-	new_pos = get_position(player_position, direction);
+	calc_position( &g->player_position, &new_pos, direction);
 
 	/* Determine what to do based on target field type */
-	switch(map[new_pos.y][new_pos.x])
+	switch( g->map[new_pos.y][new_pos.x] )
 	{
 		case M_EMPTY:								/* OK TO MOVE */
 		case M_DIRT:								/* OK TO MOVE */
-			move_field(player_position, direction);
-			player_position = new_pos;
-			break;
-
-		case M_ROCK:								/* DO NOTHING, NOT ALLOWED */
+			movement_dirt(g, &new_pos, direction);
 			break;
 
 		case M_STONE:								/* OK, ONLY IF NEXT SPACE IS EMPTY*/
-			if (movement_allowed(new_pos, direction))
-			{
-				move_field(new_pos, direction);
-				move_field(player_position, direction);
-				player_position = new_pos;
-
-			}
+			movement_stone(g, &new_pos, direction);
 			break;
 
 		case M_DIAMOND:								/* OK, REMOVE DIAMOND */
-			diamond_counter--;
-
-			move_field(player_position, direction);
-			player_position = new_pos;
+			movement_diamond(g, &new_pos, direction);
 			break;
 
 		case M_EXIT:								/* OK, ONLY IF DIAMOND LIST IS EMPTY*/
-			if (diamond_counter == 0)
-			{
-				move_field(player_position, direction);
-				/* Rockford disappears */
-				map[new_pos.y][new_pos.x] = M_EXIT;
-				RUNNING = false;                    
-			}
+			movement_exit(g, &new_pos, direction);
 			break;
 	}
 }
 
+/* Sets all elements in map array to 0 */
+void reset_map(game_state *g)
+{
+	int i,j;
+	for (i = 0; i < MAX_HEIGHT; i++)
+		for (j = 0; j < MAX_WIDTH; j++)
+			g->map[i][j] = 0;
+}
 
-/* Initialize variables */
-void init(void)
+/* Initializes variables */
+void init(game_state *g)
 {
 	int x, y;
 
-	diamond_counter = 0;
-	RUNNING = true;
+	g->diamond_counter = 0;
+	g->running = true;
 	
 	/* Looks for diamonds and Rockford */
-	for (y = 0; y < map_height; y++)
-	{
-		for (x = 0; x < map_width; x++)
+	for (y = 0; y < g->map_height; y++)
+		for (x = 0; x < g->map_width; x++)
 		{
-			switch(map[y][x])
+			switch( g->map[y][x] )
 			{
 				case M_ROCKFORD:
-					player_position.x = x;
-					player_position.y = y;
+					g->player_position.x = x;
+					g->player_position.y = y;
 
-					previous_position = player_position;
+					g->previous_position = g->player_position;
 					break;
-				case M_STONE:
-					break;
+
 				case M_DIAMOND:
-					diamond_counter++;
+					g->diamond_counter++;
 					break;
 			}
 		}
-	}
 }
 
 
-/*
- * Update position of diamonds and stones in
+/* Updates position of diamonds and stones in
  * given column
  */
-void updateColumn(int column)
+void update_column(game_state *g, int column)
 {
+	/* TODO : OPTYMALIZACJA */
 	int i;
-	for (i = map_height - 1; i >= 0; i--)
+	for (i = g->map_height - 1; i >= 0; i--)
 	{
-		char field = map[i][column];
+		char field = g->map[i][column];
+
 		if(field == M_DIAMOND || field == M_STONE)
 		{
-			position p = make_position(column, i);
+			position p;
+			p.x = column;
+			p.y = i;
+
 			/* If there is space below, move down */
-			while(map[p.y + 1][column] == M_EMPTY)
+			while( g->map[p.y + 1][column] == M_EMPTY)
 			{
-				move_field(p, DIR_DOWN);
+				move_field(g, &p, DIR_DOWN);
 				p.y++;
 			}
 		}
 	}
 }
 
-/* Stabilize map */
-void updateGlobal()
+/* Stabilizes map */
+void update_global(game_state *g)
 {
-	int i,j;
-	for(i = map_height-1; i >= 0; i--)
-	{
-		for(j = 0; j < map_width; j++)
-		{
-			char field = map[i][j];
-
-			if(field == M_DIAMOND || field == M_STONE)
-			{
-				position p = make_position(j, i);
-
-				/* If there is space below, move down */
-				while(map[p.y + 1][p.x] == M_EMPTY)
-				{
-					move_field(p, DIR_DOWN);
-					p.y++;
-				}
-			}
-		}
-	}
-
+	int i;
+	for(i = 0; i < g->map_width; i++)
+		update_column(g, i);
 }
 
-/* Update columns near Rockford */
-void update()
+/* Updates columns near Rockford */
+void update(game_state *g)
 {
 	/* Horizontal movement */
-	if(previous_position.x != player_position.x)
+	if(g->previous_position.x != g->player_position.x)
 	{
 		/* Update column on left and right */;
-		updateColumn(player_position.x + 1);
-		updateColumn(player_position.x - 1);
+		update_column(g, g->player_position.x + 1);
+		update_column(g, g->player_position.x - 1);
 	}
 
-	/* Vertival movement */
-	if(previous_position.y != player_position.y)
+	/* Vertical movement */
+	if(g->previous_position.y != g->player_position.y)
 	{
-		updateColumn(player_position.x);
+		update_column(g, g->player_position.x);
 	}
 
-	previous_position = player_position;
+	/* Update positions */
+	g->previous_position = g->player_position;
 }
 
-/* React to user's input */
-void handle_input(void)
+/* Reacts to user's input */
+void handle_input(game_state *g, int input)
 {
-	char input = getchar();
-	switch(input)
+	switch (input)
 	{
 		case DIR_UP:
 		case DIR_DOWN:
 		case DIR_LEFT:
 		case DIR_RIGHT:
-			move_rockford(input);
+			move_rockford(g, input);
 			break;
-		case EOF:			 /* NOTHING TO DO. STOP AND EXIT*/
-			RUNNING = false;
+
+		/* Nothing to do. Stop and exit */
+		case EOF:
+			g->running = false;
+			break;
+
 	}
 }
 
-void start(void)
+
+/* Main loop of program */
+void start(game_state *g)
 {
-	updateGlobal();
-	while(RUNNING)
+	update_global(g);
+
+	while(g->running)
 	{
-		update();
-		handle_input();
+
+		int input;
+		update(g);
+
+		#ifdef TUI
+			clear();
+			print_map(g);
+			refresh();
+
+			input = getch();
+		#else
+			input = getchar();
+		#endif
+
+		handle_input(g, input);
+
 	}
-	updateGlobal();
+	update_global(g);
 }
 
 int main(void)
 {
-	load_map();
-	init();
-	start();
-	print_map();
+	game_state g;
+	char map[MAX_HEIGHT][MAX_WIDTH];
+	g.map = map;
+
+	reset_map(&g);	
+	load_map(&g);
+	init(&g);
+
+	
+	#ifdef TUI
+		freopen("/dev/tty", "rw", stdin);
+
+		initscr();
+		cbreak();
+		noecho();
+
+		getmaxyx(stdscr, g.term_rows, g.term_cols);
+	#endif
+
+	start(&g);
+
+	#ifdef TUI
+		endwin();
+	#else
+		print_map(&g);
+	#endif
 
 	return 0;
 }
