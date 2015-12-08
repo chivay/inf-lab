@@ -1,3 +1,12 @@
+/* 
+ * WPI - ZADANIE ZALICZENIOWE 1 "KLĄTWA BOULDER DASHA"
+ * Autor: Hubert Jasudowicz
+ * Kompilacja:       gcc -ansi -pedantic -Wall -Wextra -Werror nazwa.c -o nazwa
+ * Kompilacja z TUI: gcc -ansi -pedantic -Wall -Wextra -Werror nazwa.c -o nazwa -lncurses -DTUI
+ * Uruchomienie      : ./nazwa < plikmapy
+ * Uruchomienie z TUI: cat plikmapy - | ./nazwa
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -56,9 +65,6 @@ typedef struct {
 	/* Number of not collected diamonds */
 	int diamond_counter;
 
-	/* Terminal dimension (used only in TUI mode) */
-	int term_rows;
-	int term_cols;
 
 } game_state;
 
@@ -66,7 +72,7 @@ typedef struct {
 
 /* UTILITY FUNCTIONS */
 
-/* Returns maximum of greater value */
+/* Returns maximum of values */
 int max(int a, int b)
 {
 	return a > b ? a : b;
@@ -330,25 +336,40 @@ void init(game_state *g)
  */
 void update_column(game_state *g, int column)
 {
-	/* TODO : OPTYMALIZACJA */
-	int i;
-	for (i = g->map_height - 1; i >= 0; i--)
+	int bottom = g->map_height-1;
+	int seek;
+	while(bottom > 0)
 	{
-		char field = g->map[i][column];
 
-		if(field == M_DIAMOND || field == M_STONE)
+		/* Find next empty */
+		while(g->map[bottom][column] != M_EMPTY && bottom > 0) bottom--;
+
+		/* Field above bottom */
+		seek = bottom - 1;
+		/* Find first  non-movable object */
+		while(g->map[seek][column] != M_ROCKFORD  &&
+			  g->map[seek][column] != M_EXIT    &&
+			  g->map[seek][column] != M_DIRT    &&
+			  g->map[seek][column] != M_ROCK    &&
+			  seek > 0) seek--;
+
+		/* Movable objects are in range bottom-1 ... seek +1*/
 		{
-			position p;
-			p.x = column;
-			p.y = i;
-
-			/* If there is space below, move down */
-			while( g->map[p.y + 1][column] == M_EMPTY)
+			int i;
+			/* Scan through range looking for objects to move */
+			for(i = bottom-1; i > seek; i--)
 			{
-				move_field(g, &p, DIR_DOWN);
-				p.y++;
+				char field = g->map[i][column];
+				if(field == M_DIAMOND || field == M_STONE)
+				{
+					g->map[bottom--][column] = field;
+					g->map[i][column] = M_EMPTY;
+				}
 			}
 		}
+
+		/* Continue searching in next range */
+		bottom = seek;
 	}
 }
 
@@ -441,13 +462,11 @@ int main(void)
 
 	
 	#ifdef TUI
-		freopen("/dev/tty", "rw", stdin);
 
 		initscr();
 		cbreak();
 		noecho();
 
-		getmaxyx(stdscr, g.term_rows, g.term_cols);
 	#endif
 
 	start(&g);

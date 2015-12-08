@@ -1,0 +1,189 @@
+########################################################################################################################################################################################################
+#.$$....$..$$.$.$.$..$.....$ $$..$ .$ .$. $$.. $.. $.$$.$$.$$$$$.$ $$$.$$  . $..$$.... ..$...$.. $.... $.$......$.$$$$ $$$.$. $.$$ ..$$$.....$.$..$..$...$ . ... .$$$$$ ...$...$... $... $$$. .$$.$$$$.#
+#$... $$$..$..$$$.$$$$.$$$$... $$$ .$...$$ ..$$$ $..$$ .$...$$.$.$$$..$..$.. $$$$$$$$..$$.$$...$$.....$$$.$$ $. $.$$.$$ $$....$$$.$.$$.$.$$.$.$. ........$$$$  $$..$.$ $.$..$..$$$$$$$.$$ .$$$......$$$#
+#.$.$..$ ... $ ..$ ... $$$.$$.$.$$$$..$...$ .. .$ ..$$.. ..$$.$..$.$$$.$$.$$$$$..$$.$.$..$$$$...$.$.$. .$$$$$....$.$ ..  . $$$.  ...$.. ......$.... $$$. ..$$ $.$$$.$..$... .$.$$$.$$.$$$.$$$ ..$$..$..#
+#.. .$.$$....$$.. $$$$$.$$$$... . $..$$..$...$. $$$ $$..$. ..$$...$ .$.........$$.$$$$..$$. $......$$....$.$$$..$$. ...$$.$$$$$$$$ $..$$$$.....$$.$$$$...$$...$ $$$$..$$..$ .$$$..$.$$$$..$..$.$ $$..$$#
+# .....$ ....$.$...$$. $$ $.$..$......$$$$$$..$$ $.....$.$$ $$.   $$$ $$$$.$$$$$... . $.$.$.. $$$ $$  $.$$.$$.... $$ $$$$... ..$$ $$$$.$.$$....$....$$.$.$ $.$ ...$ $..$.$$.$$$$.$....$.$$$$. .$.$$$...#
+#..$$$....$ . .......$$.....$.$$...$$$  $.$$..$$$$. $$$$ $$... $.$...$$...$.$....$.$$$.$$$$.$$$$$$$. $.$...$...$$$$$$$$..$.$.....$$.$$ ..$.$.. $.$ .. ...$.$...$..$...$.$......$$ $.  .$..$$..$$..$$ $$#
+#$.$....$$.$. .$$$$...$$$.$$$$....$...$ $$..... $.$$.$$$.$$..$...$$$.$.$.$....$$$$  $..$ $...$..$ $.$$...$.$..$.$ . $$.$.$$$.$...$$. . $$$..$$$ $$....$.$$.$$...$$  .. .$$ ..$.$$  ....$$$.$$...$$$$.$.#
+#$$.$$.$...$....$.$$......$$...$$$...$$..$.$.$$$...$.$ .$.$ .$$$. $.$$$ ...$....$$$$ $ $..$.. .$$$$..$$....$..$$$$.$. $ . $$.$$$$$ $$..$.....$.$$ $. $..$.$$..$.....$..$.$$.. .$$.$$$.$ ..$ $$...$..$$.#
+#.....$$$... $.$$$$....$ $.....$.$.$$...... $..$$$$..$$$. $$ .$...$$$$...$$...$$.$.. ...$$$$$ ....$$.$$$.$$$.$. .$$......$..$.$$ ..$$$  ...$$$$$$$$.$  . $$$$... .....$. .$.$$...$$ .$$   $$..$$$ .$$.$#
+# $..$.. $.$.$.$ .$...$$.$$.... .. .. $..$$$$$.. $$.$$$.$...$.$$ $..$... .... $$.$$..$.$$$.$.$..$$$$..$$ $..$.$.... $$ .$. .$$.$..$$.$$.$ $..$ $$.$..$..$. $$.$$ $....$$... $.......$$..$ $$... $$.$$..#
+#..$$$$.$$$.$.$$ $.$.....$$$$$$ $..$.$ .$.. .$.$$$.$..$$$$$$$.$.$$$.$$$$$$.$.$.$ . ..$.$$$..$$..$.$ ..$$$.$$...$ $. ..$$$.. $.. $$. $..$$$$$$.......$............ $.$$.$. $$.$. .$$.$.....$.$$$$$$...$.#
+#$..$$...$.....$$..$$...$$ .$.$$ . ...$$$.$.$$$$.$.... $$$$$$.$.$$ $$...$. ..$$$.$$$ $$$$...$.$$ ....$....$.$.$$....$$$$$.$ ...$.$$$.$$  $$$..$ .$ .. $$$.$$... .$.$$....$..... $.$$$..$$$.. ....$$$.$$#
+#$$..$$$$ ... ..$. .$ $. $..$$..$.$...$$.$ $. . .$$$.$..$$.....$$.$$...$. .. $. $.$$.$$$..$.$..$ . .$.$. .$...$. ..$$..$$ $$$..$$.$..$...$ .$$$.$$..$$$$...$.$...$$$.$.$..$ $.....$$.$$$ ...$.$.$....$$#
+# $......$$ ... ...$.$$$.$$..$$$$.$..$$$$$.$.$.$$$$$$$ .$$$$..$ . $$$$ $$.$. $.$ $ ....$ .... ...$$.$$.$$$.$. $.$...  $$$$$$$.$$$. $$$$.$.$.$$$.$$ .$.$..$$$...$. . .....$$.. .$ $....$$. $..$$..$.$$. #
+#.$.$$.$$$$..$$$$.$$.$.$$$$$$$$. ..$.$..$$..$$$$$ $ $$   $$$  $...$ .$.$ .$$.... $.$.$.$$$.$...$..$.$.$$$.$$.$$...$..$$ .. $ $... . ...$.$.$..$.$. $$.. .$..$.$.$$$ $...$.$... $...$. $.$$$$$ .$...$$$$#
+#.$.. ..$..$$.$ $....$$$$$$.. $....$ ..$.$$$..$$.$ $....$ . .$$$.$$$$$$.$$$.$..$$$$. ..$...$ . $$$$ $ $. $$.$.$$ $.$$$$ .$..$...$$..$ $.$.$$ ..$$...$$$ .. $$. ..$$...$$.$.$.$..$$...$$..$.$.$ $.$.... #
+#$$...$ $.$$$ $$.$....$.$$$$..$$.$ $$.$ ..$.$$$$.$..$.$...$.$.   $.. $$.... $$$$.$.. ...$$.$.$.$$$$$...$.$.$....$ ....$$ ..$$$ $.$$...  $$$$ . ...$..$$$$..$..$.$$.$$ $$$....$.$.  ... . $$..$.. $$... #
+#.$.$..$ ..$..$$$$$.$..$$$$$..$$..$$ $.$$..$ .$.$$$$..$.$.$..... $$ .$$.$...$..$...$$$.$.$..$ .$.$. ..$. .$.$ $.$$.$$  .$$$$...$ $$..$$..$$. . $.$ $$$$$.$$.$.....$$.$.$$$.$.. .$$$$.$..$.$.$...$$$$..$#
+#. ...  .$....$..$$ ....$$$$$$..$$.$$$. ..$.$...$.$$$$$$$ .$..$ ...$$..$$.$....$. ...$.$..$$.$. . $$.. . $$$..$.$....$ .$.$$$.$$.$.$..$....$$.$$$ $.$..$$$ $$  ...$..$ ..$$..... $$..$....$.$$$.$$.$$..#
+#. $$.$.$ $$..$.$ $ $$..$. $.$.$$$.$ ....$$. $$.$.$.$...$...$$$.$$$..$...$.$.$$$$$$ .$$...$$. $$$.$..$ $$.$$...$.$$$....$.$$$...$...$...$...$  $.. $$.$. $$$$$$ $.....$$.$.$.  $...$ $$.$..$$$$..$..$ .#
+#$...$.....$..$. .$ $$$$.$...$.$.$..$..$$$.$$$..$..$..$.$.$$. $..$$..$.$ $$.$ ...$..$.... $$.$$.   $... . ..$$. $.$.$..$$$.$ $....$$ $.$..$$.$$$$..$$  $$$.$$.$$ $.  $..$$.$.$$...$$  $$ $....$.$.$$.$.#
+#..$ ..$.$.$.. ..$ $$$$$... .$..$$$$ .$..$$.$$.. $.$.$$.$ ...$...$..$$$$$$.$$...$..$.$.$..........$..$..$.. $...$.$...$.$.$.$.$.$$$.. $.$ $$$...$ $...$$$.$ $. $ $..$$ $.$. .$........$ .$  $...$..$..$#
+# .$  .$.$..$. ...$.$$$$$..$.$ .$$$.$.. $..$$$..$...$$$$ $$$..$$.$..$$$.$$. .$$$$.$.$$...$$.... $.$ ...$$.$$.$...$.$....$$.$$.$....$.$$$$$.$$.$$. ....$ . .$$ $$$$.$ $$$..$$$$$.$.$$.$.$$....$.$$.$$.$.#
+#..$ .$..  $$$$$$.$ .$..$.$$$.$$.$......$$.$..$$$$.$$$$.$$$..$$. $..  .$$$.$..$..$$ $. .$$$$.$$.$$ $$$$.....$.. $..$.$.$....$$.$..$.$$.$ $$..$.$. $.$.$.$$$.. $.$. .$.$$ ..$.$$$.$.$.$......  $$$$$$..$#
+# ..$.$..  $.$ ...$$. .$.$$$..$$$$$$ $.$.$.$$. ... $.$$..$. $$.$.$$ ....$$....$$..$$ $$$$$$$.$........$$.$. $$$$.   .$$.$.$$$$.$..$$..$.$$...$$....$.$$.$.....$ $..$....$ .$$.$$$..$$$$$. $ ...$..$$.$$#
+#$$...$$.$$$..$.  $. $$$$$.....$.$$$$$$ ...$$$... $$.$$$.$..$.$. $$.$.... ..$ $.$$$$$...$.$ ... $$..$.$ ...$..$$ ......$. $$$$.$.$.$.$.$$..$$.$...$$$$$..$$.......$  .$$.$$$$ ..$$.......$..$.$.$.$$...#
+#.$$$ ...$$$$$ $$$ $ .....$  $ ...$..$.$.$.$$$$$.$.$... .$  $$$.$$$ .$..$. .$$$$.$$$$  $$$...$.$$..$$$..$$...$.$.$$$$$.$$ ..$ ...$.$$$$...$$$... ...$$.$$$.$$$$$.$ $..$$... $$$....$$..$$$....$$.  $.$.#
+#...$.$..$........$.$..$...$ ..$$$.. .$..$...$........$$.$$ $.$$.$. .$$$$.$$$.$$$..$$..$  $.$.$$$...$ .$.$$.$.$.$..$.$$$$$. ....$.. $$$$.$.$. $. $$.$$..$$$..$$$. ....$.$$$....... $... $$$....$$.$...$#
+#$$...$$$$$... .$$.$ $$$..$$.. $$.$.$$$  .. $..$.$.$.$$.$$$$...$$$. .$   ....$.$.$$....$$..$.$.$..$.$$$. $$$$.$$..$.$....$$$ $ . $ ...$$$$$$$..$...$..$.$..$$.$.$.. ...$$ ...$....$.$..$.$$$.$ .. $.$ $#
+#$$.$.. $..$$.$...$.$$$.$$.$. $$. .$.$......$.$.$ .. $.$. .$$$$$$ $.$$$$$$.. ... .. $......$.. $$$$$..$$$.$..$..$.$$.$$..$.$.$..$$.$$.$.$..$..$...$$.$.$$ ..$..$$$$..$$.$.$... $$$..$$.$.$ $  $$...$$.$#
+#.$.$$..$.$.$. .$$.$...$$.$$.$...$....$$$. .$$$ .$.$$..$$$..$...$.$$$$$.$ $$......$....$..$ .. $. $$. .. $ $$$$... $$...$$ $..$$.$$$$ ...$$$$.$ .$..$$$$. $$.$$$.$$$.$.$$.$..$$$.$. $$  $..$... $$$...$#
+#.$... ...$ . $$...$$ .... $ $.$$. .$.$$$$$$..$$.$$..$$...$.$. .  $.$. $$.$.$$$  $...$..$$$. .... $  $..$..$....$ $.$..$.$$$$...$.$.$$$.$$$...$$..$..$$.. . ..$.$ .$$$$.$...$$..$$$..$..$$$..$$$$$$$  .#
+#$$$.$$ $.$..$$..$...$..$$$$.$$$ $$$..$....$$.... ..$... ....$$..$  $..$$.$$$..$ $$..$$$.$$$$.$$$.$.$.$.$$...$$.$$ . ..$$$..$ $....$$$ .$.$.$$$$$$.$....$$$..$.$$.$.$$$$ ..$$..$.$ $.......$..$..$$.$.$#
+# .$$.$.$$$$.$.$$.$ $$$.. $.$$..$.$$..$.$$..$$.$$$.$..$$$.$.$..$.$ $$$$. ..$$$ $..$$.$$$. $..$$$... ..$$$..$$.$$$$$$..$$.$..$$$$.$$$.$...$$.$.$.$$$..$. $$$$.$$$ $$..$........ $..$ $$$..$$$..$.$$. $$ #
+#....$...$ $.$$$$.... .$$.$ $$$$.$...$ . .$... $$$$$ $.$$ . ..$$. $..$$.$$$$.. ..$ $$..$$. ..$.$...$$$.$ $$$$$.$.$$.. .$$$...$.$$..$$..$$$...$.$..$..$$$.$$$$.$. $$ ....$$..$$.. ..$.$$$.$  $....$.$...#
+#.. $.$  .$.. $ .$$$$ .$.$$.$.$$ .$.. ...$$..$..$..$ $$.$....$...$$..$$.. ..$$..$.$$  $.. $.. ...$$$.$..$...... ...$. ..$...$$$.$$$.$.$.$$ $..$...$..$$$$.$..$..$...  ..$..$.$..$......$$.$..$$.$. $..$#
+#$....$$...$...$$$$.$.$ $$.$.... ..$...$.$..$$$...$$$......$  .$...$$.$.$$$.$. $.$$ $.. ..$..$$. $$...$$$$$$.$$...$...$$$..$$...$. $..$$ ..$.$.....$.$.$$ $.....$$$$$$ . ..$$ .$.... $$.   $$..$$$$....#
+#.  .$ ...... $$.$$.$ $$ .$.$$..$$.$.. $. .$.$$$ $$ $.$.$.$..$.$. ....$$$ .$  ... $$.... $$.$ $$$ ..$ .$.$$$.$$$..$..$.$$$.....$ ..$.. $...$$$.$.$$$.$$$.$$.$$$. . . $.$$...$ $.$.$.$..$$.....$...... .#
+#$$$.$.$$...$ $$$.$$$.$$.$ $...$$..$$.$...$ $$... .$$$ $$$.$$$$..$$..$$...$...$.$.$$.$ $.$$$$.$..$$$$$$$$..$.$.$$$.$ .$$$$.$..$$.. $.$.$$$.. .. $.$$$$$$ $$..$$ $$$. .$. .$.$$$.$. .$$. ... .$$..$ ..$$#
+#.$. .$$..$ .$$$.$$... $...$ $$ ..$$.$$$.$$$$  .. ..$$.$$..$$$.. .....$$$$$$.$$$$..$$$... $.$$$...$$.$$..$$.$....$.$ .$....$  $..$$$$$.$ $ .$$$ $.$$$.$$$$ $.$$....$$$ $ $$$.$$.$..$.$.$...$$.$.$.$$$$.#
+#$$..$$$ .$$$$....$.$$$.. ..$$$$.$$.. $$$.$. $$ .$.$$...$..$$$$$$$$$$ $....$..$  $$.$$... $$$..$.$$$$$$  $.$.$$$$.$$$$.$$.$.$.$...$.$.$.$..$$.$$$..  .$$$$$$..$$..$$.. $.$ $.$.$$..$$ $..$. $.$..$ ..$.#
+#.$$.$....$ $. $.$$$.$ .$.... $..$$.$$$....$$ $..$$ ...$ .$ ...$$$ $$...$.$$$.  ... .....$$$.....$$. $.$ $..$ ....$$$ $.$.$.$$$. .. $....$$$.$$..$..$.$.$$...$$$...$...$ $$$.$$$ .$.$.$.$$$$.$..$.$$$$$#
+#. $$..$$.$$$..$.$ ...$....$$$.$...$.$.$. $..$$  $$$ .$$$$$$$.$..  ...  $$.. .$$...$.$ $$$$ $ ..$.$$.$ $$$ $.$$$...$$...$.$.$$.. $$ $ $$....$$.$$$.$...$. $ .$.$. .$$$$ .$$.. . ...$.$ . $$ $..$......$#
+#$$$$$.$.$.$..$....$..$$.$.$.$..$. $$. $$$. $.$ .$.$$ $..$$.$$$$..$...$..$$$$....$ .....$$ $.$ $$.$.$$$$ $$.... $$... $$.$.$. .$...$...$$$$......$$$.$$$ $$$$. $ ...$. ..$  $$...$..$..$$...$..$$.$.$..#
+#.$. .$$$$$$.. $$..$$.$$$.$$.$ $$.. .$  .$$$$.$.$$$..$$....$.   .. .$. ...$ $ $.$$$...$...$.$$$.$$$ ..$.$.  $..$.$.$$$.... .$..$ .$.$$..$$.$.$$. ... .. $$...$$.$.$. $$.$$$..$.$.$.$ $$$.$$....$.$...$.#
+# $.$.$. .$.. $$.$$$  $....$$..$ $$..$$.$$$..... .$.$$$.$..$.$$$. .$.$$.$$$$$.$.$$$..$.$. $.$.$.$$..$$. .$$$.$.$...$$. .$$$$.. .$...$...$$...$.$.$$$$$$.$$$.$$$. .$$..$.$$.$$$$$. .$$.$.$$$..$..$$$$.$.#
+#..$..$$$ $...$....$.$..$$ .$$$.....$.  $....$$$..$..$..$.$.$.. $.. $$.$$. $.. $.$$..$$ .$$$$.. ...$.......$..$ $..$.$. $....$$.$..$.. ..$.. $..$$ $$ $$....$.......$$ $$...$$...$..$.$$$.$..$..$.. $..#
+# ...$. $$$$$.....$$$$.$ .$. .$.....$$$..$$ $$ $.$.$.$$.. $..$..$..$ ..$. $..$ ..$..$$.$..$$$ $.$ ..$. ..$ $.$.$.$ $ $..$.$.$$ $$$.$..$$$.$.$$. $$$$$$. $.$$.$$$$.$$.$$.$$$$ ..$..$$$$.....$$$$. $$$$$$#
+#..$....$ $......$$..$.. $.$$ $$$$$$$$ ......$$$...$ $.$$$$ .$$$.$$$.$ ..$$$$....$.$$$... ....$.$..$$$. $$$.... $$$....$ $. .......$.$. $$$.$$$$$$$$$$$.. .$....$.$$...$$.....$$.$ $.$..$.$$.$$ ....$.$#
+#....$.$.$.... $$..  $ $. $$..$ $.$.$$$$ $$.$$$.$ $$...$.$$$.$...$$$.$....$$$.$$....$$..$..$. $..$$$..$.$.$ $.....$$......$$.$.$....$.$$$$. .$....$.$.$$.$$.$$..$$$$$..$$..$..$$$$$.$$$$$...$.$..$..$..#
+#..$$$.$$$$.$$$$$.$.$$$.$$ $$$..$..$.$...$ ..$.$.$.$ .$$..$$...$..$.$$.$$.$$ .$$.....$$.$$ $...$$$....$$..$$$$$$$$ ..$$$$$. .$..$ .$$$$.$$ .$.. $$.  .$$...$$.$ ..$.$.$$.  $..$$$$$$...$$ . . ..$$$.$. #
+#$$$..$. . $..$$.$$.  .$.$.$$$$$..$.$.$ $$.$$..$$. $.$.$$.....$. $.... $$... $$$...$$.... $..$..$.. .$......$$.. .$$.$ . $  $.$$.$.$..$..$$$$ $...$ $. .. ..$......$$$ .$$ $.$..$$.....$.$.$.. $.. $ ..#
+#...$..$$ .$$.....$$$. .$..$ $.$$.$$ $$.$..$$$$$......$$.$......$$$... .$$$.$. .$$..$$. ..$.. ..$..$...... ..$....$...$$$$....$$.$.$$$$$.$.$.$$$$$.$$. $$$.. .  .$$$$$.. $$$$$$.$..$$.$$$$.$.$$$$..$..$#
+#$...$$...$$$$$. $$.. $$.$. $$$.$...$  .$$$ $..$... $$$$.$$.$$.$$.$.$$ $$$$$.$$ .$ $$ ..$ .$..$$$$$. $. $$$...... $ $...$.$.$$$.$ $......$  .$.$ .$$$..$. ...$$.$$$ $.$$$$..$$..$$$.... $$. .  $. $$$$$#
+#.$.$...$$$.$$.$$ . $$$.$.. .$.$. $...$.$ $.$$$$$..$.$$$$$.$..$.$..$ $$$$$$$....$. $.$ $$..$$$.$ $$$.$.$.$ $$.$.$$$..$$$$.$$$.$.$.$$$$$$$..$$..$$$.$.$ $$$ .$...$$.$.$.$.. ..$$$ $..... .$$ ....$.$$$$$#
+#$$.$. $.$.$$$ .....$$...$$ . .$.$$ ..$$ $.$.$.. $$$..$.$$.$. $$$$$$$..$$$$$.$. $..$.$$$.$$$$ . .$.$ $ .$$$$$..$ $ .. $$$.$$... .$.$$..$....$......$. $$. ..$$$.......$$.$.$...$.$$$.$ $$$.$.........$$#
+#$.$$$$$$.$.$$$....$$.$$ $...$$$ .$.$$$$$.$.$$.$.$$$$$$$.$.$.$ .$..$$$$$  .$ $$.$$ $..$ $$.$$$$..$$. $.$ $..$$$...$$ $.$ .$$$ .$$..$.$..$$ ....$. .$..$....$.$..$...$$... ...$$....$..$.$$$$.$. $$$... #
+#.....$$$.$$....... .$. ....$.$ . $...$$.$$$...$$$.$..$$..$....$$ .. ..$$.$$..$$$..$..$.. $$$ $$$...$$$.$. .$. .$$$.. ...$ .$.  $..$$ ...$....$. $ .$ ..$$.$$ $$.$$$$.$...$.$...$.$..$.. $$$$.$$$$$.$$.#
+#.......$..........$..$...$..$$.$..$$.$$...$$$$$$..$$$.$$..$ .....$.$. .$$. .$. .$$$$$$$.$$.$.....$. ...$$$.$.$$.$$ $.$.$$ .$.$ ..$$..$$.$$$$.... ..$$$...$$....$$$.$. .$..$.$ ..$$..$$. .$.$..$..$ $.$#
+#$$. $$$$$.$$$$$..$$ . $$$.$$$.. . . ..$.$$ $ .$.$$$$$$..$$ .$$.$$$$$.$$...$.$... $$$ $$....$.$..$..$.$ . ..$. $.$$$$$$$.$$.$$ $ $$$$..$.$.$$$$$.$.$$$$..$$$$.$.$.$..$.$$ $$$ .$$.$$.$$..$$$$.$. .$.$..#
+#. $.$$ $$.$$.....$$$....$..$$$..$. .$..$.$.$ ..$ $$$$$ . $$.$...$$.$$$.$..$$$.$$..$.. .$. $$$ $$$ $..$$ $$.$..  .$..$.$.$..$$$$$.$$$..$$.$ .... $...$$..... ...$$$.$ $$$.$.$  $$.$.$ ....$.$.... $$$$$#
+#$$$....$.$$$..$$$.$.$.$.....$$$.$$..$$ ...$... $.. ... $..$$$..$$$....$ ...$$..$.$$.$$$$$...$$.$.....$..$$$.$$$$$.$$$ ...$......$$.$.$.$. .$$$.$$$..$$ .$.$$$. $$ $$...$$$$$$$$ .$$ ..$..$.$.$$.$.$. .#
+#$$ $$.$$$..$ ..$..$$$$ .$.$...$$$. $. .. $$ $.$.....$...$$$. .$.$$$$..$.$$...$$.$...$.$....$ $.$....$.$$.$$...$...$.$ $.$.. ....$ $$.$$$ $$.$$$..$$$.$..$.. $..$...$.....$$$$ ..$.$$.$.$ .$..$$...$$$$#
+#$...$.. $$$..$$....$$..$.$    .. $$.$$..$$ .$$$$$$.$...$.$.$...$... $.$ $$.  $$...$$..$..$.$$$.....$. $$.$$$ $.. $. . .$..$$$ ...$$ $.$$$ .$$.$.$$.$..$$$.$..... $....$.$.$..$$$$$..$$.....$ $..$....$#
+#.$$. .$. $..$.$$$ ..$..$ .$$.$.$..$$$..$$ $... .$$.$$. .$. $.$$. $.$$$.$$$..$. .$.$$.$$$$.$..$...$  ... ..$$.$. .$$.. $$$.$..$$. .$.$. $$.$$..$$$ .$ $..$...$..$$.$.$. .$.$.$. ..$ ......$.$$.$ $$....#
+#. $$.$.. .$   $$...$$..$$ $$ .$.$$$ $$..$$$..$.$$.$.$. . .$ $.$. $.. $$$ .$.. ..$.$$..$.$.$..$.$.$.$.. ..$.$.$..$.$..$$  $ $$.$....$$$$..$.$.....$$..$  $$$.$..$$$..$$$ $..$..$.$...$.$$$ $..$ $..$$$$#
+#....$$..$$..$...$.$..$$..$ ..$...$....$$..$ .$ $. $$$...$ $$$$$$.$$...$.$....$. $$..$.$..$$...$....$$..$$.$$...$..$.$.. .$$..$. $.$..$$..$...$$$$..$$... .$$ $$$$.$.$.  ..$...$$.. .$$$$...$$$. ....$$#
+#.$$$$ $ .$.$$.$ ....$$. $$...$.$..$$$.$.$... ..$$. $$..$$..$$ $$$.$$. .$$ .$..$$.$.$... $...$$   .$.$$.$$..$$$.. .. .$$$$$$.$...$$$$. . $..$ $ $$.$$$...$$ ... .$$$$$$$. ..$.$.....$...$..$ $$$...$.$ #
+#$$$$....$$$..$$ .$.$.$..$$...$.$.$.$. ...$$$ .$..$$....$$ ..$ .$$.$$.$$.$$$.$.....$.$.$....$.$$$..$$ .$.$.$...$$$$$.....$$..  ..$$$.$.$$$$$$ $$ $$.$..$$$ .$$.$$.$.$...$$ ..$$....$$...$$$  $.$$ $ $..#
+#.$$...$$$$...$.$$$$.$$.$ ....$ ..$.$$.. .$$$.$$....$$$$.$..$.$ ..$$$.$$. $$. .. $$.. $....$.$.$$..$.$..$.$.$$$.$.$.$.$ .. .$.$..$.$$$.$.. .$.$$.$ $$$.$$ $$.$$. .$ . ..$$$$$.$$...$$$.$.$... ..$$$$.  #
+#$$$.$$.$..$$$$$ $..$$ . .$.$ .$.$.$$ $$$$.$ $...$. .$$$$.$$$.$.$$$ $.$$ .$.$.$..$. $..$ .$$....$.$$$$...$.$...$$ $$$. $.$ $.$$..$.$$.$ ...$....$$.$$ $ $$.$$$...$$$.$$$$$.$$. $$ $. .$. .$.$.$.$$$$ ..#
+#$......$$$$$$ $.$.$$  .$.$...$$$ $$$...... $ .$$$$......$$$$$$.$ .$.$$ $$$.$$$ $. $$$$.$..$..$$$$ $ $.$. .$.$$..$$.$.$..  $.$.$$. $$..$ $.$ $.$$$..$.$.$$.$$$.$......$$$...$$$$$..$... .$..$....$$$..$#
+#. $.$$$....$..  $.$..   .$.$$$$..$...$$..$.$$$$$.$.$$.$$..$$..$$$$..$.$$$. $$.$$ $$$ $.$.$....$...$$$.$ .$ .$ .$$...$.$.$... $$$...$.$$..$...$..$$$..$$.. $$$.$. $$ .$$$$..$.$. ..$$.$.$.$..$ $$..$..$#
+#$..$$ ..$.$$..$$$..$$$. $.$ .  $$$$$$$.$$.$$$...$.$..$$$$$. ...$$$$$.$$.....$.$.$.$$$.  $. $$..$$$.$.$$$ ...$.$.$$$$$.$$..$ ..$$.$.$$.$$$$ $$$$$.$$$. $..$.$.$$$$.$.$$.$$$ $$$$.$$....$..$. ...$.. $.$#
+#$$. $...$.$.$ $$$$$$.$.$$$$..  ..$$ $$ ...$.$ .$..$...$...$$$.. . $ ...$$...$.$$... ..$$$$.$.$.. . $$$$$$$.$.$.$.$$..$.$$ $$$. .$..$.$$.$.... $ ...$$..$$$ .$...$....$.. $ $$ .....$$$...$.$$$$$$.$$$$#
+#$.$$.$... $.$ $...$.$$..$.$$.$$$..$ .$..$..$$ .$.$$. $.$ X. .$... $$.$.$.$$.$.$$$.$$$..$$$..$...$. .$$ . .$....$$$.. $...$$.$.$.$...$$$$$ .$..$$$$$. $$.. .$..$$...$... .$$$$$..$$$$$$$$$$.$$...$.. .$#
+#$$$$ $$. ...$$$ $.$$.$$....$ $$$ $ .$$$.......$. ....$..$$$$$$ $$....$$$$ ..$ .$. ...$..$$$.$.$..$$..$$...$.$.$.$....$ $ . $$$ $.$$.$...$.$$.....$..$$.$...$$.$..$$$.$$ $.$..$$$.$. $..$.$ $.$.. ....$#
+#$$.$$...   $$$  $ .$...$$$....$.$.$.$.$....$$$...$$..$$$$$ .. $ $.$.$$$$$$ $.$$.$ .$$.. .$.$.$. .....$.$$.$...$.$ $$$$$..$$$.$.$.$. .$.$$ $.$..$...$$$$$ ..$... ..$.$$.$$..$$..$..$$$$.$.$.....$$$$...#
+#..$$$$$$. .$$.$$. $ ... . .$.$..$$$..$$.$$..$ . ..$$.$$$$.....$.$.$$$.$$..$$$......$$$.. ..$.$.. $$... . $ $$ $.. . .$ .$.$$$.$.$..$  $.$.....$$$...$. ....$$ ....$$..$$. $$.$$$$  .$.$ .$.$ .$$$$$$$.#
+#. .$$  .$$.$.$$.$ $..$$.$$$$.$$$. . $.... ....$$.$$.$$.$.$.$ $$.$.$..$$$$. .$ $$$..$...$..$$.  $.......$. $.  $...$$$$...$$$....$$$$..$.$$ ..$ $$$....$$$$$$$.$...$....  .$$$$$.$.$ $.. $......$..$$$ #
+#.$ $ $... ..$ ...  $$$. ..$$.$...$..$$.$.$$.$$$.$..$. ..$.$..$$$ .$$$.$.$$$ . $$ $$.$..$$ $$. .. $...$.$.$$...$.$.$...$$$.$.$$$  ... ..$.$$$$  ..$.$$... .$..$ .$$$. .........$ $$.$...$$...$$$$$ $$..#
+#$.$$....$.$ . .$.$$.. .$.$.$$. . $$.$$..$$. ...$.$$..$$. $   $   $$$.$  $$$$.$$$...$...$..$.$ $$...$$$.$$$.$..$$$.$$$.$.. $.$.  $$..$.....$.$$.... $$.$$.$.$....$..... $$.  .........$..&$$$.$.$..$..$#
+#.$$.$$. $.$....$.$$..$ $$$....$$$$$..$ $. . $$$$$$$ $...$.$$..$ $$$$..$...$.. $$$.$$.$$$ $.$$$$..$.. $$$$.....$$...$ $$$$$.$.$.$$.$$.$$$$..$$$$$  $$$$$ .$.$.$.  ..$.$.$.$.$. $ $$$$. $.$$$.$$.. $$$ $#
+#$ $$$.$ $.... .$.$...$.$ . .$$.$$ . $$.$$$$.$$ ..$$.$.$.$.$$$$$$$$ ..$$$$.  $$.$.  $$$.$... ..$  ..$.$...$...$.$.$.$$$$...$$$...$.$.$$$.$.......$$$..$$..$.$..$$$$ $....$$ .$...$$$$ $..$...$...$..$$ #
+#.$..$..$.$ .$...$ $..$$.$.. .$..$.... $$$.$$$ $$$..$$.$..$$.$$.$$.$.. .$..$.$$$.$$ $$.$...$$$$.$$$$$$$.....$.$$.....$.$.$.$.$$$$.... . $$.$$ ...$...$.  .$$$.$$$ $.$$.$.$ ..$ $.....$ $$$$...$.. $.$..#
+#...$..$..... $. $..$ .....$.$.$.. ..$ ..$.$.$.$$ .$$$....$$$......$$$$ .$..$.....$.$ .$.$$$$$ $$$$..$.....$.$$.$.$ $ $$..$.$.....$$$$$$$...$$$.$..$...$...  $ $.$$. $... .$ $ $.$.$$$  ..$.$$. .$$.$$$#
+#.$$$$..$$$..$..$..... $$.$.$.. $$$.. ... $.$..$$$...$.$$$..$$ $.$......$$$.. ... ...$$$.$$ .$...$.........$$.$.$$$$....$$.$ .$.....$.$..$$$. $.$....$...$$... $..$..$..$$$$.....$.$$$$.$ $$ $..$$.$..$#
+#.$.$.....$....$.$$...$.$$$ $. $$.$.....$..$ .$.$$. .$...$$$$$..$.$.....$. $ .$.... ...$$.$$$$$$..$....$...$...$..$... . ..$.. ..$..$. $..$....$$$ $$ ..$$..$...$ ..$. $.$ .$$.$...$ .... ..$..$$..$. $#
+#.$.. $.$$.$..$..$..$.. .... $.$$.....$ $$.$$. $$.$. .. .$..$$.$....$$$$ $$... $$$$.$..$.$$.$$$$.$...$.$$$.$..$.$$$..$$$$ $...$$.$$$$.$.$..$..  .$$$$.  $$..$..$. .$$$$ ..$ .$ ..$$.......  $ $$ $..$$$#
+#$ $$$$.$$$. $$  ..$$.$.$..$.$$.....$.$.$ ..$$....$$.$.$.$$..$..$.$..$.$..$$$$$$$..$.$$$ $ $$$$$...$$$ $.$. ..$.$$.......$$.$$ $...$$$.$...$.$$ .$ ..$.$$....$ $$.$.$.$.$ $...$ .$$$..$  $.$$.$..$.  .$#
+# $.$$.$$..$$.... ..$$ $ .$$$ .$$$$.$. .$ $ .......$.$..$$$.$$$$.$$..$ ..$.$.....$$$$$$$.$$$.$$. ..$$. $.$$$$.$$.$.$$.$$.$..$$$$$.... $.$$.$...$$..$$..$$$$. .$$$$.$$$$.$....$$$..$.$ ..$$.$$$$$. ...$$#
+#$...$$$$ $ $. $...$. ... $.$..$..$$ $$. ...$$. ... $..$$$ $ $.$.$. $$..$.$...$  $$.... .$.$..$$ ..$....$  .$.$$.$$ $ .$.$$..$$$.$$...$.$..$$$.$$...$$. .$. $$$..$$$..$.$$..$.$$$$$.$$.$.$$$..$. ..$.$.#
+#$$.$$....$$.....$.$$.$$....$.$$$$.. .. . $$$$$.... $$.$$$$.$...$$...$...$$.....$..$.$..$.$.... ..$ $$.  $.$$.....$ . .. .$..$$ .$ $....$.$...$.....$$....$.$$$$.$....$$.$$.$$$$$$$..$$$$... $$$$$ $$..#
+#.$.$ .$$$..$$$$ .$....$ ..$$.$.$$ . .$$. $...$...$  $$ ....$..$.....$.$$$$$.  ...... $$ .$$ $  $$.$$$ ..$$ $...$...$. $$. ..$.$$$.$ $$.$.. .$$...$. ...$$$$.$.$$ $.$....$..$.$.$.$..$ .$$$$$$$$ $ .$..#
+#$$$ $.$.$$....$...$. ..$$.$$$.....$...$ ..$$$..$$$$.$.$. ...$$.$. $$ .$$ .$.$.$$ .$..$$$$$  $...$  $$.$$.. $......$...$$.$$ $$...$$..$$$ ..$$...$.$.$.$. . $. $$$$$.$...$. ..$$.$$.$. $$.$..$.$.. $$.$#
+# $$.$$$...$. $$.$....$$$$$$$.$$$..$$..$$.$$$$.$$.$..$$.$..$$..$.$..$.$..$$$$$$.....$$$ $..$..$.$..$...$$...$$..$$$... $..$.$$$$. $.$ $.$ ..$$..$$..... .$. .$.$$..$........$.. $.. ..$$.....$...$.$$..#
+#$$.$$.$$.$$ ..$... . $.....$ $ ..$$...$. .$....$..$.... .$$$...$$$.$$ $$.$$..$.$$.$...... ...$.$$$. .. ... .$$$.$$$$$..$$$. ..$.$$....$$$$$$$$$$$..$.$$.$.$..$$$$...$.. $$.$.$$$$..$ $..$ .  ..$.$$...#
+# ...$ $ .$...$$. .$  ...$$$$$ $$.. .$.$$$.$$.$.$.$$......$.$$$... .$$  $$..$$$ $.$ $...$....$.$.$$.$....$.$ $$ $$  ... $$  ...$$$......$$$..$.$$$$$ ..$$..$$$$.$$$$$$$..$..$..$....$$..$$$$$  $$$...$.#
+########################################################################################################################################################################################################
+
+wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+s
+dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+s
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+s
+dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+s
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+s
+dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+s
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+s
+dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+s
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+s
+dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+s
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+s
+dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+s
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+s
+dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+s
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+s
+dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+s
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+s
+dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+s
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+s
+dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+s
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+s
+dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+s
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+s
+dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+s
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+s
+dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+s
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+s
+dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+s
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+s
+dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+s
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+s
+dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+s
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaahdjgagdw
+wguig34jkahdugwaihdkhaidyawi
+sadawdawdwadgwaadwa
+dwahdiadasdawdafasydfawdaw
+dwayd3t48yihadgwau8tdwaghdh37824iahdjkhdiaaaaaaaaaaaa
+aaaaaaaasdjgauwtuadhkwad
+dkhasdhiwadihakdnwkandkawudghkaw
+

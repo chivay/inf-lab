@@ -1,0 +1,455 @@
+########################################################################################################################################################################################################
+#.....$$$$$.$.  $. $ $ $.$ O$ $...$$$$ $$$$.$$....$$$$... ..  .$$$. . $$$$  .$ $$$$..$.$$$...O.$..$....$$..$ $.$.$$..  $. $ $$$$.. $$...$$..$$.$$.$$O.$.. .$$.... $$$..$. ...$.$.$.$ $ .$. ..$...$.... #
+#$.$.$..$$$$$ ...$$$$$$ .$$..O.$.$ O..$.$..O$..O ....$...$ ... .$ . ..$ ....$$$$.$$$$...O.$ $..O.$.... $$$.$$.... ..$$ ... ....$$$$..$$$ .$$ ..$...$.$.$$ $$ . $..$..$$.  .$..$O$ ....$.$$$$.   $$$..$ #
+#.$$$.$.... $.$.$$ . $$.$$.$..$$O$. ... ..$$$$$ $..... $.....$ ..$O$ ..$  ..$.O. . $O $. O$..$ $..   $$. ....$. .. .$$ ..$$$.....$..$  . .$ $O.....$ O.$ $.$$.  .$$...$O.$$$$. .$O..$ .$$..$$$$$$ ... .#
+#...$$ $...$$..$$..$ $$..$....  ... $$ .  .$$$.$.$ $.$ ..$$.$.. .$  $$.$$$.$$.$.. ... .$$$ ..$$$$.$.  $.$$O...$ ...$... ....$...$.....$$.$.$ .$.$$.$.$$$$.$..$$O.. ......$$  $.... ....O ..$.....$$....#
+#...$.$...O.$.O. O$$$...$$$.$ $.$$.$.$...$.  .$O.$..$ .$.$$..O$. $$....$O...$$$$.$. $...$  ..$$.$.OO.O$$.. .O.$$..$.....$.$.$ .$.$. $....$.$..$$  $$$ .$$ ..O........$..$$$.$ .$..$  $.O..$$$ .$$.. $$ #
+# $.O$O$..$.$$....... $.$ .$..O$. . $...$$$ ....$. $$..$.$.$ .$..O$.$ .....$...  .. $$..$.$$$ $.$O ...$$O. .$.. O.O.$..$$$..$$.   ....O.$$$$$$.$$..$ ...$ $$ $.$  ..$.$$. .$$.O..$$.$.....$$$ O$.$. $$.#
+#$$O...$ O.$..$$$$O... $... $$.....$.$..$O$.$.$ $$.$...$ ....$$$O..$$.$.$ .$.. ... . $$$.$.$...$$.. $.O ..$   O.$...$$....$..... $...$.$ . $$...$$$$$O.$O..  .$.$..$O.$.$.$$  O$ ....$ .O.$..$$O$ ...$.#
+#.$O..$..$ $.$O..$.. $$ $. $ .$.. $$..$ $$$.  $.$.$.. $$$.$$O$  .$.$$.$.O$O$.  .$..$$$$$.$O.....O$.O.$$.$ .. $.....$..$.$ $ .$ $.$ .O.$ ... ...$.. .. $. .$.$O$..$$$..$..$$ $$$..  .O$$$...O$..$.. .O.$#
+#. O.O$ ..$.$..$.   O.$.$$$  $...O..$.. $..$...$. $...$.  $.$.... ...$.$O..$O$ .$.$$. $  O.$.O$ O$......$$. .$.$ . . .. .$  $. ..$  $O......  $.$$.$$...O$...$$.$ .OO   $ $ O$.  ..$$ .O. O$...O...O.$.#
+#.. $ . O.  $O..$  .$..$ $ $ $..$$$$. .$ O$$$$. $.$.....$.$$$ . $. .....$$$ .$ $$ $ $. ..$  $$O.OO$ $$... . $.$O ..OO.$. . .$$... .$$.$$.. $..$$. ....$$.$$.......$$$$$$...$...$ .... $$.$$    $$$.   $#
+#.$.O$ $.. .  .$$....$$$$.$  .$$. .   $ ...$. .O...$$..O.$.O..$. ... $O.O$$.   .. $ $..$ $.$$ .$ .. $ $..$$.$.....O .. $..$.....$ $ O$. ...$ $.$$$$.... .$...$.$...$O$O .$$..$$$.$. .. $$. $$.$  ..$. $#
+#$.$$... $..$$ . .$..$$O. ..$$ $$..$$$$$. $$....$.$$$$ ..$$ .$..$$.$$ ..$.$ $...$$$. .$.. $$....$.OO$..O$.. .$ $   ...$$.$$.$..$O$. $ $ $$.$ ...$. .$.$$.$.... $$ $$..$$$O$.. .$ ....$.O. $  .. . .....#
+#$. .$...$ $..$.$$. ...$ .$.$$...$$    $$$ O$... .. ..$ . .....$...O$...$$$. .$$$O$$$.$$.$..$$.$$$..$.....O$... .....$..  ..$$...O..$..$.$..$$..O...$.$ $$$O.$. .$$$. . ..O.$$.... ...$ O ..$..$$ .O O$#
+#...O.... ..$... $..$$$$.. $.$$$$.$ .. ...$$....$... ... $$$O$ ..$ $. ..$.$..$.....$$$ ..$   . $O $.$$.O$$......$$$ .$.$.....$$. $.. ..$$.$$.. $$ $$...$.O.. $.$.O$ $$$O.$ $$ OO$.$......... $.  $.$O$$#
+#$.$.  $$.$$.....$.$$ .$.O.$$..$$$  .$..$$$.$ $$.$.$$$$.$$$.$$....$... $$$.O.. $..$$. ...$O.$O.$...$. O.$..$$....$. $ $.. ..$.$$...$$$..O$...$.$. .$O.. ..$ $....$. . .$$.$.$$..$$.O $. $$.....O$.. .O.#
+# $$..$..$  $$ O$$.$$...$.$$$  . $.$$ $..O.$$...O$ $$..$. .$ ..O. $.$$.$ .$$O$ $  $. $..$.$.. O$$...$.$$. ..$... OO$...$$.$ $...$$.$..$$.O . ..$..$.$....$$.$.$..$. $..$ .$$..$$$$$  O... ..$...  $.O. #
+#....$...$ .$O$ .$O$O. ..$... .$$$ .... $$...$$...$.O.$. $ .....$$. ....$ ... . . $$....$$..$$....... ..$$.$.$....$$.$.$$. .. .$$. .$ .$..$.$.  O..O.$.$.O .. . .$O$$$ $$ $.$O$...O . $ ..... ..$$$ $$.#
+#..... $$$O $ .$O $..$$.$$.$...$ $. . $$$.$..$O.$..$...$. .$OO$..$...$  $$$...$$$ .$$$.....$$.$$$O.$...$$..$. ..$ $.. .$. .$$ $$$ .$$$..$$. .$ $.$$$$.$$.$$O$$ ...$$ ...$$. ...$$ $ $ $$$.  $ OO.$..  .#
+#$$.O..$$.$...$  . O..$.  .$ .$. $$  .$.. $.$.$$. ...O.$$.$..$$...$.. $.$$$.$$....$ .$   $.O.$.....$$$ .$.$$.$ $O.$ ..$O$....$ $$. $...  ... $$.$ ... $ $.$. $.$.$....$. ..$..$$$..$$O$O$$.. $$   .. ..#
+#  $$$..$. ..$ O..$$.$.. .$..$.$.. $O..$.....$..$ $ .$$.$O$O.O..... . $$.$   $.$...$. .$$$.O$. .. $$ $ $ ..O.$.$$.....$.O  ..O$ .$$$..$$...$$..O....$...$ $...$...  .$$O.$.$ .. O$..$. ....$. .  $$O ..#
+#...$$$..$$.  $$.$..$$... O$$.$..$$..$ $$.$.. .O$.$.O....$$$$. $......$.$$.$.....$......$..$..$. ..$$.. . $ ..$..$$.$.$... $.O$ ..$.$$. $$.$.$........$....$ $.$O.. .. ..  .$$$.$..$.$$O .$$O $.$$.. $.#
+# $$.$$.$$$$$$.$..O$$.$$..O...  .$$...O$ $ .O$..$...$$$....$  $$...... $$$$ ...$$. $.$$ $$$.$ $ . . $$ $$$$O$$.$$ $..$$$$$.....$$.$$ ...$ .$.$...$..$.$$...$.. .... $$.$$$ $....$. $ $.O.. .$$$$ .$.O..#
+# $$$.$. . .$$.$$.$$$.O O...$ .O ..  .$ ..$O... $$. .$. $ .$ .$O$..$ .O.$..... . O$.$$$$.$ ..$$.O$.O. .. $$.. ... $ ... $..$$$ .... .$.$$...$$O..$ .$. $.. O$.... .$..$$ ..$..$..$$..$....$$.... .$..$.#
+#. .$$$$ $.$$O  .. ....$..$ . .$.$$.$...$$..$$$.. ..$ $O ..$.......$.$..  .$$..$ .O.....$$$$$..$.$...O...$.$$ O.$$.. $..  . $...$$ $$$$.O.$$$$$$$ $.. $.$  .$  .$O...  O$$ $..$$$. .$$......$.$..$$..$$#
+#. .$ $.$..$.O .$..$.....$.$ $$...$.$. ..$.... $....    $$..  .O$ ...$$O$.$$.$..O......$$.$$.. $.....$$$.O O$.$ $..$........$. $.O$......... ....$$$$$. $$.$ $O .O.. .$O$$O$ $$$.$.$.$$  $ $$O$.$...$..#
+#$. $ $ .$$.$$ .$$...$$.$.$$.$  $.$O  $.O $ ..... .$ $..$$$. $$$$  ...$$$.$.$$$.$.$.$O...  $.$$$ $ $$$$$O. .  $$ . ...O .$ . . .. ........ $.$$.$..O$..$.$$..  .$...$$$$$$O.. O$.O$$$..$$. ....$...O$..#
+#....  .$ .$$.$$..$..O$.$. .....$.$..$$ . $$ ....... $..$.  $$......$$. ..$.$.$. $$$O$.$ $..$O.$O$ .O.$$.$.$.O...$$..$$.$....$$$O..$.$$.$$$..$..$..$$$$ .. .  ....$.O.....$.  $.$ $O $$$.$$ ..$....$$$$#
+#.$$.$. ..$ ... .$. ..  .$.. ..  ...$$$.OO$$.. $.$.. $. .$O...$.$.. $......$.$ .. $.$$. .$$O.$.$$.$$.$..$ $..$$$$...$.   .$ $.$$$ $$.O.$$$..$$ .$...... O. $$.$$$$.$..O. ..$..OO $$ .$ $..O...$$$.$ $..#
+#$.. O.... $   O$.... ..$. .$.  ..O.  .$ . .. .$  $  .OO$.$..$.$..$$ ..O$..$..$ .$ .$.$$.... .$$.O...$ ...$ $ . .$.  $ $$.... .$.$$.$$..$ ... $.$.......$$O.....$.$ $ ..$... ....$$$$..$...$.$. $O..$ $#
+#$.$...$$...$$O....$$..$ $.. ..$..$...$$. .$$.$$. .$$.$...$. $O..$$$$ .... $$$.$.$$$$..$O$$.$$..$.$ $.$..$ ...$.$.O.$ $ .O. $.  $$.$$.$ O$$.$ .$.$..$.. .O$$.$ OO$ $$$. $. $$.$  ..$  . . $.$.. ..$$$$$#
+#O$$$  $.O.$.. .$$....$ .$$$.$$$$  ..$.$..$. .$$..   .$$$..$O.$ ....$...$$ ....$ $.. $... .$..$ $.$...$$$$$$.$ $.$O$....O.. $$$ .O.$.  $ $. ..$.$.$ $.$......$O.$$$.....$. $..$$$$....$$$$$  ..$$$..$$.#
+#...$.$.$.$.. $$....$.$ ..... ... ..$$$$ .$.$O$....$. O. $.$.. .$.$$$ .$$ $$.O$$.. .$$..$..$.$$...$$.$.$$.$$. ..$.O$ ...$.$$.$ ......$  .....$......$O.$.. .$.$. $....$.. $.$O.$ $$ $...$..O$$  $ $...$#
+#.. $$$$$$ $.$ . $.  $$.. . .O..... O..O.....$. $.  ..$.$ O..O$ ........$$.$$... .$ O ...$.$ $ .$$$. .... .O.$..$$$.$ ....$..$  ...$$$.$.$$.....$ $$O $ .$.$. $$$.$... .$ .$.O.$.$.$. $$. $$O$ .$ $ $. #
+#OOO .$$$$O$...$. $$ $.$.$$$....$ ..  .$O.$$$$$$$$$.$.$$..$.$...$O$ .$.$.........$.$..$...$$.$$...$.$.$.$.$. .$.$.. $$.O$$.... $ .$...$.$.$ ..O ..  $ .$$.$$.....  ....$  $.$ $ ...$ $.$. $O$ $.$...$..#
+#..$. $  $ .$.$..$$$$.....$$. . ..$O ....$$$ $.$ $. .O.$$$$...$...O..$ .$$ .. ..$ $ $ $  $  .$..$.$$O..$$$. $$$$.$$$$...O..$.O $..$$.$....$.$. $.O.O$.. .O$$.$....  $.$.  ...$. ...$ $$..$$.$ ..$$$.$..#
+#$. ..$$... $..$$.$.O. $.$$.$.O$O.$$$$ $$...$$$..O.$...$$O......$$..OO$$ .$...$.$$ ...  .. O  $ $.$$.O$.$..$$. .  .$$.... $. .$$.$..$$..$$.. $.$$$..$$..$. ..$$....$.$ O$$..$$ . $$  $$. $$$.$ .$$$$. .#
+#$..$.......$....$$$$$$$ .$. .  $.$...$$$$.$.$. $$ .$.$..$.$.. ....$$$...$O$$...$ . ...... ..O.. . $ ...$ $ $.$$.$$..$ .$$$ $$O...$.  .$..$$.OO.    $..$$.$.$$$...$. .  ..... .. ..$.$ $.$$O$$$$.$ $..$#
+#$$.$ $$....O $O$..$ .$$$.$..$  $....  .$$$.$  .. ..... $$. ..O. ..  .$ O.. .O.$$..$.$$$$$...$.$.......$$.$ $ .  $.. $$$....O$.$.$....$$$$. .$$..$$ $O ..$$ $..$. $..$O.. .$$ .$..  .$$ .$.$.$... ..$$$#
+#$.. $ $$....$$..$$$$.$$$$..$$$...$O$...... ..$ $...O.$$...$ .  $.$$.$ $$ .$$  $ . $ $O$..OO$... $...$$.. ....$.$.$ O ..O$.$O..$  .....$$$O....$O$.. $$. .$...$..$$.$..$$..$OO $O...$.$....$$$. .$.$. .#
+# ...O$......  $$..$.$  $O$. $.....$.$. $$. . ..$$O$.$$.$.$  $$O.$$ O. ...... ...$. ..$. .$O $$$.$$.. . ...$$...$O$..$.$ ...$.....$   ..$..O.$$. ..$$$$$.$$...O.. ..O$...$ $. $ $  O$.$...$.$ .$ . $.$.#
+# $..$$.$..$$.$$..$. ... .$$$..$.$ $$.$.$$$.$$ .$..$$.$$O $. $..O$$.$...$$$$...$  .$... $$ $.$. OO$$O$$..$$ $.$.O$$ .. ..$ $.$.$.$.O$.. $O$..$$$. $O$.....  $.$..$..$ $$$ .$$.$ $ .$ ... ....$.$.$O.$$$#
+#. ..$ $O..$...$. $$. .$... O$. .O$. ..$$$O$$OO$$.$$..$..$.$.$...  ....  .$$..$$.... $$..$$ O.$$$$$ . .. .$ ..$$.$$.... ...$$..$ .$$$$$. .. $.$$$.$...$$$.  $.$.$.  O$..$$.$$$ ..$.. .$.$.. $$..$...$..#
+#$.$$..$$..$.$$O....  ..$O..$ $...$$$...$O.....$ .$ $$$$....$ .O....$$. $.O..$. .$O ...$$$$$..OO$.$.$$O$$$ ..$..$$$$$.O. .....  ....$..  $..$ . ..$.$$$.$..$.$.$ $...$.O. ..$.$.$..$$$$ .$$.$.$.O......#
+#$.$.. $$. $$......$O ..$$ $ O..$ ..$$$ ..$..$$..$......... ..$.....$ ...$ $... .$$ $. $. $ ..$ $.. ..$.O$  .$O... $$ $$..$..$.$..$O$.$.$$$$O..$O$..  ..$...$O.. .... $$..$.$....$. . ...$$.... .$$ ..$#
+#...$...... .$.....$.. $.$O$$. $$.....  $..$$$$.$.$......$..$.$$.$$O$$..$. $$..$$$.$..  $$$...$$$.$.$.$ ..$.$$ ..$$.$.$. ....$$ .$$.. .$$$.$.$O.$. .$$..$.$.$$.. .. . ..$.$$.O$$.$ $.$..$$$. .. $. ...O#
+#$. ..$ .$.$$.. $$..$.$. .O$ .$.$$.... $$..$.....$.. $....$$ .$..$$$$$$$$ .. .  $.$.O.$$$....$$..$$$$$$..OO$..$. $&$O. .....$ .$O$... $ .$$.O .$... $. $  . $.O.  $ O  ...$O$$... $.... ..$ ....$$. ...#
+#. $$$..$ .. .. $$.$..O.O..$.$.$ $ ...O$ .$O..O.$ $..O$OO.$$..  $.... .. ..$.  $O. O$$..O.. .O..$$$ ..$$..$O$$ .$ . .... ..$..$$....O$$ $...$. .$.$$.O.$O$.$$$$.$$..O......$ . $.. $.$.$$.$$. $$.$.....#
+#$$O $ $.$.$.$$. . .$$$.$. .....$  ..$ O$.....$$$$$$.O...$ $$.$ $$..$.$$$$. . ...$$$ $$$...$ $ $O..  O .$.$.$. $ $$$O $O.$... $.OO.... .. ...$.$.O$$.$ ... .. $.$. ....$$ .O$.O.$$$$O$$$.$$.. . .. ..$$#
+#O$$...$. $ $$. ..$....O $$..O$..O....$O$ . .. $...$$.$. $O.$.$O.$$$.O. .$.$$.$$$O..$....$$.$ $...$...$...$$O$.$$.... $$$ .$  $$.$...O..$.$ .$ $$$. $$...$$...  $.... ..$$..$ $$$ ...$.  ... .O$.$...$$#
+#.$$.   .. $OO$ ..$.$..$$.$..$.$$O..$$...$...$ . $O.$O.O..$. $$$.. $  .$ $.$$. $$. $. ..O$$$ $  .O$$....$ $...O$........$.$.$.O.$.. .$$$$.$$.$$ $...O$ .$.... $$.....$$O . $$.$$ ..$.$OO   $ $. $$.$.$.#
+# $..$..O... ..$..$$O$$$$$ .$.$..$ ....$$.$..  .$$ ...$$.$..$. $.$... $O . O.O.$$.$. $$O ..O...  . .$..$.$....  $$$......  ..$.. . $$ . .$. ..O. . .O..$..$ O.$..$.$.$  $....... ..$$. $. $$.$ ........#
+# .$.$O. $$. $$.. ......O..O$.O$$ O$O$.O ...$...   ...O.O$ .$$O... $.. $.O$..$..$..O..   O .$$$ .$OOO....$....O$$$.$.$.$O..$..O$$$..$$..O$...$.$....$$$$ $$. . $..$$....$$$$$$ ........$$ ..   $$$..$O$#
+#$..$$.$$ ... $.$..$.$$.$.$$O$..$ ...$. $$$$$ $$$$$ $.. .O$ .. .$$$..$.$.$$ .$. $$$O$ $.. $$.... O. $$$$ .O.$$ $.$$$. .O.$....$$. $ .$. $$$ $$$ $.... ..$ .$.$$O$..$.... .$ ..$.O.$O$O$.$$ ...$$$. .$. #
+#$.$.....$$$ ....O. $..$$..$..O..$$$  $$.O..$.. . $....$. $..O$$$.... ...$....  $$$$.O.$$.. .O..$.$O..$.  .....$....$.$O$$.O O..$$ $ $$$..$.$... $$$ $.. ....$O.....  .$$$...O$$$...$......$.O..$$.....#
+#. ..$$$..$$..$$..$$$O$ $..$.  .$$ $.$.$..$ .$. .$$.. $$....$ .$$...$.$.. $ .$ $$.$.$$..$ . $$. $.$.$...O...$ .$..$.$...$$$O$.$$. O$.. O......$. ..$$$O.$.$.$$.$$..$$...$.... $...$$....$.$ ..$. . ....#
+#$.....O.. $..$$ .. .. O... ..$$ O.$$$.$O  .$$.O..$$O. O$..$.$..O$$   $$ $.O... .$.O$..$.$$.$$ .O..$.$$$.$...O.$ $.$ .. .$OO.. $$...$   . .$ ......$ .$. .$.$.$.$$ ..$$ .... . $$ $..$$$$. ...O.$ $.$. #
+#...$.O.$$... $$$....$$ .$..$..$$. . .O$.$. OO$.    ..  $$.$...$O$ $ O.$ .$$.$$... ..$..O.$.$..$ $.$$.O...$$$O O.$$$. $ $.  .$ $. O... ..$   O$.. O$$..O$.$$..... ..$$..O $. . ..$$ ...$.$.O$..... $..$#
+#...$$$.O. $ .....$..$$$.$ $$......O$.$$.$$O$$$. $.O..  . .$...$$$  $  ........$$.$$.$.. $  .$$$..$..$. $$$ $ .$..O..... $. $$$.$.$.$. $.... .$...$... ..$ $ $.$$.$$ ...$O$$$.$$.O.. ..$.. O..O $ ...$$#
+#.$ ..$$.$.$. OO.. $.$ $$.$.$$$..O$$$$.$$$$$O$ $. .$$$$.$...  .$..$O....$.$$.$.$..$$$$.$O...$.  ..$$ ... ..$ ...$..O$.$. ..$..$$. $..$$. .$O$... ..  . ...O.. .$...... $O...$ .$$..$. ... $..$.$  $...$#
+#$...$$ .OO$. ...$ $O..$$.$$.$.$$.......$$$$......$ .$. $.. $$$.$.. ..   $$.O$.O.$$...$ $. $ .$..$.. $.$$$.$$.O O$$$ .$.$...$.. .$.$$.. .$.$ ..O..$$$$... ..$$... ....$. .$...$$.. $$$$$.. $.. $.$ $..$#
+#$ .$$$....$. .$.....$$.O.$.$ $$.. $$.  $..$$$$....$.$.. .$$$  $. $$ ....$  $ $$$. .$ $$$.O$$$. .O . .$$.. $$.O$$.$......... $.$.$$ . .$. .O.$$..$$.$..$$.$.$$.$O.$O.$  $.$.$$..$..$ . $ $.$$.$.. $$$$.#
+#.  .$.  .O $OO. ..$ $ .$ $.$...$.$.. $$.. $.O .$$$..$.. $......$. $O... . .$$O .... ..O . ..$$.....$O$$$. . O$ O. O... .$.$$$$..$$$... $..$... .....$..$.$     $ $..$.$$.....$ $.$ .$ ..  $..$O..$. $ #
+#....$..$$ $.$O...O...$. O .. .....$..$$$$O..$$ $ . $$$$$.$...O...$ ..$.$.O .. .  $$....O.....$$$$.$...$ $..$.$$...$.O$.$$$$$ .  O$$. $O.$ .$$. $$  .$ $..$$.$. O...$$$O$.$$$$$. . .$$.. .$ ..$$ ....$$#
+#. ..$..$$..$....$ $$...$$..O.. $.$ $....  .$$$. ..O$ $.$.$$ .$$.$...$$$.. $$..$ .$..$.O  .....$$$$$.OO ...$O.  $$$ $.$.$$...$$$$. .$$$$.$....O.$O$$....$..$$....O $$.$. O$$O$ .. .O.$$.$  .$ ..... $..#
+#. . $.$$.$$.$..... $$$ $$ $$. $$$..$ .. $ O$.$.$$$$.O  ..$$$$   $$$$.  $ .$. $$.O..$.....O.$$ ....$$$.$.$$$.O O.. $O $..$$OO$$$.$O$ $$$.$.$$..$O$$. $.$$$ $.  ..$ ......$ .$$ .$...$.$ .$...O$ $..$$ .#
+#.... O..$.. ..... .$$ . $. $$O ..$$..$.$O.$ $$$$$..$...$$.$.$.$O..$$$$$.$ $O$$..$..$.$O O$..O.....O$.$. $....  $  $.$$$$$..$ . .$$$$O..  .$ $$$$  .. .$$$.$.... ....$$.. ..$$......O.. $..$.$.O$$....$#
+#.$$O.. $$.$.$O $..$.$O.$......$O..$$O.O$$$O$.O$$. O$O.$..$$ .$..O$$$.$$O$....$$$$.$.   .....$.O$ .$$.......O . $$$$$...$ .$.. ...$..$$ .$.$$O$.$  .$O$. $$..     $....$.. . ..$..$$... $$$.$ .$  .$...#
+#$...$..$.$. ..$.O$$ .$.$. $..$.$$$...$$$$O$O$$...  .$ .$...$$.$.$$$.$.$ ...O .$$.$.$..$$..$$.$$$$ $$.. $$. . .....$..$$O.$ ..$ $. $O$. ..  ..$.  ....$....$.$$ ....... $  ..$. .$$..O$.O$$$$..$$...$. #
+# .$O..$ ..$.O  $$......O$ $$$. .$$O$$ ....$ ....$. $$....$.O.. $.$$.$.... $..$$$..OO$ $$.  $$.$..$ $ .. $ ..$. O...$$O..O.O ..$ .$..$$ ......  ..$$..$$O....  $ ...$$....$...$..$$$$$O$$O .....$..$$.$#
+#$.. ..$..$.. ..  $$$$$$O $O..$$ $O..$. .... ..O. .$.O. ..$$..$. $$.$ .$ .$$$$.$$ ..$... ....O.... $...$.$ . ..$...$ .$ $ .$$..$. ..$..$$..$..O. .$  .$$..$$.$..$.O.$O .$   $.  $$O$ $. ..$.$$$.$ ..$$.#
+#.$$ .. $O....$. $..   $...$$$.$ $$..$....... $.$....  ....$. O$..$$$ $.  .  $ .......$ ..$.. .$....$$$...O..$$$ $..$$$.$. ..$.$O..O$...$$..$$.O$ $$$..$.O$...$$   .$$$$O$$   $ $.$...$$$.$$ $ $.$ ...$#
+#...$$.. $ .$ .$.$O. $.$. . . .$$$... $.$.$$O$ ..$$..$..$O.$.O$$.....$$$..$. $.. ....$.$ .$. $..  $.$..$.$$ .......... .$.$.$.$$$ $.....$O.....$....  $.$$$.$.$$.$ .$$$. O..$.$...... $.....$ .$.O$  . #
+# $..$..$$...O$$.$.. .$...O$.$ $.. $$$$.$$ . $$ $O..  ..$ ...$...$$.$..O$..  . ..$...$  ..O....... .. $$.$$.....$..O$.$  $ $$  ...$...$......$.$... $$$..$$.$. $.$. .$ ..$$$$.$.$$$.. ... .......O.... #
+#.....$.. $ $ O. $$.$$ .....  . $ $.O.$$ $.$. $ $..$.$...$.$.$.$$.....$......O$.$.. .$$$..$...$$.$$...$O$$..... $.$.  $$....  ..$ $.$....$.. .$O.. $..$.$$..$.$.$ .$.$ .$. ....$.$.O. ....$... . .$ $O$#
+#$.$..$$... .. $$$$O..O...$..$.$.$...$. ..  $$..O.$..$ .  .$$.$$.$  .... $.. $$O. .$ .$$...$$$$. $$ $...$.$$.$$O ...$$..$.O.O..$....$ . .$$.$$$..$$..O  .$$  ...... $... $..$...$..$...$$. . $..$.$O$$$#
+#.. $$ ... $.O.$ O$$$.. ... ..$$ $$$$...$ .$..$.$  $...$. ..$$.$O$$$$$$$$.$$ . $. ... ...$$.$O.$$O.O  $.$$.$ . . ..$$.$ $.. $.$$.$$.$$.$.$.$$$$.. $.$$ $.$$...$$ $$..$ .. .$.. $.$$..$O. .$.$.$...O  $.#
+#..$O$$O $.$ ..O$.$$. .$..$ ....$..$......$O.$$.$$..$$..$$.$....$ .$.O.$.. $$.$$. ....$$$$.$O$..$.$$$....$.. ..... $$....$$ $$.. $.O..$ . . ..$.$$.$$$$...$.$$. $O.$$ $......$..$.$$$.. ..$...$O$$.$$..#
+#.. .$$O.$$ $.$. .$  ... $ . $...$ O $. $ .. O...$$O$$ $$  $..$$$$.O..$$$..$ $....$  .O.$$O.$$.X$..$.  $ $. .$ $.$$  .$.$.O..$.$$.$$$$$$$ .... ... $.  ...$O....$$$ $.$$..$  $.$$. .. .O$$.$.....$$.$O$#
+#...O$$ $. $...$$$$.$O$.$.$O..$.$O...$ .$$. $ .$.O$..O$O..$ $ .O$$$$.$....$.$O$.$..$$$ O.$$$$$ ..$$...$O.$O$.$ .$ $O.$....O$.O $......$$ .$. ..$ $ . $...$$$.$$.$$$...$.... ... ...O ..$. ...$ $$..$$O$#
+#$$$.$ $ ...$.$$ $$.$$$.O $..$$ .$$...$.$....$$.$. $ .$....$$.. $$O$  O$.O$..$$$O$.$$.$. .$ ..$.$$$.$. $ $ $ .$$$$.$.$$OO....$$$.$. $$..$ .$ .$$.$....$O$O $ $$..O$..$$$ ..  $.$O.  ..$ $$$$...$$...$  #
+#$ $..$$...  $..$$.. $.$$$$ $.$..$.O......$....$.. .. ..$..O$.$$....$O$$...$O$$.$... $$ . .. ......$$$ .....$$$.$.$$.$.$. .. .... $$$...$$ $.$$.$$$.$...$$.$ ..O$$...$  .O.$. .$.... $.$. .$.$..... .$O#
+#..$$..O$$. $..  ...O.$.$.$$O$ .. $ ..$.. $$.....$.$...$O...$O$.O..$. O..O.$.$$ ..$. $ O$$.O$$$$ .$$$$.. $.$$  ...$ .$ $  ..$...$...$  $ $..$.$$ .$ . $ .O....$..$.$$..O $ ......$$$...$$$$.$.$.  .O$$.#
+#..$ .$$....O.. $..$$. $..$O$.$.$ .$.$.$$O .$ $O$.$.$$..$$O$ ... .$.$....$$$.O ..$$$$.. O$O.$..$ ..... .$......$$...... . ..$.....$...$.$$  .$..$.$$$O$....$$O$$O ...$$ ..$$$...$.$  O$.O.O$.$  $....$ #
+#.$$ .O..$$. .. .O.$.$$ ......$ .$..$ .. O$$ $$..O$$$$$  $ .$$.. $$ .$$...  $.$..... $  . . .O..$. ..$..$$..$$..$.$$.$ ...$$. .$$...$ $O$O$$. .$.O$. ..O   .$ .O .. . .$.$ .$$ $..$ O$.$..$. $$  ..$$ .#
+#$$.$.$..$$.$$$$ .$$$$$.$. $$$$$ .$$$.$. . $  .$ O.$.$O .$...O..$ $..$ $$$.... ...$. .$$.$$$.. .$$.$..$O$ .$ $$$. . . .. . $ $$$$.$.. $$..$$$$ .$.$$  ........$.$$$$$.$.$$$  $..$..$. .. ..$ .$.$. O.$$#
+#..$O ... $$...$..$$.$.$ .$ . O.$..$.$....$O.. $$$.. $...$$..$...$.O$. .$...$.$$$ .$....$.$.$ $$.$..$ ...$.$$$O$$...$$...$O.$ .O.... $  .O$.$$.$..O$.  .$ O $..  $$   ....  .$$.$$.......$$ ..O$$..$OO$#
+#$ .. .O...$$ .$$$......$$....$...$  $$O..$$$...$..$$.$ $$...O.  $ $..$  $.$$...$...$....$ .$.$. .  $$$$   $ O.$O$O .$.. ..$.$.$ .$.$..$..$.$$O.$..$$. $..$.$O$.$$O$O  ..$...$$$$$$O.$ $$.$.$O.. $O$.$ #
+#.$.$.$ ...O.$. ...O...$.. $. O..$.$$$$$ .. ....$   $..  ....$.$.$.$  $ $.$.$..$...$ $ O..$ .$O..$ ..$....... .$..$$....$...$.. .  $.$$.$.. .$.$$...$$.$O.. $..$ $...$$$.O$$.. ... $$$..  O.$.. $ $$$$.#
+#$.  .$$.$......  . ..$ .O .$$. ..$..$. .$.$..$ . .$$O.$$.$$..... $$$.$..$$$$ $.$O...$$..$....$$ $$......$$ $.$.$.$O$. $ $$ $$$.$  $$ ..$ $....$..$.$......$.$.$.. ...$$$O.$ $ $$$....O.O.$..... .. . $#
+#$$$ ......O$.. . .$ .$..$... .$..$  ...... .$ ... ..$ $.$.$.$.....$ $..  ... $..$ $.$$.. $..$..$$. .$$.O$. $$$. $$..$... $..$$.$. .$$.$  .$$ .....$..$$$. .$ .$$ $$.$$.. ..$. ...$$$ .$.$$..$$$$ .. $.#
+#..$. $$$..$$.  $.   .$ .  .$$  $$$...$...$..$$$$ .$ .... . $$.$$O .$$$$$$$$ $..$$...$..$.$$.O.$...$ ..$$  $$. .$$$. $$$$$. .$..$ .$$O.$O$.$.$.$$..$......$.$..$..OO $..$$..O$....$.$ .$    ....$. . .$#
+#$$.$.. .....$$$... ..$.. O .$.$.$. . $..$  O$. $.$ .O$...$.$$ $.$ $.$.$...$$...$. $.$..... . .O.$$$$$ ....$$..$ $O$$$ $$O$..$.O$$$$....$$.$ O$$.$O$.$..$$  .$. .. ...$$$... $$.O.$...$...$.....$.  $$.#
+#$$$  . $. $O.$  ...O$$.. O. $$ $.$..$$.$$$.$..... .$.$$. $$$ $$... .OOO..$..$.$$..$$O .$$$$$.$$.$$... .....$$$$.. ........$$$$$  .$ $...O.$..$ $.$...$$. ...$..$ ... O$..$.$.  . ..$$ $...$. .$O    ..#
+#.$$.$$$.$.... $$.$$...  $ $$$$ .$$. O$$.. .$.$$$.$$..$$$...$ .$...$.$$.$$$$..$.$..$$$.$$$.$...$ .O$$....$$  $ ..$..$...$.$. $$$$..$.$$....$$$ .$$..$ ..$$.$$ $  .. . .$   . .$.$ $$ O$.. .$O $.$...$O$#
+#..$ .$ $.. .$$$  $$.$....$ . $$$.. $ ..$.....$..O$.O...O .$$$ ....$  O$.$$. $..$.$ .$$ .$..$.$$.$ .$$$$....$..... $. .$ $...$. OO  .$$.$.$....$$.. . .$ .$$..$.$..$.$.$...$ .$$.$O.$  . $..$$$. . $.$.#
+# O..$O  O$$$..$$...$$$. ..$. $.. ..$. .$  $... $...$ ....$.OOO$..$.$$$..$$$$O..$ $$. $OO...O..$$....$.$.$... $..O$$$. $$. .$ $$.. .$ $ $..  $.$.$$.$$..  .  $$$$.$.$$ $$O.$$.$$$......$$$$$ ..$..$..$$#
+#....$.$O.$. .$O.$$.....$..$$$O..$. O$...$. .$$$. $O ..$$. .$$. $$...$.....O $$.....$.$.$$. $$O.$.$..$$ $$.$..$  $..$$..$$..$$$$O $ $...$.$$..$$$$$$$.$$$$$ $. ...$.$.. . .$ O$$$$$$.......$.$$.$$. $. #
+#.$$....O..O.. .....$.$.$.$O..$..O  $. O. $...$..O$..$.$.$..... ..$$.$$O$..$.$ $$... .  $$..O$.$.$.O$.$.$.$.O$..$$.$$.$O$$ .  $$$ $$$.$$.$. . . .$. $$$$$.$..$ .$.$ $. .$$..$.$$.$$$$ .$. .$$$...$$$ . #
+########################################################################################################################################################################################################
+
+
+dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddssssssssss
+ssssssssssssssssssssaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaauguagduaghwidyhaiwhda
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaasssssssssssssssssssssssssssssssssssssssssssss
+dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddssssssssss
+ssssssssssssssssssssaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaauguagduaghwidyhaiwhda
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaasssssssssssssssssssssssssssssssssssssssssssss
+dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddssssssssss
+ssssssssssssssssssssaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaauguagduaghwidyhaiwhda
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaasssssssssssssssssssssssssssssssssssssssssssss
+dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddssssssssss
+ssssssssssssssssssssaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaauguagduaghwidyhaiwhda
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaasssssssssssssssssssssssssssssssssssssssssssss
+dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddssssssssss
+ssssssssssssssssssssaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaauguagduaghwidyhaiwhda
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaasssssssssssssssssssssssssssssssssssssssssssss
+wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwdddddddddddddddsssssssssssssssssssssssssssssssssssssss
+sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssddddddddddddddddddddddddddd
+wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwdddddddddddddddsssssssssssssssssssssssssssssssssssssss
+sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssddddddddddddddddddddddddddd
+wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwdddddddddddddddsssssssssssssssssssssssssssssssssssssss
+sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssddddddddddddddddddddddddddd
+wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwdddddddddddddddsssssssssssssssssssssssssssssssssssssss
+sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssddddddddddddddddddddddddddd
+wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwdddddddddddddddsssssssssssssssssssssssssssssssssssssss
+sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssddddddddddddddddddddddddddd
+wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwdddddddddddddddsssssssssssssssssssssssssssssssssssssss
+sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssddddddddddddddddddddddddddd
+wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwdddddddddddddddsssssssssssssssssssssssssssssssssssssss
+sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssddddddddddddddddddddddddddd
+wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwdddddddddddddddsssssssssssssssssssssssssssssssssssssss
+sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssddddddddddddddddddddddddddd
+wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwdddddddddddddddsssssssssssssssssssssssssssssssssssssss
+sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssddddddddddddddddddddddddddd
+wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwdddddddddddddddsssssssssssssssssssssssssssssssssssssss
+sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
+
+wwww
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+ww
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+wwww
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+ww
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+wwww
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+ww
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+wwww
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+ww
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+wwww
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+ww
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+wwww
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+ww
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+v
+v
+wwww
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+ww
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+wwww
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+ww
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+wwww
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+ww
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+wwww
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+ww
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+wwww
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+ww
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+wwww
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+ww
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+v
+vwwww
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+ww
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+wwww
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+ww
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+wwww
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+ww
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+wwww
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+ww
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+wwww
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+ww
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+wwww
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+ww
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+wwww
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+ww
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+wwww
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+ww
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+wwww
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+ww
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+wwww
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+ww
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+v
+wwww
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+ww
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+wwww
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+ww
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+wwww
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+ww
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+wwww
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+ww
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+wwww
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+ww
+dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddwwww
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+ww
+dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddwwww
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+ww
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+wwww
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+ww
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+wwww
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+ww
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+
+
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+
+
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+sss
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssasdadsadasdadadadasdadsadadadadasadadaaaaassaassdadadddddssad
+
+ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssdsssssssssssssssssssssssssssssssssssssssssssssssssssssssssswddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwa
