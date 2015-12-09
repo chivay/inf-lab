@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #define N 256
@@ -44,7 +45,7 @@ typedef enum {
 	pop = 0x02,		/* postincrement(pop) */
 	psh = 0x03,		/* predecrement(push)  */
 	imm = 0x04,		/* immediate  */
-	abs = 0x05,		/* absolute  */
+   _abs = 0x05,		/* absolute  */
 	dis = 0x06,		/* displacement */
 	rel = 0x07       /* relative */
 } ADDRESS_MODE;
@@ -63,7 +64,10 @@ typedef struct {
 typedef struct {
 	OPCODE opcode;
 	ADDRESS_MODE address_mode;
-	
+
+	int operand_value;
+	int operand_address;
+
 } instruction;
 
 int mod(int w, int n)
@@ -90,13 +94,252 @@ void reset_machine(vm_state *vm)
 	memset(vm->memory, 0, sizeof(int)*N);
 }
 
+
 void fetch_instruction(vm_state *vm, instruction *dst)
 {
 	int instr = vm->memory[ vm->IP ];
-	dst->opcode       = instr >> 3;
-	dst->address_mode = instr & 0x7;
+	dst->opcode       = instr >>   3;
+	dst->address_mode = instr  & 0x7;
 }
 
+void load_operand_acc(vm_state *vm, instruction *inst)
+{
+	inst->operand_address = -1;
+	inst->operand_value = vm->AC;
+}
+void load_operand_ind(vm_state *vm, instruction *inst)
+{
+	inst->operand_address = vm->AC;
+	inst->operand_value   = vm->memory[ inst->operand_address ];
+}
+void load_operand_pop(vm_state *vm, instruction *inst)
+{
+	inst->operand_address = vm->SP;	
+	inst->operand_value   = vm->memory[ inst->operand_address ];
+
+	vm->SP = mod(vm->SP + 1, N);
+}
+void load_operand_psh(vm_state *vm, instruction *inst)
+{
+	vm->SP = mod(vm->SP - 1, N);
+
+	inst->operand_address = vm->SP;
+	inst->operand_value   = vm->memory[ inst->operand_address ];
+}
+void load_operand_imm(vm_state *vm, instruction *inst)
+{
+	inst->operand_address = vm->IP;
+	inst->operand_value   = vm->memory[ vm->IP ];
+
+	/* Skip next instruction */
+	vvm->IP = mod(vm->IP + 1, N);	
+}
+void load_operand_abs(vm_state *vm, instruction *inst)
+{
+	inst->operand_address = vm->memory[ vm->IP ];
+	inst->operand_value   = vm->memory[ vm->memory[ vm->IP ] ];
+
+	vm->IP = mod(vm->IP + 1, N);	
+}
+void load_operand_dis(vm_state *vm, instruction *inst)
+{
+	inst->operand_address = vm->memory[ vm->IP ] + vm->SP;
+	inst->operand_value   = vm->memory[ vm->memory[ vm->IP ] ];
+	vm->IP = mod(vm->IP + 1, N);
+}
+void load_operand_rel(vm_state *vm, instruction *inst)
+{
+	inst->operand_address = vm->memory[ vm->IP ] + vm->IP;
+	inst->operand_value   = vm->memory[ vm->memory[ vm->IP ] ];
+	vm->IP = mod(vm->IP + 1, N);
+}
+
+void load_operand(vm_state *vm, instruction *inst)
+{
+	switch (inst->address_mode)
+	{
+		case acc:
+			load_operand_acc(vm, inst);
+			break;
+
+		case ind:
+			load_operand_ind(vm, inst);
+			break;
+
+		case pop:
+			load_operand_pop(vm, inst);
+			break;
+
+		case psh:
+			load_operand_psh(vm, inst);
+			break;
+
+		case imm:
+			load_operand_imm(vm, inst);
+			break;
+
+		case _abs:
+			load_operand_abs(vm, inst);
+			break;
+
+		case dis:
+			load_operand_dis(vm, inst);
+			break;
+
+		case rel:
+			load_operand_rel(vm, inst);
+			break;
+
+		default:
+			exit(EXIT_FAILURE);
+
+	}
+}
+
+void op_jsr(vm_state *vm, instruction *inst)
+{
+	vm->AC = vm->IP;
+}
+
+void op_jsr
+
+void execute_instruction(vm_state* vm, instruction *inst)
+{
+	switch (inst->opcode)
+	{
+		case JSR:
+			op_jsr(vm, inst);
+			break;
+
+		case JMP:
+			op_jmp(vm, inst);
+			break;
+
+		case JPZ:
+			op_jpz(vm, inst);
+			break;
+
+		case JNZ:
+			op_jnz(vm, inst);
+			break;
+
+		case NND:
+			op_nnd(vm, inst);
+			break;
+
+		case DNN:
+			op_ddn(vm, inst);
+			break;
+
+		case INC:
+			op_inc(vm, inst);
+			break;
+
+		case DEC:
+			op_dec(vm, inst);
+			break;
+
+		case DDA:
+			op_dda(vm, inst);
+			break;
+
+		case BUS:
+			op_bus(vm, inst);
+			break;
+
+		case LUM:
+			op_lum(vm, inst);
+			break;
+
+		case VID:
+			op_vid(vm, inst);
+			break;
+
+		case DOM:
+			op_dom(vm, inst);
+			break;
+
+		case SNE:
+			op_sne(vm, inst);
+			break;
+
+		case SGE:
+			op_sge(vm, inst);
+			break;
+
+		case SLE:
+			op_sle(vm, inst);
+			break;
+
+		case ADD:
+			op_add(vm, inst);
+			break;
+
+		case SUB:
+			op_sub(vm, inst);
+			break;
+
+		case MUL:
+			op_mul(vm, inst);
+			break;
+
+		case DIV:
+			op_div(vm, inst);
+			break;
+
+		case MOD:
+			op_mod(vm, inst);
+			break;
+
+		case SEQ:
+			op_seq(vm, inst);
+			break;
+
+		case SLT:
+			op_slt(vm, inst);
+			break;
+
+		case SGT:
+			op_sgt(vm, inst);
+			break;
+
+		case LAA:
+			op_laa(vm, inst);
+			break;
+
+		case LAS:
+			op_las(vm, inst);
+			break;
+
+		case LDA:
+			op_lda(vm, inst);
+			break;
+
+		case STA:
+			op_sta(vm, inst);
+			break;
+
+		case ICH:
+			op_ich(vm, inst);
+			break;
+
+		case OCH:
+			op_och(vm, inst);
+			break;
+
+		case INU:
+			op_inu(vm, inst);
+			break;
+
+		case ONU:
+			op_onu(vm, inst);
+			break;
+
+		default:
+			exit(EXIT_FAILURE);
+	}
+
+}
 
 void run(vm_state *vm)
 {
@@ -104,13 +347,15 @@ void run(vm_state *vm)
 	while(vm->IP < vm->program_length) {
 
 		fetch_instruction(vm, &curr_instr);
-
+		vm->IP = mod(vm->IP + 1, N);
+		load_operand(vm, &curr_instr);
+		execute_instruction(vm, &curr_instr);
 	}
 }
 
 int main()
 {
-	int prog[] = {240, 144, 248, 236, 10};
+	int prog[] = {0xF0, 0x90, 0xF8, 0xEC, 0x0A };
 	vm_state vm;
 	reset_machine(&vm);
 
