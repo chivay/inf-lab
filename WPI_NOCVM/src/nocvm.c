@@ -4,6 +4,8 @@
 
 #define N 256
 
+#define AC_ADDRESS -1
+
 typedef enum {
 	JSR = 0x00,		/* jump to subroutine */
 	JMP = 0x01,		/* jump */
@@ -75,6 +77,11 @@ int mod(int w, int n)
 	return (w % n < 0) ? (w % n + n) : (w % n);
 }
 
+int nand(int a, int b)
+{
+	return ~(a & b);
+}
+
 void dump_memory(vm_state *vm)
 {
 	int i;
@@ -102,16 +109,21 @@ void fetch_instruction(vm_state *vm, instruction *dst)
 	dst->address_mode = instr  & 0x7;
 }
 
+/*******************************************************/
+/*               OPERAND FUNCTIONS                     */
+
 void load_operand_acc(vm_state *vm, instruction *inst)
 {
-	inst->operand_address = -1;
+	inst->operand_address = AC_ADDRESS;
 	inst->operand_value = vm->AC;
 }
+
 void load_operand_ind(vm_state *vm, instruction *inst)
 {
 	inst->operand_address = vm->AC;
 	inst->operand_value   = vm->memory[ inst->operand_address ];
 }
+
 void load_operand_pop(vm_state *vm, instruction *inst)
 {
 	inst->operand_address = vm->SP;	
@@ -119,6 +131,7 @@ void load_operand_pop(vm_state *vm, instruction *inst)
 
 	vm->SP = mod(vm->SP + 1, N);
 }
+
 void load_operand_psh(vm_state *vm, instruction *inst)
 {
 	vm->SP = mod(vm->SP - 1, N);
@@ -126,38 +139,41 @@ void load_operand_psh(vm_state *vm, instruction *inst)
 	inst->operand_address = vm->SP;
 	inst->operand_value   = vm->memory[ inst->operand_address ];
 }
+
 void load_operand_imm(vm_state *vm, instruction *inst)
 {
 	inst->operand_address = vm->IP;
-	inst->operand_value   = vm->memory[ vm->IP ];
+	inst->operand_value   = vm->memory[ inst->operand_address ];
 
 	/* Skip next instruction */
-	vvm->IP = mod(vm->IP + 1, N);	
+	vm->IP = mod(vm->IP + 1, N);	
 }
+
 void load_operand_abs(vm_state *vm, instruction *inst)
 {
 	inst->operand_address = vm->memory[ vm->IP ];
-	inst->operand_value   = vm->memory[ vm->memory[ vm->IP ] ];
+	inst->operand_value   = vm->memory[ inst->operand_address ];
 
 	vm->IP = mod(vm->IP + 1, N);	
 }
+
 void load_operand_dis(vm_state *vm, instruction *inst)
 {
-	inst->operand_address = vm->memory[ vm->IP ] + vm->SP;
-	inst->operand_value   = vm->memory[ vm->memory[ vm->IP ] ];
+	inst->operand_address = mod(vm->memory[ vm->IP ] + vm->SP, N);
+	inst->operand_value   = vm->memory[ inst->operand_address ];
 	vm->IP = mod(vm->IP + 1, N);
 }
+
 void load_operand_rel(vm_state *vm, instruction *inst)
 {
-	inst->operand_address = vm->memory[ vm->IP ] + vm->IP;
-	inst->operand_value   = vm->memory[ vm->memory[ vm->IP ] ];
+	inst->operand_address = mod( vm->memory[ vm->IP ] + vm->IP + 1, N);
+	inst->operand_value   = vm->memory[ inst->operand_address ];
 	vm->IP = mod(vm->IP + 1, N);
 }
 
 void load_operand(vm_state *vm, instruction *inst)
 {
-	switch (inst->address_mode)
-	{
+	switch (inst->address_mode) {
 		case acc:
 			load_operand_acc(vm, inst);
 			break;
@@ -192,21 +208,264 @@ void load_operand(vm_state *vm, instruction *inst)
 
 		default:
 			exit(EXIT_FAILURE);
-
 	}
 }
 
+/*        END OF OPERAND FUNCTIONS                     */
+/*******************************************************/
+
+
+/*******************************************************/
+/*                OPCODE FUNCTIONS                     */
+
 void op_jsr(vm_state *vm, instruction *inst)
 {
+	if(inst->operand_address == AC_ADDRESS)
+		exit(EXIT_SUCCESS);
+
 	vm->AC = vm->IP;
+	vm->IP = inst->operand_address;
 }
 
-void op_jsr
+void op_jmp(vm_state *vm, instruction *inst)
+{
+	if(inst->operand_address == AC_ADDRESS)
+		exit(EXIT_SUCCESS);
+	vm->IP = inst->operand_address;
+}
+
+void op_jpz(vm_state *vm, instruction *inst)
+{
+	if(inst->operand_address == AC_ADDRESS)
+		exit(EXIT_SUCCESS);
+
+	if (vm->AC == 0)
+		vm->IP = inst->operand_address;
+}
+
+void op_jnz(vm_state *vm, instruction *inst)
+{
+	if(inst->operand_address == AC_ADDRESS)
+		exit(EXIT_SUCCESS);
+
+	if (vm->AC != 0)
+		vm->IP = inst->operand_address;
+}
+
+void op_nnd(vm_state *vm, instruction *inst)
+{
+	vm->AC = nand(vm->AC, inst->operand_value);
+}
+
+void op_dnn(vm_state *vm, instruction *inst)
+{
+	if(inst->operand_address == AC_ADDRESS)
+		vm->AC = nand(vm->AC, inst->operand_value);
+	else
+		vm->memory[ inst->operand_address ] = nand(vm->AC, inst->operand_value);
+}
+
+void op_inc(vm_state *vm, instruction *inst)
+{
+	if(inst->operand_address == AC_ADDRESS)
+		vm->AC++;
+	else
+		vm->memory[ inst->operand_address ]++;
+}
+
+void op_dec(vm_state *vm, instruction *inst)
+{
+	if(inst->operand_address == AC_ADDRESS)
+		vm->AC--;
+	else
+		vm->memory[ inst->operand_address ]--;
+}
+
+void op_dda(vm_state *vm, instruction *inst)
+{
+	if(inst->operand_address == AC_ADDRESS)
+		vm->AC = vm->AC + inst->operand_value;
+	else
+		vm->memory[ inst->operand_address ] = vm->AC + inst->operand_value;
+}
+
+void op_bus(vm_state *vm, instruction *inst)
+{
+	if(inst->operand_address == AC_ADDRESS)
+		vm->AC = inst->operand_value -  vm->AC;
+	else
+		vm->memory[ inst->operand_address ] =  inst->operand_value - vm->AC;	
+}
+
+void op_lum(vm_state *vm, instruction *inst)
+{
+	if(inst->operand_address == AC_ADDRESS)
+		vm->AC = vm->AC * inst->operand_value;
+	else
+		vm->memory[ inst->operand_address ] = vm->AC * inst->operand_value;
+}
+
+void op_vid(vm_state *vm, instruction *inst)
+{
+	if(vm->AC == 0)
+		exit(EXIT_FAILURE);
+
+	if(inst->operand_address == AC_ADDRESS)
+		vm->AC = inst->operand_value / vm->AC;
+	else
+		vm->memory[ inst->operand_address ] = inst->operand_value / vm->AC;
+}
+
+void op_dom(vm_state *vm, instruction *inst)
+{
+	if(vm->AC == 0)
+		exit(EXIT_FAILURE);
+
+	if(inst->operand_address == AC_ADDRESS)
+		vm->AC = inst->operand_value % vm->AC;
+	else
+		vm->memory[ inst->operand_address ] = inst->operand_value % vm->AC;	
+}
+
+void op_sne(vm_state *vm, instruction *inst)
+{
+	if(vm->AC != inst->operand_value)
+		vm->IP = mod(vm->IP + 2, N);
+}
+
+void op_sge(vm_state *vm, instruction *inst)
+{
+	if(vm->AC >= inst->operand_value)
+		vm->IP = mod(vm->IP + 2, N);
+}
+
+void op_sle(vm_state *vm, instruction *inst)
+{
+	if(vm->AC <= inst->operand_value)
+		vm->IP = mod(vm->IP + 2, N);
+}
+
+void op_add(vm_state *vm, instruction *inst)
+{
+	vm->AC += inst->operand_value;
+}
+
+void op_sub(vm_state *vm, instruction *inst)
+{
+	vm->AC -= inst->operand_value;
+}
+
+void op_mul(vm_state *vm, instruction *inst)
+{
+	vm->AC *= inst->operand_value;
+}
+
+void op_div(vm_state *vm, instruction *inst)
+{
+	if(inst->operand_value == 0)
+		exit(EXIT_FAILURE);
+
+	vm->AC /= inst->operand_value;
+}
+
+void op_mod(vm_state *vm, instruction *inst)
+{
+	if(inst->operand_value == 0)
+		exit(EXIT_FAILURE);
+
+	vm->AC %= inst->operand_value;	
+}
+
+void op_seq(vm_state *vm, instruction *inst)
+{
+	if(vm->AC == inst->operand_value)
+		vm->IP = mod(vm->IP + 2, N);
+}
+
+void op_slt(vm_state *vm, instruction *inst)
+{
+	if(vm->AC < inst->operand_value)
+		vm->IP = mod(vm->IP + 2, N);
+}
+
+void op_sgt(vm_state *vm, instruction *inst)
+{
+	if(vm->AC > inst->operand_value)
+		vm->IP = mod(vm->IP + 2, N);	
+}
+
+void op_laa(vm_state *vm, instruction *inst)
+{
+	if(inst->operand_address == AC_ADDRESS)
+		exit(EXIT_SUCCESS);
+
+	vm->AC = inst->operand_address;
+}
+
+void op_las(vm_state *vm, instruction *inst)
+{
+	if(inst->operand_address == AC_ADDRESS)
+		exit(EXIT_SUCCESS);
+
+	vm->SP = inst->operand_address;
+}
+
+void op_lda(vm_state *vm, instruction *inst)
+{
+	vm->AC = inst->operand_value;
+}
+
+void op_sta(vm_state *vm, instruction *inst)
+{
+	if(inst->operand_address != AC_ADDRESS)
+		vm->memory[ inst->operand_address ] = vm->AC;
+}
+
+void op_ich(vm_state *vm, instruction *inst)
+{
+	int x = getchar();
+
+	if(x == EOF)
+		x = N-1;
+
+	if(inst->operand_address == AC_ADDRESS)
+		vm->AC = x;
+	else
+		vm->memory[ inst->operand_address ] = x;
+}
+
+void op_och(instruction *inst)
+{
+	putchar(inst->operand_value);
+}
+
+void op_inu(vm_state *vm, instruction *inst)
+{
+	int x;
+	scanf("%d", &x);
+
+	if(x == EOF)
+		x = N-1;
+
+	if(inst->operand_address == AC_ADDRESS)
+		vm->AC = x;
+	else
+		vm->memory[ inst->operand_address ] = x;
+
+}
+
+void op_onu(instruction *inst)
+{
+	printf("%d", inst->operand_value);
+}
+
+/*               END OF OPCODE FUNCTIONS               */
+/*******************************************************/
+
 
 void execute_instruction(vm_state* vm, instruction *inst)
 {
-	switch (inst->opcode)
-	{
+	switch (inst->opcode) {
 		case JSR:
 			op_jsr(vm, inst);
 			break;
@@ -228,7 +487,7 @@ void execute_instruction(vm_state* vm, instruction *inst)
 			break;
 
 		case DNN:
-			op_ddn(vm, inst);
+			op_dnn(vm, inst);
 			break;
 
 		case INC:
@@ -324,7 +583,7 @@ void execute_instruction(vm_state* vm, instruction *inst)
 			break;
 
 		case OCH:
-			op_och(vm, inst);
+			op_och(inst);
 			break;
 
 		case INU:
@@ -332,7 +591,7 @@ void execute_instruction(vm_state* vm, instruction *inst)
 			break;
 
 		case ONU:
-			op_onu(vm, inst);
+			op_onu(inst);
 			break;
 
 		default:
@@ -344,6 +603,7 @@ void execute_instruction(vm_state* vm, instruction *inst)
 void run(vm_state *vm)
 {
 	instruction curr_instr;
+
 	while(vm->IP < vm->program_length) {
 
 		fetch_instruction(vm, &curr_instr);
@@ -355,7 +615,12 @@ void run(vm_state *vm)
 
 int main()
 {
-	int prog[] = {0xF0, 0x90, 0xF8, 0xEC, 0x0A };
+	/* int prog[] = {0xF0, 0x90, 0xF8, 0xEC, 0x0A }; */ /* Wczytaj liczbe wypisz kwadrat */ 
+	/* int prog[] = {205, 8, 210, 21, 14, 232, 13, 2, 72, 101, 108, 108, 111, 10};  */ /* Wypisz Hello*/
+	/* int prog[] = {13, 4, 0, 0, 240, 108, 255, 13, 21, 221, 2, 213, 2, 21, 21, 213, 2, 69, 3, 13, 4, 253, 3, 236, 10}; */
+	int prog[] = {13, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 213, 12, 180, 10, 13, 28, 212, 2, 133, 12, 241, 53, 12, 13, 13, 212, 9, 221, 12, 213, 12, 108, 255, 13, 49, 212, 2, 133, 12, 249, 236, 10, 61, 12, 13, 32};
+	/*int prog[] = {13, 4, 0, 0, 245, 2, 245, 3, 213, 2, 109, 3, 13, 32, 213, 2, 189, 3, 13, 26, 213, 3, 77, 2, 13, 30, 213, 2, 77, 3, 13, 8, 253, 2, 236, 10};*/
+
 	vm_state vm;
 	reset_machine(&vm);
 
@@ -363,7 +628,6 @@ int main()
 	memcpy(vm.memory, prog, sizeof(prog));
 	vm.program_length = sizeof(prog) / sizeof(int);
 
-	dump_memory(&vm);
 
 	run(&vm);
 	return 0;

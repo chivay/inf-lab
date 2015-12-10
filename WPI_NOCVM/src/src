@@ -1,0 +1,60 @@
+ 0:  13	 JMP abs
+ 1:  13	 13
+ 2:   0	 0
+ 3:   0	 0
+ 4:   0	 0
+ 5:   0	 0
+ 6:   0	 0
+ 7:   0	 0
+ 8:   0	 0
+ 9:   0	 0
+10:   0	 0
+11:   0	 0
+12:   0	 0
+13: 213	 LDA abs
+14:  12	 12
+15: 180	 SLT imm AC < 10 ?
+16:  10	 10
+17:  13	 JMP 28
+18:  28	 28
+19: 212	 LDA imm
+20:   2	 JSR pop
+21: 133	 ADD abs
+22:  12	 JMP imm
+23: 241	 INU ind
+24:  53	 INC abs
+25:  12	 JMP imm
+26:  13	 JMP abs
+27:  13	 JMP abs
+28: 212	 LDA imm
+29:   9	 JMP ind
+30: 221	 STA abs
+31:  12	 JMP imm
+32: 213	 LDA abs
+33:  12	 JMP imm
+34: 108	 SNE imm
+35: 255	 ONU rel
+36:  13	 JMP abs
+37:  49	 INC ind
+38: 212	 LDA imm
+39:   2	 JSR pop
+40: 133	 ADD abs
+41:  12	 JMP imm
+42: 249	 ONU ind
+43: 236	 OCH imm
+44:  10	 JMP pop
+45:  61	 DEC abs
+46:  12	 JMP imm
+47:  13	 JMP abs
+48:  32	 NND acc
+
+acc	accumulator	operandem jest AC
+ind	indirect	adresowanie pośrednie: operandem jest słowo o adresie, który jest w AC
+pop	postincrement (pop)	adresowanie stosowe zwiększające po: operandem jest słowo o adresie, który jest w SP. Dodatkowo, już po określeniu operandu, wartość SP jest zwiększana o 1.
+psh	predecrement (push)	adresowanie stosowe zmniejszające przed: przed określeniem operandu wartość SP jest zmniejszana o 1. Następnie jako operand jest wskazywane słowo, którego adres jest w SP.
+imm	immediate	adresowanie natychmiastowe: operandem jest argument instrukcji, czyli słowo w pamięci bezpośrednio za instrukcją
+abs	absolute	adresowanie bezwzględne: operandem jest słowo, którego adres jest wartością argumentu instrukcji
+dis	displacement	adresowanie z przesunięciem względem SP: operandem jest słowo, którego adres jest sumą wartości argumentu i wartości SP
+rel	relative	adresowanie z przesunięciem względem IP: operandem jest słowo, którego adres jest sumą wartości argumentu i adresu następnego słowa na argumentem.
+
+AC = 0
