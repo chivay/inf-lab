@@ -1,14 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 #include <string.h>
 
 
 /* Size of memory and word in memory */
 #define N 256
 
+/* Max code size */
+#define CODE_SIZE 10000
+
 /* Virtual address of AC register */
 #define AC_ADDRESS -1
 
+#define COMMENT_SYMBOL ';'
 
 /* Operations codes available to use */
 typedef enum {
@@ -55,7 +60,7 @@ typedef enum {
 	imm = 0x04,		/* immediate  */
    _abs = 0x05,		/* absolute  */
 	dis = 0x06,		/* displacement */
-	rel = 0x07       /* relative */
+	rel = 0x07      /* relative */
 } ADDRESS_MODE;
 
 
@@ -97,17 +102,6 @@ int mod(int w)
 int nand(int a, int b)
 {
 	return ~(a & b);
-}
-
-/* Sets values of registers and memory to 0 */
-void reset_machine(vm_state *vm)
-{
-	vm->AC = 0;
-	vm->SP = 0;
-	vm->IP = 0;
-	vm->program_length = 0;
-
-	memset(vm->memory, 0, sizeof(int)*N);
 }
 
 /* Gets next instruction to process from address pointed by IP */
@@ -548,6 +542,10 @@ void op_onu(instruction *inst)
 /*               END OF OPCODE FUNCTIONS               */
 /*******************************************************/
 
+/*******************************************************/
+/*                 EXECUTION FUNCTIONS                 */
+/*******************************************************/
+
 /* Executes instruction described in @inst based on opcode */
 void execute_instruction(vm_state* vm, instruction *inst)
 {
@@ -698,22 +696,265 @@ void run(vm_state *vm)
 	}
 }
 
-int main()
-{
-	/* int prog[] = {0xF0, 0x90, 0xF8, 0xEC, 0x0A }; */ /* Wczytaj liczbe wypisz kwadrat */ 
-	/* int prog[] = {205, 8, 210, 21, 14, 232, 13, 2, 72, 101, 108, 108, 111, 10};  */ /* Wypisz Hello*/
-	/* int prog[] = {13, 4, 0, 0, 240, 108, 255, 13, 21, 221, 2, 213, 2, 21, 21, 213, 2, 69, 3, 13, 4, 253, 3, 236, 10}; */
-	int prog[] = {13, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 213, 12, 180, 10, 13, 28, 212, 2, 133, 12, 241, 53, 12, 13, 13, 212, 9, 221, 12, 213, 12, 108, 255, 13, 49, 212, 2, 133, 12, 249, 236, 10, 61, 12, 13, 32};
-	/*int prog[] = {13, 4, 0, 0, 245, 2, 245, 3, 213, 2, 109, 3, 13, 32, 213, 2, 189, 3, 13, 26, 213, 3, 77, 2, 13, 30, 213, 2, 77, 3, 13, 8, 253, 2, 236, 10};*/
+/*******************************************************/
+/*          END OF EXECUTION FUNCTIONS                 */
+/*******************************************************/
 
+/*******************************************************/
+/*            INITIALIZATION FUNCTIONS                 */
+/*******************************************************/
+
+/* Sets values of registers and memory to 0 */
+void reset_machine(vm_state *vm)
+{
+	vm->AC = 0;
+	vm->SP = 0;
+	vm->IP = 0;
+	vm->program_length = 0;
+
+	memset(vm->memory, 0, sizeof(int)*N);
+}
+
+void clean_code(char *prog, char *code, int *length)
+{
+	int len, i,j;
+	len = strlen(prog);
+
+	j = 0;
+	i = 0;
+	while (i < len) {
+		char c = prog[i];
+
+		/* Skip comment */
+		if(c == COMMENT_SYMBOL) {
+			while(i < len && prog[i++] != '\n');
+		}
+		/* Skip white characters */
+		else if(c == ' ' || c == '\t' || c == '\n') {
+			i++;
+		}
+		else
+		{
+			code[j++] = c;
+			i++;
+		}
+	}
+
+	*length = j;
+}
+
+OPCODE get_opcode(char *code, int i, int *add_mode_index)
+{
+	OPCODE op;
+
+	*add_mode_index = i+1;
+
+	switch(code[i])
+	{
+		/* Starting with backslash */
+		case '\\':
+			switch(code[i+1])
+			{
+				case '_':
+					op = JSR;
+					break;
+				case '~':
+					op = JNZ;
+					break;
+				case '|':
+					op = DNN;
+					break;	
+				case '}':
+					op = INC;
+					break;	
+				case '{':
+					op = DEC;
+					break;	
+				case '+':
+					op = DDA;
+					break;	
+				case '-':
+					op = BUS;
+					break;	
+				case '*':
+					op = LUM;
+					break;
+				case '/':
+					op = VID;
+					break;	
+				case '%':
+					op = DOM;
+					break;	
+				case '=':
+					op = SNE;
+					break;	
+				case '<':
+					op = SGE;
+					break;
+				case '>':
+					op = SLE;
+					break;	
+				case '?':
+					op = INU;
+					break;
+				case '!':
+					op = ONU;
+					break;
+			}
+			(*add_mode_index)++;
+			break;
+
+		/* Without backslash */
+
+		case '_':
+			op = JMP;
+			break;
+		case '~':
+			op = JPZ;
+			break;
+		case '|':
+			op = NND;
+			break;
+		case '+':
+			op = ADD;
+			break;
+		case '-':
+			op = SUB;
+			break;
+		case '*':
+			op = MUL;
+			break;
+		case '/':
+			op = DIV;
+			break;
+		case '%':
+			op = MOD;
+			break;
+		case '=':
+			op = SEQ;
+			break;
+		case '<':
+			op = SLT;
+			break;
+		case '>':
+			op = SGT;
+			break;
+		case ',':
+			op = LAA;
+			break;
+		case '`':
+			op = LAS;
+			break;
+		case '.':
+			op = LDA;
+			break;
+		case ':':
+			op = STA;
+			break;	
+		case '?':
+			op = ICH;
+			break;	
+		case '!':
+			op = OCH;
+			break;		
+	}
+	return op;
+}
+
+ADDRESS_MODE get_address_mode(char *code, int address_index)
+{
+	ADDRESS_MODE add;
+	switch(code[address_index])
+	{
+		case '@':
+			add = acc;
+			break;
+		case '^':
+			add = ind;
+			break;
+		case '}':
+			add = pop;
+			break;
+		case '{':
+			add = psh;
+			break;
+		case '#':
+			add = imm;
+			break;
+		case '$':
+			add = dis;
+			break;
+		case '&':
+			add = rel;
+			break;
+		default:
+			add = _abs;
+	}
+	return add;
+}
+
+void parse_program(vm_state *vm, char *prog)
+{
+	char code[CODE_SIZE];
+	int length;
+	int i;
+	int size_in_memory=0;
+
+	clean_code(prog, code, &length);
+
+
+	i = 0;
+	while(i < length)
+	{
+		OPCODE op;
+		ADDRESS_MODE  add;
+		int address_index;
+
+		op  = get_opcode(code, i, &address_index);
+		add = get_address_mode(code, address_index);
+
+		vm->memory[size_in_memory++] = (op << 3) + add;
+
+		i = address_index + 1;
+	}
+
+	vm->program_length = size_in_memory;
+}
+
+void load_program(vm_state *vm, char *prog)
+{
+	/* Program is sequence of numbers */
+	if ( isdigit(prog[0]) )
+	{
+		int offset = 0;
+		int i = 0;
+		int bytes_read;
+		int ins;
+
+		while(sscanf(prog + offset, "%d%n", &ins, &bytes_read) == 1)
+		{
+			offset += bytes_read;
+			vm->memory[i++] = ins;
+		}
+		vm->program_length = i-1;
+	}
+	else
+		parse_program(vm, prog);
+}
+
+/*******************************************************/
+/*       END OF INITIALIZATION FUNCTIONS               */
+/*******************************************************/
+
+int main(int argc, char *argv[])
+{
 	vm_state vm;
 	reset_machine(&vm);
 
-
-	memcpy(vm.memory, prog, sizeof(prog));
-	vm.program_length = sizeof(prog) / sizeof(int);
-
+	if(argc > 1)
+		load_program(&vm, argv[1]);
 
 	run(&vm);
+
 	return 0;
 }
