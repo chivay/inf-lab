@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
-
+#include <stdbool.h>
 
 /* Size of memory and word in memory */
 #define N 256
@@ -85,6 +85,35 @@ typedef struct {
 	int operand_address;
 } instruction;
 
+typedef struct {
+	/* Array containing stack, maximum size = N */
+	int s[N];
+	/* Index of first element */
+	int top;
+} stack;
+
+void push_stack(stack *st, int value)
+{
+	/* There is still some space*/
+	if (st->top < N-1)
+	{
+		st->top++;
+		st->s[st->top] = value;
+	}
+}
+
+int pop_stack(stack *st)
+{
+	if (st->top != -1) {
+		return st->s[st->top--];
+	else
+		return -1;
+}
+
+void init_stack(stack *st)
+{
+	st->top = -1;
+}
 
 /* Computes computes math-like remainder of @w / @n, not the same as % */
 int modulo(int w, int n)
@@ -102,6 +131,32 @@ int mod(int w)
 int nand(int a, int b)
 {
 	return ~(a & b);
+}
+
+bool scan_int(char *code, int *value, int *bytes)
+{
+	return sscanf(code, "%d%n", value, bytes);
+}
+
+bool isletter(char c)
+{
+	return (c >= 'a' && c <= 'z');
+}
+
+char get_escape_sequence(char c)
+{
+	switch (c){
+		case 'a':  return '\a';
+		case 'b':  return '\b';
+		case 'f':  return '\f';
+		case 'n':  return '\n';
+		case 'r':  return '\r';
+		case 't':  return '\t';
+		case 'v':  return '\v';
+		case '\\': return '\\';
+		case '"':  return '\"';
+		default:   return '\0';			
+	}
 }
 
 /* Gets next instruction to process from address pointed by IP */
@@ -217,38 +272,14 @@ void load_operand_rel(vm_state *vm, instruction *inst)
 void load_operand(vm_state *vm, instruction *inst)
 {
 	switch (inst->address_mode) {
-		case acc:
-			load_operand_acc(vm, inst);
-			break;
-
-		case ind:
-			load_operand_ind(vm, inst);
-			break;
-
-		case pop:
-			load_operand_pop(vm, inst);
-			break;
-
-		case psh:
-			load_operand_psh(vm, inst);
-			break;
-
-		case imm:
-			load_operand_imm(vm, inst);
-			break;
-
-		case _abs:
-			load_operand_abs(vm, inst);
-			break;
-
-		case dis:
-			load_operand_dis(vm, inst);
-			break;
-
-		case rel:
-			load_operand_rel(vm, inst);
-			break;
-
+		case acc: load_operand_acc(vm, inst); break;
+		case ind: load_operand_ind(vm, inst); break;
+		case pop: load_operand_pop(vm, inst); break;
+		case psh: load_operand_psh(vm, inst); break;
+		case imm: load_operand_imm(vm, inst); break;
+	   case _abs: load_operand_abs(vm, inst); break;
+		case dis: load_operand_dis(vm, inst); break;
+		case rel: load_operand_rel(vm, inst); break;
 		default:
 			exit(EXIT_FAILURE);
 	}
@@ -550,134 +581,38 @@ void op_onu(instruction *inst)
 void execute_instruction(vm_state* vm, instruction *inst)
 {
 	switch (inst->opcode) {
-		case JSR:
-			op_jsr(vm, inst);
-			break;
-
-		case JMP:
-			op_jmp(vm, inst);
-			break;
-
-		case JPZ:
-			op_jpz(vm, inst);
-			break;
-
-		case JNZ:
-			op_jnz(vm, inst);
-			break;
-
-		case NND:
-			op_nnd(vm, inst);
-			break;
-
-		case DNN:
-			op_dnn(vm, inst);
-			break;
-
-		case INC:
-			op_inc(vm, inst);
-			break;
-
-		case DEC:
-			op_dec(vm, inst);
-			break;
-
-		case DDA:
-			op_dda(vm, inst);
-			break;
-
-		case BUS:
-			op_bus(vm, inst);
-			break;
-
-		case LUM:
-			op_lum(vm, inst);
-			break;
-
-		case VID:
-			op_vid(vm, inst);
-			break;
-
-		case DOM:
-			op_dom(vm, inst);
-			break;
-
-		case SNE:
-			op_sne(vm, inst);
-			break;
-
-		case SGE:
-			op_sge(vm, inst);
-			break;
-
-		case SLE:
-			op_sle(vm, inst);
-			break;
-
-		case ADD:
-			op_add(vm, inst);
-			break;
-
-		case SUB:
-			op_sub(vm, inst);
-			break;
-
-		case MUL:
-			op_mul(vm, inst);
-			break;
-
-		case DIV:
-			op_div(vm, inst);
-			break;
-
-		case MOD:
-			op_mod(vm, inst);
-			break;
-
-		case SEQ:
-			op_seq(vm, inst);
-			break;
-
-		case SLT:
-			op_slt(vm, inst);
-			break;
-
-		case SGT:
-			op_sgt(vm, inst);
-			break;
-
-		case LAA:
-			op_laa(vm, inst);
-			break;
-
-		case LAS:
-			op_las(vm, inst);
-			break;
-
-		case LDA:
-			op_lda(vm, inst);
-			break;
-
-		case STA:
-			op_sta(vm, inst);
-			break;
-
-		case ICH:
-			op_ich(vm, inst);
-			break;
-
-		case OCH:
-			op_och(inst);
-			break;
-
-		case INU:
-			op_inu(vm, inst);
-			break;
-
-		case ONU:
-			op_onu(inst);
-			break;
-
+		case JSR: op_jsr(vm, inst); break;
+		case JMP: op_jmp(vm, inst); break;
+		case JPZ: op_jpz(vm, inst); break;
+		case JNZ: op_jnz(vm, inst); break;
+		case NND: op_nnd(vm, inst); break;
+		case DNN: op_dnn(vm, inst); break;
+		case INC: op_inc(vm, inst); break;
+		case DEC: op_dec(vm, inst); break;
+		case DDA: op_dda(vm, inst); break;
+		case BUS: op_bus(vm, inst); break;
+		case LUM: op_lum(vm, inst); break;
+		case VID: op_vid(vm, inst); break;
+		case DOM: op_dom(vm, inst); break;
+		case SNE: op_sne(vm, inst); break;
+		case SGE: op_sge(vm, inst); break;
+		case SLE: op_sle(vm, inst); break;
+		case ADD: op_add(vm, inst); break;
+		case SUB: op_sub(vm, inst); break;
+		case MUL: op_mul(vm, inst); break;
+		case DIV: op_div(vm, inst); break;
+		case MOD: op_mod(vm, inst); break;
+		case SEQ: op_seq(vm, inst); break;
+		case SLT: op_slt(vm, inst); break;
+		case SGT: op_sgt(vm, inst); break;
+		case LAA: op_laa(vm, inst); break;
+		case LAS: op_las(vm, inst); break;
+		case LDA: op_lda(vm, inst); break;
+		case STA: op_sta(vm, inst); break;
+		case ICH: op_ich(vm, inst); break;
+		case OCH: op_och(inst);     break;
+		case INU: op_inu(vm, inst); break;
+		case ONU: op_onu(inst);     break;
 		default:
 			exit(EXIT_FAILURE);
 	}
@@ -690,7 +625,9 @@ void run(vm_state *vm)
 
 	while(vm->IP < vm->program_length) {
 		fetch_instruction(vm, &curr_instr);
+
 		vm->IP = mod(vm->IP + 1);
+		
 		load_operand(vm, &curr_instr);
 		execute_instruction(vm, &curr_instr);
 	}
@@ -701,45 +638,39 @@ void run(vm_state *vm)
 /*******************************************************/
 
 /*******************************************************/
-/*            INITIALIZATION FUNCTIONS                 */
+/*                    PARSER FUNCTIONS                 */
 /*******************************************************/
 
-/* Sets values of registers and memory to 0 */
-void reset_machine(vm_state *vm)
-{
-	vm->AC = 0;
-	vm->SP = 0;
-	vm->IP = 0;
-	vm->program_length = 0;
 
-	memset(vm->memory, 0, sizeof(int)*N);
-}
-
+/* TODO: liczby oddzielone spacją !!!!! */
 void clean_code(char *prog, char *code, int *length)
 {
+	bool in_string;
 	int len, i,j;
 	len = strlen(prog);
 
+	in_string = false;
 	j = 0;
 	i = 0;
 	while (i < len) {
 		char c = prog[i];
 
 		/* Skip comment */
-		if(c == COMMENT_SYMBOL) {
+		if(c == '\"')
+			in_string = !in_string;
+		else if(c == COMMENT_SYMBOL && !in_string) {
 			while(i < len && prog[i++] != '\n');
 		}
 		/* Skip white characters */
 		else if(c == ' ' || c == '\t' || c == '\n') {
 			i++;
 		}
-		else
-		{
+		else {
 			code[j++] = c;
 			i++;
 		}
 	}
-
+	code[j] = '\0';
 	*length = j;
 }
 
@@ -749,12 +680,10 @@ OPCODE get_opcode(char *code, int i, int *add_mode_index)
 
 	*add_mode_index = i+1;
 
-	switch(code[i])
-	{
+	switch(code[i]) {
 		/* Starting with backslash */
 		case '\\':
-			switch(code[i+1])
-			{
+			switch(code[i+1]) {
 				case '_':
 					op = JSR;
 					break;
@@ -864,8 +793,7 @@ OPCODE get_opcode(char *code, int i, int *add_mode_index)
 ADDRESS_MODE get_address_mode(char *code, int address_index)
 {
 	ADDRESS_MODE add;
-	switch(code[address_index])
-	{
+	switch(code[address_index]) {
 		case '@':
 			add = acc;
 			break;
@@ -896,55 +824,174 @@ ADDRESS_MODE get_address_mode(char *code, int address_index)
 void parse_program(vm_state *vm, char *prog)
 {
 	char code[CODE_SIZE];
+	char labels[30];
 	int length;
 	int i;
+	int j;
 	int size_in_memory=0;
 
+	stack use_declare_p_s;  /*  ( \) */
+	stack declare_use_p_s;  /* \(  ) */
+	stack use_declare_b_s;  /*  [ \] */
+	stack declare_use_b_s;  /* \[  ] */
+
+	init_stack(use_declare_b_s);
+	init_stack(declare_use_b_s);
+
+	init_stack(use_declare_p_s);
+	init_stack(declare_use_p_s);
+
+	memset(labels, -1, 30);
 	clean_code(prog, code, &length);
 
-
 	i = 0;
-	while(i < length)
-	{
-		OPCODE op;
-		ADDRESS_MODE  add;
-		int address_index;
+	while(i < length) {
+		int int_value;
+		int bytes;
 
-		op  = get_opcode(code, i, &address_index);
-		add = get_address_mode(code, address_index);
+		/* Use declare brackets stack START */
+		if(code[i] == '[') {
+			/* For now we don't know what to put here, so push this address to fill later*/
+			push_stack(use_declare_b_s, size_in_memory++);
+			i++;
+		}
+		/* Use declare brackets stack END */
+		else if(code[i] == '\\' && code[i+1] == ']') {
+			/* Now we know what to put in gap */
+			vm->memory[ pop_stack(use_declare_b_s) ] = size_in_memory;
+			i += 2;
+		}
+		/* Declare use brackets stack START */
+		else if(code[i] == '\\' && code[i+1] == '[') {
+			push_stack(declare_use_b_s, size_in_memory);
+			i += 2;
+		}
+		/* Declare use brackets stack END */
+		else if (code[i] == ']') {
+			vm->memory[size_in_memory++] = pop_stack(declare_use_b_s);
+			i++;
+		}
+		/* Use declare parentheses stack START */
+		else if(code[i] == '(') {
+			/* For now we don't know what to put here, so push this address to fill later*/
+			push_stack(use_declare_p_s, size_in_memory++);
+			i++;
+		}
+		/* Use declare parentheses stack END */
+		else if(code[i] == '\\' && code[i+1] == ')') {
+			/* Now we know what to put in gap */
+			vm->memory[ pop_stack(use_declare_p_s) ] = size_in_memory;
+			i += 2;
+		}
+		/* Declare use parentheses stack START */
+		else if(code[i] == '\\' && code[i+1] == '(') {
+			push_stack(declare_use_p_s, size_in_memory);
+			i += 2;
+		}
+		/* Declare use parentheses stack END */
+		else if (code[i] == ')') {
+			vm->memory[size_in_memory++] = pop_stack(declare_use_p_s);
+			i++;
+		}
+		/* Label declaration */
+		else if(code[i] == '\\' && isletter(code[i+1])) {
+			labels[code[i+1] - 'a'] = size_in_memory;
+			i += 2;
+		}
+		/* Label usage */
+		else if (isletter(code[i])) {
+			/* Insert placeholder value */
+			vm->memory[size_in_memory++] = 255 * code[i];
+			i++;
+		}
+		/* Array declaration */
+		else if(code[i] == '\\' && code[i+1] == '\"') {
+			i+= 2;
+			scan_int(code + i, &int_value, &bytes);
+			/* int_value == size of array */
+			/* skip int_value cells */
+			size_in_memory += int_value;
+			i+= bytes;
+		}
+		/* String declaration */
+		else if(code[i] == '"') {
+			while(code[i++] != '"') {
+				/* Escape sequence*/
+				if(code[i] == '\\')
+					vm->memory[size_in_memory++] = get_escape_sequence(code[i+1]);
+				else
+					vm->memory[size_in_memory++] = code[i];
+			}
+		}
+		/* Unsigned int */
+		else if( scan_int(code + i, &int_value, &bytes) ) {
+			vm->memory[size_in_memory++] = mod(int_value);
+			i += bytes;
+		}
+		/* Signed int */
+		else if (code[i] == '\\' && scan_int(code + i + 1, &int_value, &bytes) ) {
+			int_value *= -1;
+			vm->memory[size_in_memory++] = mod(int_value);
+			i += bytes + 1;
+		}
+		/* Standard operation */
+		else {
 
-		vm->memory[size_in_memory++] = (op << 3) + add;
+			OPCODE op;
+			ADDRESS_MODE  add;
+			int address_index;
 
-		i = address_index + 1;
+			op  = get_opcode(code, i, &address_index);
+			add = get_address_mode(code, address_index);
+
+			vm->memory[size_in_memory++] = (op << 3) + add;
+
+			i = address_index + 1;
+		}
+
 	}
-
+	/* Insert labels */
+	for(j = 0; j < size_in_memory; j++)
+		if (vm->memory[j]/255 > 1)
+			vm->memory[j] = labels[ vm->memory[j]/255 - 'a' ];
 	vm->program_length = size_in_memory;
+}
+
+/*******************************************************/
+/*               END OF PARSER FUNCTIONS               */
+/*******************************************************/
+
+/* Sets values of registers and memory to 0 */
+void reset_machine(vm_state *vm)
+{
+	vm->AC = 0;
+	vm->SP = 0;
+	vm->IP = 0;
+	vm->program_length = 0;
+
+	memset(vm->memory, 0, sizeof(int)*N);
 }
 
 void load_program(vm_state *vm, char *prog)
 {
 	/* Program is sequence of numbers */
-	if ( isdigit(prog[0]) )
-	{
+	if ( isdigit(prog[0]) ) {
 		int offset = 0;
 		int i = 0;
 		int bytes_read;
 		int ins;
 
-		while(sscanf(prog + offset, "%d%n", &ins, &bytes_read) == 1)
-		{
+		while(scan_int(prog + offset, &ins, &bytes_read)) {
 			offset += bytes_read;
 			vm->memory[i++] = ins;
 		}
 		vm->program_length = i-1;
 	}
-	else
+	/* Program as a source code */
+	else {
 		parse_program(vm, prog);
+	}
 }
-
-/*******************************************************/
-/*       END OF INITIALIZATION FUNCTIONS               */
-/*******************************************************/
 
 int main(int argc, char *argv[])
 {
