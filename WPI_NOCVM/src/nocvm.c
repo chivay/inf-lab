@@ -85,6 +85,7 @@ typedef struct {
 	int operand_address;
 } instruction;
 
+/* Stack implementation */
 typedef struct {
 	/* Array containing stack, maximum size = N */
 	int s[N];
@@ -104,7 +105,7 @@ void push_stack(stack *st, int value)
 
 int pop_stack(stack *st)
 {
-	if (st->top != -1) {
+	if (st->top != -1)
 		return st->s[st->top--];
 	else
 		return -1;
@@ -114,6 +115,8 @@ void init_stack(stack *st)
 {
 	st->top = -1;
 }
+
+/* End of stack implementation */
 
 /* Computes computes math-like remainder of @w / @n, not the same as % */
 int modulo(int w, int n)
@@ -645,20 +648,15 @@ void run(vm_state *vm)
 /* TODO: liczby oddzielone spacją !!!!! */
 void clean_code(char *prog, char *code, int *length)
 {
-	bool in_string;
 	int len, i,j;
 	len = strlen(prog);
 
-	in_string = false;
 	j = 0;
 	i = 0;
 	while (i < len) {
 		char c = prog[i];
 
-		/* Skip comment */
-		if(c == '\"')
-			in_string = !in_string;
-		else if(c == COMMENT_SYMBOL && !in_string) {
+		if(c == COMMENT_SYMBOL) {
 			while(i < len && prog[i++] != '\n');
 		}
 		/* Skip white characters */
@@ -684,108 +682,43 @@ OPCODE get_opcode(char *code, int i, int *add_mode_index)
 		/* Starting with backslash */
 		case '\\':
 			switch(code[i+1]) {
-				case '_':
-					op = JSR;
-					break;
-				case '~':
-					op = JNZ;
-					break;
-				case '|':
-					op = DNN;
-					break;	
-				case '}':
-					op = INC;
-					break;	
-				case '{':
-					op = DEC;
-					break;	
-				case '+':
-					op = DDA;
-					break;	
-				case '-':
-					op = BUS;
-					break;	
-				case '*':
-					op = LUM;
-					break;
-				case '/':
-					op = VID;
-					break;	
-				case '%':
-					op = DOM;
-					break;	
-				case '=':
-					op = SNE;
-					break;	
-				case '<':
-					op = SGE;
-					break;
-				case '>':
-					op = SLE;
-					break;	
-				case '?':
-					op = INU;
-					break;
-				case '!':
-					op = ONU;
-					break;
+				case '_': op = JSR; break;
+				case '~': op = JNZ; break;
+				case '|': op = DNN; break;	
+				case '}': op = INC; break;	
+				case '{': op = DEC; break;	
+				case '+': op = DDA; break;	
+				case '-': op = BUS; break;	
+				case '*': op = LUM; break;
+				case '/': op = VID; break;	
+				case '%': op = DOM; break;	
+				case '=': op = SNE; break;	
+				case '<': op = SGE; break;
+				case '>': op = SLE; break;	
+				case '?': op = INU; break;
+				case '!': op = ONU; break;
 			}
 			(*add_mode_index)++;
 			break;
 
 		/* Without backslash */
-
-		case '_':
-			op = JMP;
-			break;
-		case '~':
-			op = JPZ;
-			break;
-		case '|':
-			op = NND;
-			break;
-		case '+':
-			op = ADD;
-			break;
-		case '-':
-			op = SUB;
-			break;
-		case '*':
-			op = MUL;
-			break;
-		case '/':
-			op = DIV;
-			break;
-		case '%':
-			op = MOD;
-			break;
-		case '=':
-			op = SEQ;
-			break;
-		case '<':
-			op = SLT;
-			break;
-		case '>':
-			op = SGT;
-			break;
-		case ',':
-			op = LAA;
-			break;
-		case '`':
-			op = LAS;
-			break;
-		case '.':
-			op = LDA;
-			break;
-		case ':':
-			op = STA;
-			break;	
-		case '?':
-			op = ICH;
-			break;	
-		case '!':
-			op = OCH;
-			break;		
+		case '_': op = JMP; break;
+		case '~': op = JPZ; break;
+		case '|': op = NND; break;
+		case '+': op = ADD; break;
+		case '-': op = SUB; break;
+		case '*': op = MUL; break;
+		case '/': op = DIV; break;
+		case '%': op = MOD; break;
+		case '=': op = SEQ; break;
+		case '<': op = SLT; break;
+		case '>': op = SGT; break;
+		case ',': op = LAA; break;
+		case '`': op = LAS; break;
+		case '.': op = LDA; break;
+		case ':': op = STA; break;	
+		case '?': op = ICH; break;	
+		case '!': op = OCH; break;		
 	}
 	return op;
 }
@@ -794,27 +727,13 @@ ADDRESS_MODE get_address_mode(char *code, int address_index)
 {
 	ADDRESS_MODE add;
 	switch(code[address_index]) {
-		case '@':
-			add = acc;
-			break;
-		case '^':
-			add = ind;
-			break;
-		case '}':
-			add = pop;
-			break;
-		case '{':
-			add = psh;
-			break;
-		case '#':
-			add = imm;
-			break;
-		case '$':
-			add = dis;
-			break;
-		case '&':
-			add = rel;
-			break;
+		case '@': add = acc; break;
+		case '^': add = ind; break;
+		case '}': add = pop; break;
+		case '{': add = psh; break;
+		case '#': add = imm; break;
+		case '$': add = dis; break;
+		case '&': add = rel; break;
 		default:
 			add = _abs;
 	}
@@ -824,7 +743,7 @@ ADDRESS_MODE get_address_mode(char *code, int address_index)
 void parse_program(vm_state *vm, char *prog)
 {
 	char code[CODE_SIZE];
-	char labels[30];
+	int labels[30];
 	int length;
 	int i;
 	int j;
@@ -835,13 +754,13 @@ void parse_program(vm_state *vm, char *prog)
 	stack use_declare_b_s;  /*  [ \] */
 	stack declare_use_b_s;  /* \[  ] */
 
-	init_stack(use_declare_b_s);
-	init_stack(declare_use_b_s);
+	init_stack(&use_declare_b_s);
+	init_stack(&declare_use_b_s);
 
-	init_stack(use_declare_p_s);
-	init_stack(declare_use_p_s);
+	init_stack(&use_declare_p_s);
+	init_stack(&declare_use_p_s);
 
-	memset(labels, -1, 30);
+	memset(labels, -1, 30 * sizeof(int) );
 	clean_code(prog, code, &length);
 
 	i = 0;
@@ -852,45 +771,46 @@ void parse_program(vm_state *vm, char *prog)
 		/* Use declare brackets stack START */
 		if(code[i] == '[') {
 			/* For now we don't know what to put here, so push this address to fill later*/
-			push_stack(use_declare_b_s, size_in_memory++);
+			push_stack(&use_declare_b_s, size_in_memory++);
 			i++;
 		}
-		/* Use declare brackets stack END */
+		/* Use declare bracckets stack END */
 		else if(code[i] == '\\' && code[i+1] == ']') {
 			/* Now we know what to put in gap */
-			vm->memory[ pop_stack(use_declare_b_s) ] = size_in_memory;
+			vm->memory[ pop_stack(&use_declare_b_s) ] = size_in_memory;
 			i += 2;
 		}
 		/* Declare use brackets stack START */
 		else if(code[i] == '\\' && code[i+1] == '[') {
-			push_stack(declare_use_b_s, size_in_memory);
+			push_stack(&declare_use_b_s, size_in_memory);
 			i += 2;
 		}
 		/* Declare use brackets stack END */
 		else if (code[i] == ']') {
-			vm->memory[size_in_memory++] = pop_stack(declare_use_b_s);
+			vm->memory[size_in_memory++] = pop_stack(&declare_use_b_s);
 			i++;
 		}
 		/* Use declare parentheses stack START */
 		else if(code[i] == '(') {
 			/* For now we don't know what to put here, so push this address to fill later*/
-			push_stack(use_declare_p_s, size_in_memory++);
+			vm->memory[size_in_memory] = -1;
+			push_stack(&use_declare_p_s, size_in_memory++);
 			i++;
 		}
 		/* Use declare parentheses stack END */
 		else if(code[i] == '\\' && code[i+1] == ')') {
 			/* Now we know what to put in gap */
-			vm->memory[ pop_stack(use_declare_p_s) ] = size_in_memory;
+			vm->memory[ pop_stack(&use_declare_p_s) ] = size_in_memory;
 			i += 2;
 		}
 		/* Declare use parentheses stack START */
 		else if(code[i] == '\\' && code[i+1] == '(') {
-			push_stack(declare_use_p_s, size_in_memory);
+			push_stack(&declare_use_p_s, size_in_memory);
 			i += 2;
 		}
 		/* Declare use parentheses stack END */
 		else if (code[i] == ')') {
-			vm->memory[size_in_memory++] = pop_stack(declare_use_p_s);
+			vm->memory[size_in_memory++] = pop_stack(&declare_use_p_s);
 			i++;
 		}
 		/* Label declaration */
@@ -915,13 +835,19 @@ void parse_program(vm_state *vm, char *prog)
 		}
 		/* String declaration */
 		else if(code[i] == '"') {
-			while(code[i++] != '"') {
+			i++;
+			while(code[i] != '"') {
 				/* Escape sequence*/
-				if(code[i] == '\\')
+				if(code[i] == '\\') {
 					vm->memory[size_in_memory++] = get_escape_sequence(code[i+1]);
-				else
+					i += 2;
+				}
+				else {
 					vm->memory[size_in_memory++] = code[i];
+					i++;
+				}
 			}
+			i++;
 		}
 		/* Unsigned int */
 		else if( scan_int(code + i, &int_value, &bytes) ) {
@@ -946,7 +872,11 @@ void parse_program(vm_state *vm, char *prog)
 
 			vm->memory[size_in_memory++] = (op << 3) + add;
 
-			i = address_index + 1;
+			/* We don't want to skip if _abs matched */
+			if(add != _abs)
+				i = address_index + 1;
+			else
+				i = address_index;
 		}
 
 	}
@@ -955,6 +885,7 @@ void parse_program(vm_state *vm, char *prog)
 		if (vm->memory[j]/255 > 1)
 			vm->memory[j] = labels[ vm->memory[j]/255 - 'a' ];
 	vm->program_length = size_in_memory;
+	
 }
 
 /*******************************************************/
