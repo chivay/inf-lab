@@ -93,6 +93,7 @@ typedef struct {
 	int top;
 } stack;
 
+/* Pushes @value on stack @st */
 void push_stack(stack *st, int value)
 {
 	/* There is still some space*/
@@ -103,6 +104,7 @@ void push_stack(stack *st, int value)
 	}
 }
 
+/* Pops value from stack @st */
 int pop_stack(stack *st)
 {
 	if (st->top != -1)
@@ -111,11 +113,11 @@ int pop_stack(stack *st)
 		return -1;
 }
 
+/* Initializes stack */
 void init_stack(stack *st)
 {
 	st->top = -1;
 }
-
 /* End of stack implementation */
 
 /* Computes computes math-like remainder of @w / @n, not the same as % */
@@ -136,16 +138,29 @@ int nand(int a, int b)
 	return ~(a & b);
 }
 
+/* Reads first integer from @code and puts it into @value,
+ * Returns number of conumed bytes.
+ */
 bool scan_int(char *code, int *value, int *bytes)
 {
 	return sscanf(code, "%d%n", value, bytes);
 }
 
-bool isletter(char c)
+/* Checks if @c is in range from 'a' to 'z' */
+bool is_letter(char c)
 {
 	return (c >= 'a' && c <= 'z');
 }
 
+/* Checks if @c is a digit  ('0' to '9') */
+bool is_digit(char c)
+{
+	return (c >= '0' && c <= '9');
+}
+
+/* Returns character code for \@c  eg: for @c == 'n' returns '\n'
+ * If no character matched, then null is returned
+ */
 char get_escape_sequence(char c)
 {
 	switch (c){
@@ -580,7 +595,7 @@ void op_onu(instruction *inst)
 /*                 EXECUTION FUNCTIONS                 */
 /*******************************************************/
 
-/* Executes instruction described in @inst based on opcode */
+/* Executes instruction specified in @inst based on opcode */
 void execute_instruction(vm_state* vm, instruction *inst)
 {
 	switch (inst->opcode) {
@@ -644,8 +659,10 @@ void run(vm_state *vm)
 /*                    PARSER FUNCTIONS                 */
 /*******************************************************/
 
+/* Removes comments and white charcters from @prog,
+ * stores result in @code, and code length in @length
+ */
 
-/* TODO: liczby oddzielone spacją !!!!! */
 void clean_code(char *prog, char *code, int *length)
 {
 	int len, i,j;
@@ -656,7 +673,14 @@ void clean_code(char *prog, char *code, int *length)
 	while (i < len) {
 		char c = prog[i];
 
-		if(c == COMMENT_SYMBOL) {
+		/* If digit is the last in number*/
+		if(isdigit(c) && !isdigit(prog[i+1])) {
+			code[j++] = c;
+			/* Add delimiter at the end */
+			code[j++] = '|';
+			i++;
+		}
+		else if(c == COMMENT_SYMBOL) {
 			while(i < len && prog[i++] != '\n');
 		}
 		/* Skip white characters */
@@ -672,6 +696,9 @@ void clean_code(char *prog, char *code, int *length)
 	*length = j;
 }
 
+/* Returns OPCODE at @code[@i], stores index of its address mode 
+ * in @add_more_index
+ */
 OPCODE get_opcode(char *code, int i, int *add_mode_index)
 {
 	OPCODE op;
@@ -723,10 +750,11 @@ OPCODE get_opcode(char *code, int i, int *add_mode_index)
 	return op;
 }
 
-ADDRESS_MODE get_address_mode(char *code, int address_index)
+/* Returns address mode type at @code[@i]  */
+ADDRESS_MODE get_address_mode(char *code, int i)
 {
 	ADDRESS_MODE add;
-	switch(code[address_index]) {
+	switch(code[i]) {
 		case '@': add = acc; break;
 		case '^': add = ind; break;
 		case '}': add = pop; break;
@@ -740,6 +768,7 @@ ADDRESS_MODE get_address_mode(char *code, int address_index)
 	return add;
 }
 
+/* Parse program's source code and store it into machine's memory */
 void parse_program(vm_state *vm, char *prog)
 {
 	char code[CODE_SIZE];
@@ -749,6 +778,7 @@ void parse_program(vm_state *vm, char *prog)
 	int j;
 	int size_in_memory=0;
 
+	/* Stacks storing data for brackets and parentheses*/
 	stack use_declare_p_s;  /*  ( \) */
 	stack declare_use_p_s;  /* \(  ) */
 	stack use_declare_b_s;  /*  [ \] */
@@ -756,11 +786,13 @@ void parse_program(vm_state *vm, char *prog)
 
 	init_stack(&use_declare_b_s);
 	init_stack(&declare_use_b_s);
-
 	init_stack(&use_declare_p_s);
 	init_stack(&declare_use_p_s);
 
+	/* Set addresses of all labels to -1*/
 	memset(labels, -1, 30 * sizeof(int) );
+
+	/* Remove comments and white characters */
 	clean_code(prog, code, &length);
 
 	i = 0;
@@ -768,59 +800,72 @@ void parse_program(vm_state *vm, char *prog)
 		int int_value;
 		int bytes;
 
-		/* Use declare brackets stack START */
-		if(code[i] == '[') {
-			/* For now we don't know what to put here, so push this address to fill later*/
+		/* Integer delimiter found. Skip */
+		if (code[i] == '|') {
+			i++;
+		}
+		/* Use declare brackets START */
+		else if(code[i] == '[') {
+			/* Push this address to fill later*/
 			push_stack(&use_declare_b_s, size_in_memory++);
 			i++;
 		}
-		/* Use declare bracckets stack END */
+
+		/* Use declare brackets END */
 		else if(code[i] == '\\' && code[i+1] == ']') {
 			/* Now we know what to put in gap */
 			vm->memory[ pop_stack(&use_declare_b_s) ] = size_in_memory;
 			i += 2;
 		}
-		/* Declare use brackets stack START */
+
+		/* Declare use brackets START */
 		else if(code[i] == '\\' && code[i+1] == '[') {
+			/* Push current address for later use*/
 			push_stack(&declare_use_b_s, size_in_memory);
 			i += 2;
 		}
-		/* Declare use brackets stack END */
+
+		/* Declare use brackets END */
 		else if (code[i] == ']') {
+			/* Get address from stack */
 			vm->memory[size_in_memory++] = pop_stack(&declare_use_b_s);
 			i++;
 		}
-		/* Use declare parentheses stack START */
+
+		/* Use declare parentheses START */
 		else if(code[i] == '(') {
-			/* For now we don't know what to put here, so push this address to fill later*/
-			vm->memory[size_in_memory] = -1;
+			/* Push this address to fill later*/
 			push_stack(&use_declare_p_s, size_in_memory++);
 			i++;
 		}
-		/* Use declare parentheses stack END */
+
+		/* Use declare parentheses END */
 		else if(code[i] == '\\' && code[i+1] == ')') {
 			/* Now we know what to put in gap */
 			vm->memory[ pop_stack(&use_declare_p_s) ] = size_in_memory;
 			i += 2;
 		}
-		/* Declare use parentheses stack START */
+
+		/* Declare use parentheses START */
 		else if(code[i] == '\\' && code[i+1] == '(') {
 			push_stack(&declare_use_p_s, size_in_memory);
 			i += 2;
 		}
-		/* Declare use parentheses stack END */
+
+		/* Declare use parentheses END */
 		else if (code[i] == ')') {
 			vm->memory[size_in_memory++] = pop_stack(&declare_use_p_s);
 			i++;
 		}
+
 		/* Label declaration */
-		else if(code[i] == '\\' && isletter(code[i+1])) {
+		else if(code[i] == '\\' && is_letter(code[i+1])) {
 			labels[code[i+1] - 'a'] = size_in_memory;
 			i += 2;
 		}
 		/* Label usage */
-		else if (isletter(code[i])) {
-			/* Insert placeholder value */
+		else if (is_letter(code[i])) {
+			/* Insert placeholder value (that wouldn't appear in code) */
 			vm->memory[size_in_memory++] = 255 * code[i];
 			i++;
 		}
@@ -884,8 +929,9 @@ void parse_program(vm_state *vm, char *prog)
 	for(j = 0; j < size_in_memory; j++)
 		if (vm->memory[j]/255 > 1)
 			vm->memory[j] = labels[ vm->memory[j]/255 - 'a' ];
+
+	/* Update program length */
 	vm->program_length = size_in_memory;
-	
 }
 
 /*******************************************************/
@@ -903,6 +949,7 @@ void reset_machine(vm_state *vm)
 	memset(vm->memory, 0, sizeof(int)*N);
 }
 
+/* Loads program into machine's memory  */
 void load_program(vm_state *vm, char *prog)
 {
 	/* Program is sequence of numbers */
@@ -929,9 +976,11 @@ int main(int argc, char *argv[])
 	vm_state vm;
 	reset_machine(&vm);
 
+	/* If there's a program to load */
 	if(argc > 1)
 		load_program(&vm, argv[1]);
 
+	/* Run virtual machine */
 	run(&vm);
 
 	return 0;
