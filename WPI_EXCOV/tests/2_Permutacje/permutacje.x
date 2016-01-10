@@ -1,0 +1,25 @@
+a    x
+ a   x
+  a  x
+   a x
+    ax
+b     x
+ b    x
+  b   x
+   b  x
+    b x
+c      x
+ c     x
+  c    x
+   c   x
+    c  x
+d       x
+ d      x
+  d     x
+   d    x
+    d   x
+e        x
+ e       x
+  e      x
+   e     x
+    e    x
