@@ -1,9 +1,12 @@
-/*
- * EXACT COVER PROBLEM
- * PROBLEM DOKŁADNEGO POKRYCIA
+/**
+ * @file excov.c
+ * @brief Program solving exact cover problem.
  *
- *  Author: Hubert Jasudowicz
- * Version: 1.0
+ * Program solves exact cover problem using dancing links 
+ * technique as described in a paper by Donald Knuth. 
+ *
+ * @author Hubert Jasudowicz  
+ * @bug No known bugs.
  */
 
  /* Visual representation of data structure in memory:
@@ -18,38 +21,52 @@
   *              ...        ...        ...
   */
 
+/* libc includes */
 #include <stdio.h>
 #include <stdlib.h>
 
-/* Structure for representing sparse matrix in memory
- * using double-linked lists in 2 dimensions
+/** 
+ * @brief Structure for representing element in sparse matrix
+ * 
+ * This structure represents node in sparse matrix as seen in
+ * ASCII art above. It stores links to nodes in 4 directions
+ * as well as column node, character and header_index for printing solution.
  */
 struct Node {
-  struct Node *U;
-  struct Node *D;
-  struct Node *L;
-  struct Node *R;
+  struct Node *U; /**< Link to node above. */
+  struct Node *D; /**< Link to node below. */
+  struct Node *L; /**< Link to node on the left. */
+  struct Node *R; /**< Link to node on the right. */
 
-  /* Header node */
-  struct Node *C;
+  struct Node *C; /**< Link to header node */
 
-  int header_index;
-  char c;
+  int header_index; /**< Stores index of column node, used only in column nodes */
+  char c; /**< Stores character to print in solution, unused in root and column nodes */
 };
 struct Node;
 typedef struct Node Node;
 
-/* Solution structure containing size of solution
- * and array with solution
+/**
+ * @brief Structure for storing partial solutions
+ *
+ * Structure is passed down into recursion, contains size of solution
+ * and array with partial solution on given level of recursion.
  */
 struct Solution {
-	int size;
-	char *row;
+	int size;  /**< Size of solution array */
+	char *row; /**< Array of characters to print */
 };
-
 typedef struct Solution Solution; 
 
-/* Sets up inital value for new node @n */
+/**
+ * @brief Sets up inital values for new node.
+ * 
+ * Initializes node passed as parameter, setting links
+ * to itself, and zeroes other elements in structure.
+ *
+ * @param n Node to be initialized.
+ * @return Void.
+ */
 void init_node(Node* n)
 {
 	/* All pointers point to node itself */
@@ -65,9 +82,13 @@ void init_node(Node* n)
 	n->c = 0;
 }
 
-
-/* Allocates memory for new node, initializes it
+ /**
+ * @brief Creates new node
+ * 
+ * Allocates memory for new node, initializes it
  * and returns pointer to new node
+ *
+ * @return Pointer to newly created node.
  */
 Node* create_node()
 {
@@ -76,22 +97,41 @@ Node* create_node()
 	return nd;
 }
 
-/* Removes node @x from list horizontally(L/R)*/
+/**
+ * @brief Removes node @p x from list horizontally(L/R)
+ * 
+ * Unlinks node passed as parameter from linked list.
+ *
+ * @param x Node to be removed.
+ * @return Void.
+ */
 void remove_node_h(Node *x)
 {
 	x->R->L = x->L;
 	x->L->R = x->R;
 }
 
-/* Removes node @x from list vertically (U/D) */
+/**
+ * @brief Removes node @p x from list vertically (U/D)
+ * 
+ * Unlinks node passed as parameter from linked list.
+ *
+ * @param x Node to be removed.
+ * @return Void.
+ */
 void remove_node_v(Node *x)
 {
 	x->D->U = x->U;
 	x->U->D = x->D;
 }
 
-/* Inserts node @x into list horizontally(L/R)
- * using Dancing Links technique
+/**
+ * @brief Inserts node @x into list horizontally(L/R)
+ * 
+ * Inserts node @p x back into matrix using Dancing Links.
+ *
+ * @param x Node to be inserted.
+ * @return Void.
  */
 void insert_node_h(Node *x)
 {
@@ -99,8 +139,13 @@ void insert_node_h(Node *x)
 	x->L->R = x;
 }
 
-/* Inserts node @x into list vertically(U/D)
- * using Dancing Links technique
+/**
+ * @brief Inserts node @x into list vertically(U/D)
+ * 
+ * Inserts node @p x back into matrix using Dancing Links.
+ *
+ * @param x Node to be inserted.
+ * @return Void.
  */
 void insert_node_v(Node *x)
 {
@@ -108,7 +153,17 @@ void insert_node_v(Node *x)
 	x->U->D = x;
 }
 
-/* Inserts node @c horizontally(L/R) between @a and @b */
+/**
+ * @brief Inserts node @p c horizontally(L/R) between @p a and @p b
+ * 
+ * Inserts node @p c horizontally(L/R) between @p a and @p b so that
+ * @p c is to the right of @p a and @p b is to the right of @c. 
+ *
+ * @param a Node to be on the left.
+ * @param b Node to be on the right.
+ * @param c Node to be in the middle.
+ * @return Void.
+ */
 void insert_between_h(Node *a, Node *b, Node *c)
 {
 	a->R = c;
@@ -118,7 +173,17 @@ void insert_between_h(Node *a, Node *b, Node *c)
 	c->L = a;
 }
 
-/* Inserts node @c vertically(U/D) between @a and @b */
+/**
+ * @brief Inserts node @p c vertically (U/D) between @p a and @p b
+ * 
+ * Inserts node @p c vertically (U/D) between @p a and @p b so that
+ * @p c is below @p a and @p b is below @p c. 
+ *
+ * @param a Node to be above.
+ * @param b Node to be below.
+ * @param c Node to be in the middle.
+ * @return Void.
+ */
 void insert_between_v(Node *a, Node *b, Node *c)
 {
 	a->D = c;
@@ -128,7 +193,16 @@ void insert_between_v(Node *a, Node *b, Node *c)
 	c->D = b;
 }
 
-/* Removes column with node @n from data matrix */
+/**
+ * @brief Hides column from data matrix
+ * 
+ * Hides column with node @p n from data matrix, by removing header node
+ * and then for each node in column, hiding row containing that node. 
+ * The operation is reversible.
+ *
+ * @param n Node in column being covered
+ * @return Void.
+ */
 void cover_column(Node *n)
 {
 	Node *i;
@@ -144,10 +218,17 @@ void cover_column(Node *n)
 		for (j = i->R; j != i; j = j->R)
 			remove_node_v(j);
 	}
-
 }
 
-/* Puts column with node @n back into matrix */
+/**
+ * @brief Uncovers column with node @n
+ * 
+ * For each node in column, restores rows containing that nodes.
+ * Then puts header node back into place.
+ *
+ * @param n Node in column being uncovered
+ * @return Void.
+ */
 void uncover_column(Node *n)
 {
 	Node *i;
@@ -165,7 +246,16 @@ void uncover_column(Node *n)
 	insert_node_h(header);
 }
 
-/* Add row with @row to partial solution */
+/**
+ * @brief Adds row to partial solution.
+ * 
+ * Function goes over nodes in row with node @p row
+ * and rewrites characters into solution structure. 
+ *
+ * @param sol Pointer to Solution structure.
+ * @param row Pointer to node in row being added.
+ * @return Void.
+ */
 void add_row(Solution *sol, Node *row)
 {
 	Node *i = row;
@@ -177,7 +267,16 @@ void add_row(Solution *sol, Node *row)
 		sol->row[ i->C->header_index ] = i->c;
 }
 
-/* Remove row with @row from solution */
+/**
+ * @brief Removes row with @row from solution
+ * 
+ * Function goes over nodes in row with node @p row
+ * and zeroes out places corresponding to indexes of nodes.
+ *
+ * @param sol Pointer to Solution structure.
+ * @param row Pointer to node in row being removed.
+ * @return Void.
+ */
 void remove_row(Solution *sol, Node *row)
 {
 	Node *i = row;
@@ -189,7 +288,15 @@ void remove_row(Solution *sol, Node *row)
 		sol->row[ i->C->header_index ] = 0;
 }
 
-/* Prints solution from @sol if it is valid */
+/**
+ * @brief Prints solution if it is valid
+ * 
+ * Checks if solution is fully filled and if
+ * it is, prints it to STDOUT.
+ *
+ * @param sol Pointer to Solution structure.
+ * @return Void.
+ */
 void print_solution(Solution *sol)
 {
 	/* Return if solution is incomplete */
@@ -204,6 +311,17 @@ void print_solution(Solution *sol)
 	putchar('\n');
 }
 
+/**
+ * @brief Reads input from STDIN.
+ * 
+ * Reads input form STDIN and builds data structure while reading.
+ * Each line of input represents row in data matrix, only non space characters
+ * are stored in memory to save space.
+ *
+ * @param root Pointer to root node in data structure.
+ * @param columns Pointer to integer to store total number of columns.
+ * @return Void.
+ */
 void read(Node *root, int *columns)
 {
 	char c;
@@ -253,7 +371,16 @@ void read(Node *root, int *columns)
 	*columns = root->L->header_index + 1;
 }
 
-/* Solves exact cover problem using X algorithm */
+/**
+ * @brief Solves exact cover problem using X algorithm
+ * 
+ * Function recursively finds and prints all solutions to exact cover problem
+ * using X algorithm described by Donald Knuth.
+ *
+ * @param root Pointer to root node in data structure.
+ * @param columns Pointer to integer to store total number of columns.
+ * @return Void.
+ */
 void solve(Node *root, Solution *sol)
 {
 	Node *r;
@@ -294,8 +421,15 @@ void solve(Node *root, Solution *sol)
 	uncover_column(c);
 }
 
-
-/* Frees all memory allocated in read function */
+/**
+ * @brief Frees all memory
+ * 
+ * Iterates over all nodes in data structure and 
+ * frees all memory allocated by malloc in read function.
+ *
+ * @param root Pointer to root node in data structure.
+ * @return Void.
+ */
 void cleanup(Node *root)
 {
 	Node *i;
