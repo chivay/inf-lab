@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include "parse.h"
+#include "structure.h"
 
 int main()
 {
