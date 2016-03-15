@@ -1,5 +1,11 @@
 #include <stdlib.h>
+#include <stdbool.h>
 #include "structure.h"
+
+
+/*
+ * LIST FUNCTIONS
+ */
 
 void initNode(Node *node)
 {
@@ -43,3 +49,12 @@ void destroyList(List *lst)
 	lst->last = NULL;
 }
 
+/*
+ * HOSPITAL FUNCTIONS
+ */
+ void initHospital(Hospital *hospital)
+ {
+ 	initList( &(hospital->patients) );
+ 	hospital->verbose = false;
+ }
+ void initDisease(){}

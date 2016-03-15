@@ -1,16 +1,22 @@
 #ifndef STRUCTURE_H
 #define STRUCTURE_H
 
+#include <stdbool.h>
 
-struct TPatient;
-struct TDiseaseDesc;
+
 struct TNode;
 struct TList;
 
+struct THospital;
+struct TPatient;
+struct TDiseaseDesc;
+
 typedef struct TNode Node;
-typedef struct TPatient Patient;
-typedef struct TDiseaseDesc DiseaseDesc;
 typedef struct TList List;
+
+typedef struct TDiseaseDesc DiseaseDesc;
+typedef struct TPatient Patient;
+typedef struct THospital Hospital;
 
 struct TNode
 {
@@ -37,15 +43,25 @@ void deleteNode(Node *node);
 void destroyList(List *lst);
 
 
-
-struct Patient
+struct TDiseaseDesc
 {
+	const char *text;
+	int refs;
+};
+
+struct TPatient
+{
+	const char *name;
 	List diseases;
 };
 
-struct Hospital
+struct THospital
 {
-	List patients;	
+	List patients;
+
+	bool verbose;
 };
+
+void initHospital(Hospital *hospital);
 
 #endif

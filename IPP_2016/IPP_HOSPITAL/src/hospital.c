@@ -2,8 +2,18 @@
 #include "structure.h"
 #include "parse.h"
 
-int main()
+int main(int argc, char **argv)
 {
-	printf("Hello World!\n");
+	Hospital h;
+	initHospital(&h);
+
+	if( !readParameters(&h, argc, argv) )
+	{
+		printf("ERROR\n");
+		return 1;
+	}
+	
+	readInput();
+
 	return 0;
 }
