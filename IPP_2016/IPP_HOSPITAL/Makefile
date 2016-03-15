@@ -7,7 +7,7 @@ TARGET = bin/hospital
 SRCEXT = c
 SOURCES = $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
 OBJECTS = $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
-CFLAGS = -g -Wall
+CFLAGS = -g -Wall -Wextra
 INC = -I include
 
 $(TARGET): $(OBJECTS)
@@ -15,6 +15,7 @@ $(TARGET): $(OBJECTS)
 	$(CC) $^ -o $(TARGET)
 
 $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
+	@echo "Compiling..."
 	@mkdir -p $(BUILDDIR)
 	$(CC) $(CFLAGS) $(INC) -c -o $@ $<
 
