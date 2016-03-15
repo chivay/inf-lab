@@ -1,9 +1,56 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
+#include "structure.h"
 #include "parse.h"
 
-bool readParameters(Hospital *hospital, int argc, char  **argv)
+
+void cmdEnterDescription(Hospital *hosp)
+{
+	char *name = strtok(NULL, DELIMITERS);
+	char *description = strtok(NULL, "");
+
+	Patient *patient = findPatient(hosp, name);
+
+	if(patient == NULL)
+	{
+		patient = malloc(sizeof(Patient));
+		initPatient(patient);
+		addPatient(hosp, patient);
+	}
+	else
+		addDisease(patient, description);
+
+}
+
+void cmdCopyDescription(Hospital *hosp)
+{
+	char *nameDest = strtok(NULL, DELIMITERS);
+	char *nameSrc = strtok(NULL, DELIMITERS);
+
+}
+
+void cmdChangeDescription(Hospital *hosp)
+{
+	char *name = strtok(NULL, DELIMITERS);
+	char *id = strtok(NULL, DELIMITERS);
+	char *description = strtok(NULL, "");
+
+
+}
+
+void cmdPrintDescription(Hospital *hosp)
+{
+	char *name = strtok(NULL, DELIMITERS);
+	char *id = strtok(NULL, DELIMITERS);
+}
+
+void cmdDeletePatient(Hospital *hosp)
+{
+	char *name = strtok(NULL, DELIMITERS);
+}
+
+bool readParameters(Hospital *hosp, int argc, char  **argv)
 {
 	if(argc > 2)
 		return false;
@@ -11,7 +58,7 @@ bool readParameters(Hospital *hospital, int argc, char  **argv)
 	{
 		if(strcmp(argv[1], "-v") == 0)
 		{
-			hospital->verbose = true;
+			hosp->verbose = true;
 			return true;
 		}
 		else 
@@ -21,7 +68,7 @@ bool readParameters(Hospital *hospital, int argc, char  **argv)
 	return true;
 }
 
-comandType getCommand(char *line)
+commandType getCommand(char *line)
 {
 	char *command = strtok(line, DELIMITERS);
 	commandType result;
@@ -47,7 +94,7 @@ comandType getCommand(char *line)
 	return result;
 }
 
-void readInput(Hospital *hospital)
+void readInput(Hospital *hosp)
 {
 	char line[MAX_LINE_LENGTH];
 
@@ -60,21 +107,27 @@ void readInput(Hospital *hospital)
 		switch(command)
 		{
 			case ND_ENTER:
+				cmdEnterDescription(hosp);
 				break;
 
 			case ND_COPY:
+				cmdCopyDescription(hosp);
 				break;
 
 			case CHG_DESC:
+				cmdChangeDescription(hosp);
 				break;
 
 			case PRNT_DESC:
+				cmdPrintDescription(hosp);
 				break;
 
 			case DEL_PAT:
+				cmdDeletePatient(hosp);
 				break;
 				
 			case ERR:
+				// ERROR!!!
 				break;
 		}		
 

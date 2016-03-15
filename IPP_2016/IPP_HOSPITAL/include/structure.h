@@ -64,4 +64,6 @@ struct THospital
 
 void initHospital(Hospital *hospital);
 
+Patient* findPatient(Hospital *hosp, char *name);
+
 #endif

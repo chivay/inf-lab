@@ -25,7 +25,15 @@ enum COMMAND_TYPE
 
 typedef enum COMMAND_TYPE commandType;
 
-bool readParameters(Hospital *hospital, int argc, char  **argv);
-void readInput(Hospital *hospital);
+void cmdEnterDescription(Hospital *hosp);
+void cmdCopyDescription(Hospital *hosp);
+void cmdChangeDescription(Hospital *hosp);
+void cmdPrintDescription(Hospital *hosp);
+void cmdDeletePatient(Hospital *hosp);
+
+commandType getCommand(char *line);
+
+bool readParameters(Hospital *hosp, int argc, char  **argv);
+void readInput(Hospital *hosp);
 
 #endif

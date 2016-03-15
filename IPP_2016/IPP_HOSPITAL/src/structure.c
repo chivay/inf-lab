@@ -40,7 +40,7 @@ void deleteNode(Node *node)
 	free(node);
 }
 
-void destroyList(List *lst)
+void deleteList(List *lst)
 {
 	while(lst->first->next != NULL)
 		deleteNode(lst->first->next);
@@ -57,4 +57,31 @@ void destroyList(List *lst)
  	initList( &(hospital->patients) );
  	hospital->verbose = false;
  }
- void initDisease(){}
+ void initPatient(Patient *patient, char *name)
+ {
+ 	initList( &(patient->diseases) );
+ }
+ void initDisease(DiseaseDesc *desc, char *descitpion)
+ {
+
+ }
+
+ void deleteHospital(Hospital *hosp)
+ {
+ 	
+ }
+
+ Patient* findPatient(Hospital *hosp, char *name)
+ {
+ 	Node *nd = hosp->patients.first;
+ 	while(nd != NULL)
+ 	{
+ 		if( strcmp(name, nd->patient->name) == 0)
+ 			return nd->patient;
+
+ 		nd = nd->next;
+ 	}
+ 	return NULL;
+ }
+
+ void addPatient(Hospital *hosp, Patient* pat)

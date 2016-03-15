@@ -12,8 +12,8 @@ int main(int argc, char **argv)
 		printf("ERROR\n");
 		return 1;
 	}
-
 	readInput(&h);
 
+	deleteHospital(&h);
 	return 0;
 }
