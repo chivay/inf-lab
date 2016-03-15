@@ -40,7 +40,7 @@ void initList(List *lst);
 
 void addNode(List *lst, Node *node);
 void deleteNode(Node *node);
-void destroyList(List *lst);
+void deleteList(List *lst);
 
 
 struct TDiseaseDesc
@@ -58,12 +58,16 @@ struct TPatient
 struct THospital
 {
 	List patients;
-
 	bool verbose;
 };
 
 void initHospital(Hospital *hospital);
+void initPatient(Patient *patient, char *name);
+void initDisease(DiseaseDesc *desc, char *description);
+void deleteHospital(Hospital *hosp);
 
 Patient* findPatient(Hospital *hosp, char *name);
 
+void addPatient(Hospital *hosp, Patient *pat);
+void addDisease(Patient *patient, DiseaseDesc *dsc);
 #endif

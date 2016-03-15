@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 #include "structure.h"
 
 
@@ -50,30 +51,51 @@ void deleteList(List *lst)
 }
 
 /*
- * HOSPITAL FUNCTIONS
+ * HOSPIRAL FUNCTIONS
  */
- void initHospital(Hospital *hospital)
- {
- 	initList( &(hospital->patients) );
- 	hospital->verbose = false;
- }
- void initPatient(Patient *patient, char *name)
- {
- 	initList( &(patient->diseases) );
- }
- void initDisease(DiseaseDesc *desc, char *descitpion)
- {
 
- }
+void initHospital(Hospital *hospital)
+{
+	initList( &(hospital->patients) );
+	hospital->verbose = false;
+}
 
- void deleteHospital(Hospital *hosp)
- {
+void initPatient(Patient *patient, char *name)
+{
+	initList( &(patient->diseases) );
+
+ 	int len = strlen(name);
+ 	char *dest = malloc(sizeof(char) * len + 1);
+ 	strcpy(dest, name);
+
+ 	patient->name = dest;
+}
+
+void initDisease(DiseaseDesc *desc, char *description)
+{
+ 	desc->refs = 0;
+
+ 	int len = strlen(description);
+ 	char *dest = malloc(sizeof(char) * len + 1);
+ 	strcpy(dest, description);
+
+ 	desc->text = dest;
+}
+
+void deleteHospital(Hospital *hosp)
+{
+ 	// for each patient delete descriptions
+ 	// delete patients
  	
- }
+}
 
- Patient* findPatient(Hospital *hosp, char *name)
- {
+Patient* findPatient(Hospital *hosp, char *name)
+{
  	Node *nd = hosp->patients.first;
+
+ 	// Skip dummy
+ 	nd = nd->next;
+
  	while(nd != NULL)
  	{
  		if( strcmp(name, nd->patient->name) == 0)
@@ -81,7 +103,24 @@ void deleteList(List *lst)
 
  		nd = nd->next;
  	}
- 	return NULL;
- }
 
- void addPatient(Hospital *hosp, Patient* pat)
+ 	return NULL;
+}
+
+void addPatient(Hospital *hosp, Patient *pat)
+{
+ 	Node *nd = malloc(sizeof(Node));
+ 	initNode(nd);
+
+ 	nd->patient = pat;
+ 	addNode( &(hosp->patients), nd);
+}
+
+void addDisease(Patient *patient, DiseaseDesc *dis)
+{
+ 	Node *nd = malloc(sizeof(Node));
+ 	initNode(nd);
+
+ 	nd->disease = dis;
+ 	addNode( &(patient->diseases), nd);
+}

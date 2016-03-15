@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
@@ -12,15 +13,17 @@ void cmdEnterDescription(Hospital *hosp)
 
 	Patient *patient = findPatient(hosp, name);
 
+	// Patient not found
 	if(patient == NULL)
 	{
 		patient = malloc(sizeof(Patient));
-		initPatient(patient);
+		initPatient(patient, name);
 		addPatient(hosp, patient);
 	}
-	else
-		addDisease(patient, description);
 
+	DiseaseDesc *dsc = malloc(sizeof(DiseaseDesc));
+	initDisease(dsc, description);
+	addDisease(patient, dsc);
 }
 
 void cmdCopyDescription(Hospital *hosp)

@@ -7,7 +7,7 @@ TARGET = bin/hospital
 SRCEXT = c
 SOURCES = $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
 OBJECTS = $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
-CFLAGS = -g -Wall -Wextra
+CFLAGS = -g -Wall
 INC = -I include
 
 $(TARGET): $(OBJECTS)
