@@ -12,8 +12,8 @@ int main(int argc, char **argv)
 		printf("ERROR\n");
 		return 1;
 	}
-	
-	readInput();
+
+	readInput(&h);
 
 	return 0;
 }
