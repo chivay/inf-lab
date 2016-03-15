@@ -89,6 +89,23 @@ void deleteHospital(Hospital *hosp)
  	
 }
 
+
+void newLink(DiseaseDesc *dsc)
+{
+	dsc->refs++;
+}
+
+void removeLink(DiseaseDesc **dsc)
+{
+	(*dsc)->refs--;
+
+	if( (*dsc)->refs == 0)
+	{
+		free(*dsc);
+		*dsc = NULL;
+	}
+}
+
 Patient* findPatient(Hospital *hosp, char *name)
 {
  	Node *nd = hosp->patients.first;
@@ -122,5 +139,11 @@ void addDisease(Patient *patient, DiseaseDesc *dis)
  	initNode(nd);
 
  	nd->disease = dis;
+ 	newLink(dis);
  	addNode( &(patient->diseases), nd);
+}
+
+bool diseaseListEmpty(Patient *patient)
+{
+	retrun (patient->diseases.first == patient->diseases.last);
 }

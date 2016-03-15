@@ -28,8 +28,15 @@ void cmdEnterDescription(Hospital *hosp)
 
 void cmdCopyDescription(Hospital *hosp)
 {
-	char *nameDest = strtok(NULL, DELIMITERS);
+	char *nameDst = strtok(NULL, DELIMITERS);
 	char *nameSrc = strtok(NULL, DELIMITERS);
+
+	Patient *patDst = findPatient(hosp, nameDst);
+	Patient *patSrc = findPatient(hosp, nameSrc);
+
+	// Patient not found!
+	if(patDst == NULL || patSrc == NULL)
+		return;
 
 }
 
