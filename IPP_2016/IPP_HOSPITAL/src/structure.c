@@ -1,57 +1,11 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include "list.h"
 #include "structure.h"
 
-
 /*
- * LIST FUNCTIONS
- */
-
-void initNode(Node *node)
-{
-	node->next = NULL;
-	node->prev = NULL;
-}
-
-void initList(List *lst)
-{
-	Node *dummy = malloc(sizeof(Node));
-	dummy->next = NULL;
-	dummy->prev = NULL;
-
-	lst->first = dummy;
-	lst->last = dummy;
-}
-
-void addNode(List *lst, Node *node)
-{
-	lst->last->next = node;
-	node->prev = lst->last;
-
-	lst->last = node;
-}
-
-void deleteNode(Node *node)
-{
-	node->prev->next = node->next;
-	if(node->next != NULL)
-		node->next->prev = node->prev;
-
-	free(node);
-}
-
-void deleteList(List *lst)
-{
-	while(lst->first->next != NULL)
-		deleteNode(lst->first->next);
-	free(lst->first);
-	lst->first = NULL;
-	lst->last = NULL;
-}
-
-/*
- * HOSPIRAL FUNCTIONS
+ * HOSPITAL FUNCTIONS
  */
 
 void newLink(DiseaseDesc *dsc)
@@ -65,6 +19,7 @@ void removeLink(DiseaseDesc **dsc)
 
 	if( (*dsc)->refs == 0)
 	{
+		free((*dsc)->text);
 		free(*dsc);
 		*dsc = NULL;
 	}
@@ -100,9 +55,14 @@ void initDisease(DiseaseDesc *desc, char *description)
 
 void deleteHospital(Hospital *hosp)
 {
- 	// for each patient delete descriptions
- 	// delete patients
- 	
+ 	Node *nd = hosp->patients.first;
+ 	nd = nd->next;
+ 	while(nd != NULL)
+ 	{
+ 		deletePatient(nd->patient);
+ 		nd = nd->next;
+ 	}
+ 	deleteList( &(hosp->patients) );
 }
 
 void deletePatient(Patient *patient)
@@ -117,11 +77,6 @@ void deletePatient(Patient *patient)
 
 	deleteList( &(patient->diseases) );
 	free(patient->name);
-}
-
-void deleteDisease(DiseaseDesc *dsc)
-{
-	free(dsc->text);
 }
 
 Patient* findPatient(Hospital *hosp, char *name)

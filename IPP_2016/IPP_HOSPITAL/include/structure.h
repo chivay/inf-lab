@@ -1,46 +1,15 @@
 #ifndef STRUCTURE_H
 #define STRUCTURE_H
-
 #include <stdbool.h>
-
-
-struct TNode;
-struct TList;
+#include "list.h"
 
 struct THospital;
 struct TPatient;
 struct TDiseaseDesc;
 
-typedef struct TNode Node;
-typedef struct TList List;
-
 typedef struct TDiseaseDesc DiseaseDesc;
 typedef struct TPatient Patient;
 typedef struct THospital Hospital;
-
-struct TNode
-{
-	Node *next;
-	Node *prev;
-
-	union {
-		Patient *patient;
-		DiseaseDesc *disease;
-	};
-};
-
-struct TList 
-{
-	Node *first;
-	Node *last;
-};
-
-void initNode(Node *node);
-void initList(List *lst);
-
-void addNode(List *lst, Node *node);
-void deleteNode(Node *node);
-void deleteList(List *lst);
 
 
 struct TDiseaseDesc
@@ -69,7 +38,6 @@ void initPatient(Patient *patient, char *name);
 void initDisease(DiseaseDesc *desc, char *description);
 void deleteHospital(Hospital *hosp);
 void deletePatient(Patient *patient);
-void deleteDisease(DiseaseDesc *dsc);
 
 Patient* findPatient(Hospital *hosp, char *name);
 Node * findPatientNode(Hospital *hosp, char *name);

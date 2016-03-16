@@ -2,6 +2,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
+#include "list.h"
 #include "structure.h"
 #include "parse.h"
 
@@ -41,15 +42,15 @@ bool cmdCopyDescription(Hospital *hosp)
 	if(patSrc == NULL)
 		return false;
 
+	if(diseaseListEmpty(patSrc))
+		return false;
+
 	if(patDst == NULL)
 	{
 		patDst = malloc(sizeof(Patient));
 		initPatient(patDst, nameDst);
 		addPatient(hosp, patDst);
 	}
-
-	if(diseaseListEmpty(patSrc))
-		return false;
 
 	DiseaseDesc *lastDisease = getLastDisease(patSrc);
 	addDisease(patDst, lastDisease);
@@ -171,7 +172,7 @@ void readInput(Hospital *hosp)
 	while(fgets(line, MAX_LINE_LENGTH, stdin) != NULL)
 	{
 		int lineLength = strlen(line);
-		
+
 		if(line[lineLength - 1] == '\n')
 			line[strlen(line) - 1] = '\0';
 
