@@ -45,13 +45,13 @@ void deleteList(List *lst);
 
 struct TDiseaseDesc
 {
-	const char *text;
+	char *text;
 	int refs;
 };
 
 struct TPatient
 {
-	const char *name;
+	char *name;
 	List diseases;
 };
 
@@ -68,13 +68,16 @@ void initHospital(Hospital *hospital);
 void initPatient(Patient *patient, char *name);
 void initDisease(DiseaseDesc *desc, char *description);
 void deleteHospital(Hospital *hosp);
+void deletePatient(Patient *patient);
 
 Patient* findPatient(Hospital *hosp, char *name);
+Node * findPatientNode(Hospital *hosp, char *name);
 
 void addPatient(Hospital *hosp, Patient *pat);
 void addDisease(Patient *patient, DiseaseDesc *dsc);
 
 bool diseaseListEmpty(Patient *patient);
 DiseaseDesc* getLastDisease(Patient *patient);
-
+Node* getDiseaseNodeId(Patient *patient, int id);
+DiseaseDesc* getDiseaseId(Patient *patient, int id);
 #endif

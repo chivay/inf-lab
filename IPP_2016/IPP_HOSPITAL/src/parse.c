@@ -52,18 +52,54 @@ void cmdChangeDescription(Hospital *hosp)
 	char *id = strtok(NULL, DELIMITERS);
 	char *description = strtok(NULL, "");
 
+	Patient *patient = findPatient(hosp, name);
 
+	if(patient == NULL)
+		return;
+
+	Node *nd = getDiseaseNodeId(patient, atoi(id));
+
+	if(nd == NULL)
+		return;
+
+	removeLink( &(nd->disease) );
+
+	DiseaseDesc *dsc = malloc(sizeof(DiseaseDesc));
+	initDisease(dsc, description);
+
+	nd->disease = dsc;
 }
 
 void cmdPrintDescription(Hospital *hosp)
 {
 	char *name = strtok(NULL, DELIMITERS);
 	char *id = strtok(NULL, DELIMITERS);
+
+	Patient *patient = findPatient(hosp, name);
+
+	if(patient == NULL)
+		return;
+
+	DiseaseDesc *dsc = getDiseaseId(patient, atoi(id));
+	if(dsc == NULL)
+		return;
+			
+	printf("%s\n", dsc->text);
 }
 
 void cmdDeletePatient(Hospital *hosp)
 {
 	char *name = strtok(NULL, DELIMITERS);
+
+	Node *patientNode = findPatientNode(hosp, name);
+
+	if(patientNode == NULL)
+		return;
+
+	deletePatient(patientNode->patient);
+	deleteNode(patientNode);
+	free(patientNode);
+
 }
 
 bool readParameters(Hospital *hosp, int argc, char  **argv)

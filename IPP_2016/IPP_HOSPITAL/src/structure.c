@@ -89,6 +89,22 @@ void deleteHospital(Hospital *hosp)
  	
 }
 
+void deletePatient(Patient *patient)
+{
+	Node *nd = patient->diseases.first;
+	while(nd != NULL)
+	{
+
+	}
+	deleteList( &(patient->diseases) );
+	free(patient->name);
+}
+
+void deleteDisease(DiseaseDesc *dsc)
+{
+	free(dsc->text);
+}
+
 
 void newLink(DiseaseDesc *dsc)
 {
@@ -106,7 +122,7 @@ void removeLink(DiseaseDesc **dsc)
 	}
 }
 
-Patient* findPatient(Hospital *hosp, char *name)
+Node* findPatientNode(Hospital *hosp, char *name)
 {
  	Node *nd = hosp->patients.first;
 
@@ -116,12 +132,18 @@ Patient* findPatient(Hospital *hosp, char *name)
  	while(nd != NULL)
  	{
  		if( strcmp(name, nd->patient->name) == 0)
- 			return nd->patient;
+ 			return nd;
 
  		nd = nd->next;
  	}
 
- 	return NULL;
+ 	return NULL;	
+}
+
+Patient* findPatient(Hospital *hosp, char *name)
+{
+	Node *ptr = findPatientNode(hosp, name);
+	return (ptr == NULL) ? NULL : ptr->patient ;
 }
 
 void addPatient(Hospital *hosp, Patient *pat)
@@ -151,4 +173,30 @@ bool diseaseListEmpty(Patient *patient)
 DiseaseDesc* getLastDisease(Patient *patient)
 {
 	return patient->diseases.last->disease;
+}
+
+Node* getDiseaseNodeId(Patient *patient, int id)
+{
+	// Dummy
+	Node *nd = patient->diseases.first;
+
+	nd = nd->next;
+	int i = 1;
+
+	while(nd != NULL && i != id)
+	{
+		nd = nd->next;
+		i++;
+	}
+
+	if(id == i)
+		return nd; //sometimes could also return NULL
+	else
+		return NULL;
+}
+
+DiseaseDesc* getDiseaseId(Patient *patient, int id)
+{
+	Node *ptr = getDiseaseNodeId(patient, id);
+	return (ptr == NULL) ? NULL : ptr->disease;
 }
