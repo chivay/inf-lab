@@ -6,7 +6,7 @@
 #include "parse.h"
 
 
-void cmdEnterDescription(Hospital *hosp)
+bool cmdEnterDescription(Hospital *hosp)
 {
 	char *name = strtok(NULL, DELIMITERS);
 	char *description = strtok(NULL, "");
@@ -24,9 +24,12 @@ void cmdEnterDescription(Hospital *hosp)
 	DiseaseDesc *dsc = malloc(sizeof(DiseaseDesc));
 	initDisease(dsc, description);
 	addDisease(patient, dsc);
+
+	reportStatus(STATUS_SUCCESS);
+	return true;
 }
 
-void cmdCopyDescription(Hospital *hosp)
+bool cmdCopyDescription(Hospital *hosp)
 {
 	char *nameDst = strtok(NULL, DELIMITERS);
 	char *nameSrc = strtok(NULL, DELIMITERS);
@@ -36,17 +39,20 @@ void cmdCopyDescription(Hospital *hosp)
 
 	// Patient not found!
 	if(patDst == NULL || patSrc == NULL)
-		return;
+		return false;
 
 	if(diseaseListEmpty(patSrc))
-		return;
+		return false;
 
 	DiseaseDesc *lastDisease = getLastDisease(patSrc);
 	addDisease(patDst, lastDisease);
 	newLink(lastDisease);
+
+	reportStatus(STATUS_SUCCESS);
+	return true;
 }
 
-void cmdChangeDescription(Hospital *hosp)
+bool cmdChangeDescription(Hospital *hosp)
 {
 	char *name = strtok(NULL, DELIMITERS);
 	char *id = strtok(NULL, DELIMITERS);
@@ -55,12 +61,12 @@ void cmdChangeDescription(Hospital *hosp)
 	Patient *patient = findPatient(hosp, name);
 
 	if(patient == NULL)
-		return;
+		return false;
 
 	Node *nd = getDiseaseNodeId(patient, atoi(id));
 
 	if(nd == NULL)
-		return;
+		return false;
 
 	removeLink( &(nd->disease) );
 
@@ -68,9 +74,12 @@ void cmdChangeDescription(Hospital *hosp)
 	initDisease(dsc, description);
 
 	nd->disease = dsc;
+
+	reportStatus(STATUS_SUCCESS);
+	return true;
 }
 
-void cmdPrintDescription(Hospital *hosp)
+bool cmdPrintDescription(Hospital *hosp)
 {
 	char *name = strtok(NULL, DELIMITERS);
 	char *id = strtok(NULL, DELIMITERS);
@@ -78,28 +87,31 @@ void cmdPrintDescription(Hospital *hosp)
 	Patient *patient = findPatient(hosp, name);
 
 	if(patient == NULL)
-		return;
+		return false;
 
 	DiseaseDesc *dsc = getDiseaseId(patient, atoi(id));
 	if(dsc == NULL)
-		return;
+		return false;
 			
 	printf("%s\n", dsc->text);
+	return true;
 }
 
-void cmdDeletePatient(Hospital *hosp)
+bool cmdDeletePatient(Hospital *hosp)
 {
 	char *name = strtok(NULL, DELIMITERS);
 
 	Node *patientNode = findPatientNode(hosp, name);
 
 	if(patientNode == NULL)
-		return;
+		return false;
 
 	deletePatient(patientNode->patient);
 	deleteNode(patientNode);
 	free(patientNode);
 
+	reportStatus(STATUS_SUCCESS);
+	return true;
 }
 
 bool readParameters(Hospital *hosp, int argc, char  **argv)
@@ -156,32 +168,42 @@ void readInput(Hospital *hosp)
 
 		commandType command = getCommand(line);
 
+		bool success;
+
 		switch(command)
 		{
 			case ND_ENTER:
-				cmdEnterDescription(hosp);
+				success = cmdEnterDescription(hosp);
 				break;
 
 			case ND_COPY:
-				cmdCopyDescription(hosp);
+				success = cmdCopyDescription(hosp);
 				break;
 
 			case CHG_DESC:
-				cmdChangeDescription(hosp);
+				success = cmdChangeDescription(hosp);
 				break;
 
 			case PRNT_DESC:
-				cmdPrintDescription(hosp);
+				success = cmdPrintDescription(hosp);
 				break;
 
 			case DEL_PAT:
-				cmdDeletePatient(hosp);
+				success = cmdDeletePatient(hosp);
 				break;
 				
 			case ERR:
-				// ERROR!!!
+				success = false;
 				break;
-		}		
+		}
+
+		if(!success)
+			reportStatus(STATUS_FAIL);
 
 	}
+}
+
+void reportStatus(const char *status)
+{
+	printf("%s\n", status);
 }

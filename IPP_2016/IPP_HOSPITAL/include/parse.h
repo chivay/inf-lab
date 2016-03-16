@@ -13,6 +13,9 @@
 #define CMD_PRNT_DESC "PRINT_DESCRIPTION"
 #define CMD_DEL_PAT   "DELETE_PATIENT_DATA"
 
+#define STATUS_FAIL "IGNORED"
+#define STATUS_SUCCESS "OK"
+
 enum COMMAND_TYPE
 { 
 	ND_ENTER,  // NEW_DISEASE_ENTER_DESCRIPTION name disease description
@@ -25,15 +28,17 @@ enum COMMAND_TYPE
 
 typedef enum COMMAND_TYPE commandType;
 
-void cmdEnterDescription(Hospital *hosp);
-void cmdCopyDescription(Hospital *hosp);
-void cmdChangeDescription(Hospital *hosp);
-void cmdPrintDescription(Hospital *hosp);
-void cmdDeletePatient(Hospital *hosp);
+bool cmdEnterDescription(Hospital *hosp);
+bool cmdCopyDescription(Hospital *hosp);
+bool cmdChangeDescription(Hospital *hosp);
+bool cmdPrintDescription(Hospital *hosp);
+bool cmdDeletePatient(Hospital *hosp);
 
 commandType getCommand(char *line);
 
 bool readParameters(Hospital *hosp, int argc, char  **argv);
 void readInput(Hospital *hosp);
+
+void reportStatus(const char *status);
 
 #endif
