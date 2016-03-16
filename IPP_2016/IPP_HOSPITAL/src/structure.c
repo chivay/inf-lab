@@ -145,5 +145,10 @@ void addDisease(Patient *patient, DiseaseDesc *dis)
 
 bool diseaseListEmpty(Patient *patient)
 {
-	retrun (patient->diseases.first == patient->diseases.last);
+	return (patient->diseases.first == patient->diseases.last);
+}
+
+DiseaseDesc* getLastDisease(Patient *patient)
+{
+	return patient->diseases.last->disease;
 }

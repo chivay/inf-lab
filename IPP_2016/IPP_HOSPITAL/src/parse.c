@@ -38,6 +38,12 @@ void cmdCopyDescription(Hospital *hosp)
 	if(patDst == NULL || patSrc == NULL)
 		return;
 
+	if(diseaseListEmpty(patSrc))
+		return;
+
+	DiseaseDesc *lastDisease = getLastDisease(patSrc);
+	addDisease(patDst, lastDisease);
+	newLink(lastDisease);
 }
 
 void cmdChangeDescription(Hospital *hosp)

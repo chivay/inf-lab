@@ -61,6 +61,9 @@ struct THospital
 	bool verbose;
 };
 
+void newLink(DiseaseDesc *dsc);
+void removeLink(DiseaseDesc **dsc);
+
 void initHospital(Hospital *hospital);
 void initPatient(Patient *patient, char *name);
 void initDisease(DiseaseDesc *desc, char *description);
@@ -70,4 +73,8 @@ Patient* findPatient(Hospital *hosp, char *name);
 
 void addPatient(Hospital *hosp, Patient *pat);
 void addDisease(Patient *patient, DiseaseDesc *dsc);
+
+bool diseaseListEmpty(Patient *patient);
+DiseaseDesc* getLastDisease(Patient *patient);
+
 #endif
