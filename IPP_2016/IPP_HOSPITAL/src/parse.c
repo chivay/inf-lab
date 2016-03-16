@@ -108,7 +108,6 @@ bool cmdDeletePatient(Hospital *hosp)
 
 	deletePatient(patientNode->patient);
 	deleteNode(patientNode);
-	free(patientNode);
 
 	reportStatus(STATUS_SUCCESS);
 	return true;

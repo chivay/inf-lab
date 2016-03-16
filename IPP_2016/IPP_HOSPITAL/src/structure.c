@@ -108,10 +108,13 @@ void deleteHospital(Hospital *hosp)
 void deletePatient(Patient *patient)
 {
 	Node *nd = patient->diseases.first;
+	nd = nd->next;
 	while(nd != NULL)
 	{
-
+		removeLink( &(nd->disease) );
+		nd = nd->next;
 	}
+
 	deleteList( &(patient->diseases) );
 	free(patient->name);
 }
