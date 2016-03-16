@@ -37,9 +37,16 @@ bool cmdCopyDescription(Hospital *hosp)
 	Patient *patDst = findPatient(hosp, nameDst);
 	Patient *patSrc = findPatient(hosp, nameSrc);
 
-	// Patient not found!
-	if(patDst == NULL || patSrc == NULL)
+	// Source patient not found!
+	if(patSrc == NULL)
 		return false;
+
+	if(patDst == NULL)
+	{
+		patDst = malloc(sizeof(Patient));
+		initPatient(patDst, nameDst);
+		addPatient(hosp, patDst);
+	}
 
 	if(diseaseListEmpty(patSrc))
 		return false;
@@ -163,7 +170,10 @@ void readInput(Hospital *hosp)
 
 	while(fgets(line, MAX_LINE_LENGTH, stdin) != NULL)
 	{
-		line[strlen(line) - 1] = '\0';
+		int lineLength = strlen(line);
+		
+		if(line[lineLength - 1] == '\n')
+			line[strlen(line) - 1] = '\0';
 
 		commandType command = getCommand(line);
 
