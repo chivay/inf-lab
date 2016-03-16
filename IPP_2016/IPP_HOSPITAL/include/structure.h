@@ -69,6 +69,7 @@ void initPatient(Patient *patient, char *name);
 void initDisease(DiseaseDesc *desc, char *description);
 void deleteHospital(Hospital *hosp);
 void deletePatient(Patient *patient);
+void deleteDisease(DiseaseDesc *dsc);
 
 Patient* findPatient(Hospital *hosp, char *name);
 Node * findPatientNode(Hospital *hosp, char *name);

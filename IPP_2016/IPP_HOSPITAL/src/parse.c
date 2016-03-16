@@ -114,24 +114,6 @@ bool cmdDeletePatient(Hospital *hosp)
 	return true;
 }
 
-bool readParameters(Hospital *hosp, int argc, char  **argv)
-{
-	if(argc > 2)
-		return false;
-	if(argc == 2)
-	{
-		if(strcmp(argv[1], "-v") == 0)
-		{
-			hosp->verbose = true;
-			return true;
-		}
-		else 
-			return false;
-	}
-
-	return true;
-}
-
 commandType getCommand(char *line)
 {
 	char *command = strtok(line, DELIMITERS);
@@ -156,6 +138,24 @@ commandType getCommand(char *line)
 		result = ERR;
 
 	return result;
+}
+
+bool readParameters(Hospital *hosp, int argc, char  **argv)
+{
+	if(argc > 2)
+		return false;
+	if(argc == 2)
+	{
+		if(strcmp(argv[1], "-v") == 0)
+		{
+			hosp->verbose = true;
+			return true;
+		}
+		else 
+			return false;
+	}
+
+	return true;
 }
 
 void readInput(Hospital *hosp)

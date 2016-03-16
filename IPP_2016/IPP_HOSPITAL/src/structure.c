@@ -54,6 +54,22 @@ void deleteList(List *lst)
  * HOSPIRAL FUNCTIONS
  */
 
+void newLink(DiseaseDesc *dsc)
+{
+	dsc->refs++;
+}
+
+void removeLink(DiseaseDesc **dsc)
+{
+	(*dsc)->refs--;
+
+	if( (*dsc)->refs == 0)
+	{
+		free(*dsc);
+		*dsc = NULL;
+	}
+}
+
 void initHospital(Hospital *hospital)
 {
 	initList( &(hospital->patients) );
@@ -105,21 +121,10 @@ void deleteDisease(DiseaseDesc *dsc)
 	free(dsc->text);
 }
 
-
-void newLink(DiseaseDesc *dsc)
+Patient* findPatient(Hospital *hosp, char *name)
 {
-	dsc->refs++;
-}
-
-void removeLink(DiseaseDesc **dsc)
-{
-	(*dsc)->refs--;
-
-	if( (*dsc)->refs == 0)
-	{
-		free(*dsc);
-		*dsc = NULL;
-	}
+	Node *ptr = findPatientNode(hosp, name);
+	return (ptr == NULL) ? NULL : ptr->patient ;
 }
 
 Node* findPatientNode(Hospital *hosp, char *name)
@@ -138,12 +143,6 @@ Node* findPatientNode(Hospital *hosp, char *name)
  	}
 
  	return NULL;	
-}
-
-Patient* findPatient(Hospital *hosp, char *name)
-{
-	Node *ptr = findPatientNode(hosp, name);
-	return (ptr == NULL) ? NULL : ptr->patient ;
 }
 
 void addPatient(Hospital *hosp, Patient *pat)
