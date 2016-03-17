@@ -40,5 +40,6 @@ bool readParameters(Hospital *hosp, int argc, char  **argv);
 void readInput(Hospital *hosp);
 
 void reportStatus(const char *status);
+void reportDescriptions(int cnt);
 
 #endif

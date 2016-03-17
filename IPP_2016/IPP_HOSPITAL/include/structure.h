@@ -28,22 +28,23 @@ struct THospital
 {
 	List patients;
 	bool verbose;
+	int descriptionCounter;
 };
 
-void newLink(DiseaseDesc *dsc);
-void removeLink(DiseaseDesc **dsc);
+void newLink(Hospital *hosp, DiseaseDesc *dsc);
+void removeLink(Hospital *hosp, DiseaseDesc *dsc);
 
 void initHospital(Hospital *hospital);
 void initPatient(Patient *patient, char *name);
 void initDisease(DiseaseDesc *desc, char *description);
 void deleteHospital(Hospital *hosp);
-void deletePatient(Patient *patient);
+void deletePatient(Hospital *hosp, Patient *patient);
 
 Patient* findPatient(Hospital *hosp, char *name);
 Node * findPatientNode(Hospital *hosp, char *name);
 
 void addPatient(Hospital *hosp, Patient *pat);
-void addDisease(Patient *patient, DiseaseDesc *dsc);
+void addDisease(Hospital *hosp, Patient *patient, DiseaseDesc *dsc);
 
 bool diseaseListEmpty(Patient *patient);
 DiseaseDesc* getLastDisease(Patient *patient);

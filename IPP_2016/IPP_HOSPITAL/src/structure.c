@@ -8,20 +8,20 @@
  * HOSPITAL FUNCTIONS
  */
 
-void newLink(DiseaseDesc *dsc)
+void newLink(Hospital *hosp, DiseaseDesc *dsc)
 {
 	dsc->refs++;
 }
 
-void removeLink(DiseaseDesc **dsc)
+void removeLink(Hospital *hosp, DiseaseDesc *dsc)
 {
-	(*dsc)->refs--;
+	dsc->refs--;
 
-	if( (*dsc)->refs == 0)
+	if(dsc->refs == 0)
 	{
-		free((*dsc)->text);
-		free(*dsc);
-		*dsc = NULL;
+		hosp->descriptionCounter--;
+		free(dsc->text);
+		free(dsc);
 	}
 }
 
@@ -29,6 +29,7 @@ void initHospital(Hospital *hospital)
 {
 	initList( &(hospital->patients) );
 	hospital->verbose = false;
+	hospital->descriptionCounter = 0;
 }
 
 void initPatient(Patient *patient, char *name)
@@ -59,24 +60,25 @@ void deleteHospital(Hospital *hosp)
  	nd = nd->next;
  	while(nd != NULL)
  	{
- 		deletePatient(nd->patient);
+ 		deletePatient(hosp, nd->patient);
  		nd = nd->next;
  	}
  	deleteList( &(hosp->patients) );
 }
 
-void deletePatient(Patient *patient)
+void deletePatient(Hospital *hosp, Patient *patient)
 {
 	Node *nd = patient->diseases.first;
 	nd = nd->next;
 	while(nd != NULL)
 	{
-		removeLink( &(nd->disease) );
+		removeLink(hosp, nd->disease);
 		nd = nd->next;
 	}
 
 	deleteList( &(patient->diseases) );
 	free(patient->name);
+	free(patient);
 }
 
 Patient* findPatient(Hospital *hosp, char *name)
@@ -112,13 +114,13 @@ void addPatient(Hospital *hosp, Patient *pat)
  	addNode( &(hosp->patients), nd);
 }
 
-void addDisease(Patient *patient, DiseaseDesc *dis)
+void addDisease(Hospital *hosp, Patient *patient, DiseaseDesc *dis)
 {
  	Node *nd = malloc(sizeof(Node));
  	initNode(nd);
 
  	nd->disease = dis;
- 	newLink(dis);
+ 	newLink(hosp, dis);
  	addNode( &(patient->diseases), nd);
 }
 
@@ -129,6 +131,8 @@ bool diseaseListEmpty(Patient *patient)
 
 DiseaseDesc* getLastDisease(Patient *patient)
 {
+	if(diseaseListEmpty(patient))
+		return NULL;
 	return patient->diseases.last->disease;
 }
 

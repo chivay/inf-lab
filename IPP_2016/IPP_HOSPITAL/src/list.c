@@ -5,13 +5,15 @@ void initNode(Node *node)
 {
 	node->next = NULL;
 	node->prev = NULL;
+
+	node->patient = NULL;
+	node->disease = NULL;
 }
 
 void initList(List *lst)
 {
 	Node *dummy = malloc(sizeof(Node));
-	dummy->next = NULL;
-	dummy->prev = NULL;
+	initNode(dummy);
 
 	lst->first = dummy;
 	lst->last = dummy;

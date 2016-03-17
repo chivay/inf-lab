@@ -24,7 +24,9 @@ bool cmdEnterDescription(Hospital *hosp)
 
 	DiseaseDesc *dsc = malloc(sizeof(DiseaseDesc));
 	initDisease(dsc, description);
-	addDisease(patient, dsc);
+
+	hosp->descriptionCounter++;
+	addDisease(hosp, patient, dsc);
 
 	reportStatus(STATUS_SUCCESS);
 	return true;
@@ -53,9 +55,7 @@ bool cmdCopyDescription(Hospital *hosp)
 	}
 
 	DiseaseDesc *lastDisease = getLastDisease(patSrc);
-	addDisease(patDst, lastDisease);
-	newLink(lastDisease);
-
+	addDisease(hosp, patDst, lastDisease);
 	reportStatus(STATUS_SUCCESS);
 	return true;
 }
@@ -76,10 +76,12 @@ bool cmdChangeDescription(Hospital *hosp)
 	if(nd == NULL)
 		return false;
 
-	removeLink( &(nd->disease) );
+	removeLink(hosp, nd->disease);
 
 	DiseaseDesc *dsc = malloc(sizeof(DiseaseDesc));
 	initDisease(dsc, description);
+	newLink(hosp, dsc);
+	hosp->descriptionCounter++;
 
 	nd->disease = dsc;
 
@@ -114,7 +116,7 @@ bool cmdDeletePatient(Hospital *hosp)
 	if(patientNode == NULL)
 		return false;
 
-	deletePatient(patientNode->patient);
+	deletePatient(hosp, patientNode->patient);
 	deleteNode(patientNode);
 
 	reportStatus(STATUS_SUCCESS);
@@ -210,10 +212,17 @@ void readInput(Hospital *hosp)
 		if(!success)
 			reportStatus(STATUS_FAIL);
 
+		if(hosp->verbose)
+			reportDescriptions(hosp->descriptionCounter);
 	}
 }
 
 void reportStatus(const char *status)
 {
 	printf("%s\n", status);
+}
+
+void reportDescriptions(int cnt)
+{
+	fprintf(stderr, "DESCRIPTIONS: %d\n", cnt);
 }
