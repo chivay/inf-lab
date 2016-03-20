@@ -47,6 +47,7 @@ void addPatient(Hospital *hosp, Patient *pat);
 void addDisease(Hospital *hosp, Patient *patient, DiseaseDesc *dsc);
 
 bool diseaseListEmpty(Patient *patient);
+void deleteDiseases(Hospital *hosp, Patient *patient);
 DiseaseDesc* getLastDisease(Patient *patient);
 Node* getDiseaseNodeId(Patient *patient, int id);
 DiseaseDesc* getDiseaseId(Patient *patient, int id);

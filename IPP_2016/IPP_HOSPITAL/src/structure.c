@@ -66,7 +66,7 @@ void deleteHospital(Hospital *hosp)
  	deleteList( &(hosp->patients) );
 }
 
-void deletePatient(Hospital *hosp, Patient *patient)
+void deleteDiseases(Hospital *hosp, Patient *patient)
 {
 	Node *nd = patient->diseases.first;
 	nd = nd->next;
@@ -75,8 +75,13 @@ void deletePatient(Hospital *hosp, Patient *patient)
 		removeLink(hosp, nd->disease);
 		nd = nd->next;
 	}
-
 	deleteList( &(patient->diseases) );
+}
+
+void deletePatient(Hospital *hosp, Patient *patient)
+{
+	deleteDiseases(hosp, patient);
+	
 	free(patient->name);
 	free(patient);
 }

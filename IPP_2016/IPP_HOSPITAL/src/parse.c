@@ -116,8 +116,8 @@ bool cmdDeletePatient(Hospital *hosp)
 	if(patientNode == NULL)
 		return false;
 
-	deletePatient(hosp, patientNode->patient);
-	deleteNode(patientNode);
+	deleteDiseases(hosp, patientNode->patient);
+	initList( &(patientNode->patient->diseases));
 
 	reportStatus(STATUS_SUCCESS);
 	return true;
