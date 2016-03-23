@@ -4,10 +4,6 @@
 #include "list.h"
 #include "structure.h"
 
-/*
- * HOSPITAL FUNCTIONS
- */
-
 void newLink(Hospital *hosp, DiseaseDesc *dsc)
 {
 	dsc->refs++;
@@ -110,7 +106,7 @@ Node* findPatientNode(Hospital *hosp, char *name)
  	return NULL;	
 }
 
-void addPatient(Hospital *hosp, Patient *pat)
+void addPatientToHospital(Hospital *hosp, Patient *pat)
 {
  	Node *nd = malloc(sizeof(Node));
  	initNode(nd);
@@ -119,7 +115,7 @@ void addPatient(Hospital *hosp, Patient *pat)
  	addNode( &(hosp->patients), nd);
 }
 
-void addDisease(Hospital *hosp, Patient *patient, DiseaseDesc *dis)
+void addDiseaseToPatient(Hospital *hosp, Patient *patient, DiseaseDesc *dis)
 {
  	Node *nd = malloc(sizeof(Node));
  	initNode(nd);

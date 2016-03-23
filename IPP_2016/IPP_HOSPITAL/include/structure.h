@@ -43,8 +43,8 @@ void deletePatient(Hospital *hosp, Patient *patient);
 Patient* findPatient(Hospital *hosp, char *name);
 Node * findPatientNode(Hospital *hosp, char *name);
 
-void addPatient(Hospital *hosp, Patient *pat);
-void addDisease(Hospital *hosp, Patient *patient, DiseaseDesc *dsc);
+void addPatientToHospital(Hospital *hosp, Patient *pat);
+void addDiseaseToPatient(Hospital *hosp, Patient *patient, DiseaseDesc *dsc);
 
 bool diseaseListEmpty(Patient *patient);
 void deleteDiseases(Hospital *hosp, Patient *patient);

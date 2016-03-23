@@ -6,6 +6,18 @@
 #include "structure.h"
 #include "parse.h"
 
+
+char* readToWhitespace()
+{
+	return strtok(NULL, DELIMITERS);
+}
+
+char* readToEndline()
+{
+	return strtok(NULL, "");
+}
+
+
 commandType getCommand(char *line)
 {
 	char *command = strtok(line, DELIMITERS);
@@ -32,8 +44,9 @@ commandType getCommand(char *line)
 	return result;
 }
 
-commandType readCommand(char *line, char **arg1, char **arg2, char **arg3)
+commandType readCommand(char **arg1, char **arg2, char **arg3)
 {
+	char line[MAX_LINE_LENGTH];
 	*arg1 = *arg2 = *arg3 = NULL;
 	
 	// Return error if nothing to parse
@@ -51,12 +64,35 @@ commandType readCommand(char *line, char **arg1, char **arg2, char **arg3)
 	switch(command)
 	{
 		case DEL_PAT:
-			*arg = 
+			*arg1 = readToWhitespace();
+			break;
+
 		case ND_ENTER:
+			*arg1 = readToWhitespace();
+			*arg2 = readToEndline();
+			break;
+
 		case ND_COPY:
+			*arg1 = readToWhitespace();
+			*arg2 = readToWhitespace();
+			break;
+
 		case CHG_DESC:
+			*arg1 = readToWhitespace();
+			*arg2 = readToWhitespace();
+			*arg3 = readToEndline();
+			break;
+
 		case PRNT_DESC:
+			*arg1 = readToWhitespace();
+			*arg2 = readToWhitespace();
+			break;
+
+		default:
+			break;
 	}
+	
+	return command;
 }
 
 bool readParameters(Hospital *hosp, int argc, char  **argv)
