@@ -16,7 +16,8 @@
 #define STATUS_FAIL "IGNORED"
 #define STATUS_SUCCESS "OK"
 
-enum COMMAND_TYPE {
+enum COMMAND_TYPE
+{
     ND_ENTER,  // NEW_DISEASE_ENTER_DESCRIPTION name disease description
     ND_COPY,   // NEW_DISEASE_COPY_DESCRIPTION name1 name2
     CHG_DESC,  // CHANGE_DESCRIPTION name n disease description

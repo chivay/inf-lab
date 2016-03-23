@@ -17,7 +17,7 @@ bool cmdEnterDescription(Hospital *hosp, char *name, char *description)
 		addPatientToHospital(hosp, patient);
 	}
 
-	// Create new disease desctiption
+	// Create new disease description
 	DiseaseDesc *dsc = malloc(sizeof(DiseaseDesc));
 	initDisease(dsc, description);
 	hosp->descriptionCounter++;
