@@ -6,7 +6,7 @@ INC = -I include
 
 CC = gcc
 TARGET = hospital
-CFLAGS = -Wall
+CFLAGS = -Wall -O2
 
 all: executable
 
