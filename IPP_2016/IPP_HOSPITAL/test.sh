@@ -1,9 +1,5 @@
 #!/bin/bash
-
 #USAGE ./test.sh prog directory
-# direcotry/*.in
-# directory/*.out
-# -v .err
 
 if [ $# -lt 2 ]
 then

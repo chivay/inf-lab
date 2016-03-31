@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include "list.h"
 
+
 void initNode(Node *node)
 {
 	node->next = NULL;
@@ -9,6 +10,7 @@ void initNode(Node *node)
 	node->patient = NULL;
 	node->disease = NULL;
 }
+
 
 void initList(List *lst)
 {
@@ -19,6 +21,7 @@ void initList(List *lst)
 	lst->last = dummy;
 }
 
+
 void addNode(List *lst, Node *node)
 {
 	lst->last->next = node;
@@ -26,6 +29,7 @@ void addNode(List *lst, Node *node)
 
 	lst->last = node;
 }
+
 
 void deleteNode(Node *node)
 {
@@ -35,6 +39,7 @@ void deleteNode(Node *node)
 
 	free(node);
 }
+
 
 void deleteList(List *lst)
 {
